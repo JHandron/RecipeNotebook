@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
+import java.util.List;
 
 public class RecipeNotebookActionEvents implements IRecipeNotebookActions {
 
@@ -17,8 +18,8 @@ public class RecipeNotebookActionEvents implements IRecipeNotebookActions {
         GUI.getLstTags().setModel(listModelTags);
         //ActionListeners
         //Add New Recipe
-        GUI.getTxtIngredients().addActionListener(this::txtIngredientsEntered);
-        GUI.getTxtTags().addActionListener(this::txtTagsEntered);
+        GUI.getTxtAddIngredients().addActionListener(this::txtIngredientsEntered);
+        GUI.getTxtAddTags().addActionListener(this::txtTagsEntered);
         GUI.getBtnAddRecipe().addActionListener(this::addRecipeButtonClicked);
 
         //Search Recipes
@@ -32,10 +33,10 @@ public class RecipeNotebookActionEvents implements IRecipeNotebookActions {
 
     public void addRecipeButtonClicked(ActionEvent e) {
         final Recipe recipe = new Recipe();
-        recipe.setName(GUI.getTxtRecipeName().getText().trim()); //TODO:Better input sanitization
-        recipe.setInstructions(GUI.getTxtaInstructions().getText().trim());
-        recipe.setTagsList(new ArrayList<>()); //TODO:??
-        recipe.setIngredientList(new ArrayList<>()); //TODO:??
+        recipe.setName(GUI.getTxtAddRecipeName().getText().trim()); //TODO:Better input sanitization
+        recipe.setInstructions(GUI.getTxtarAddInstructions().getText().trim());
+        recipe.setTagsList(new ArrayList<>()); //TODO: Initializing this way?
+        recipe.setIngredientList(new ArrayList<>()); //TODO: Initializing this way?
 
         //Add Strings in the list to the model
         for (Object o : listModelTags.toArray()){
@@ -50,7 +51,18 @@ public class RecipeNotebookActionEvents implements IRecipeNotebookActions {
     }
 
     public void findButtonClicked(ActionEvent e){
-        MongoDelegator.getByName(GUI.getTxtNameSearch().getText().trim());
+        if (GUI.getRbName().isSelected()){
+            MongoDelegator.getByName(GUI.getTxtSearchName().getText().trim());
+        }
+        else if (GUI.getRbInstructions().isSelected()){
+            MongoDelegator.getByInstructions(GUI.getTxtarSearchInstructions().getText().trim());
+        }
+        else if (GUI.getRbIngredients().isSelected()){
+            //do search
+        }
+        else if (GUI.getRbTags().isSelected()){
+            MongoDelegator.getByTags(List.of(GUI.getTxtSearchTags().getText().split(", ")));//TODO: Adjust split value to account for whitespace or not
+        }
     }
 
     public void rbNameSelected(ActionEvent e) {
@@ -75,12 +87,12 @@ public class RecipeNotebookActionEvents implements IRecipeNotebookActions {
 
     //Naming these methods "Entered" since that's when the event fires
     public void txtIngredientsEntered(ActionEvent e) {
-        listModelIngredients.addElement(GUI.getTxtIngredients().getText().trim());
-        GUI.getTxtIngredients().setText("");
+        listModelIngredients.addElement(GUI.getTxtAddIngredients().getText().trim());
+        GUI.getTxtAddIngredients().setText("");
     }
 
     public void txtTagsEntered(ActionEvent e) {
-        listModelTags.addElement(GUI.getTxtTags().getText().trim());
-        GUI.getTxtTags().setText("");
+        listModelTags.addElement(GUI.getTxtAddTags().getText().trim());
+        GUI.getTxtAddTags().setText("");
     }
 }

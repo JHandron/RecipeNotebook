@@ -24,20 +24,20 @@ public class RecipeNotebookGUI extends JTabbedPane {
         return lblRecipeName;
     }
 
-    public JTextField getTxtRecipeName() {
-        return txtRecipeName;
+    public JTextField getTxtAddRecipeName() {
+        return txtAddRecipeName;
     }
 
     public JScrollPane getSpInstructions() {
         return spInstructions;
     }
 
-    public JTextArea getTxtaInstructions() {
-        return txtaInstructions;
+    public JTextArea getTxtarAddInstructions() {
+        return txtarAddInstructions;
     }
 
-    public JTextField getTxtIngredients() {
-        return txtIngredients;
+    public JTextField getTxtAddIngredients() {
+        return txtAddIngredients;
     }
 
     public JScrollPane getSpIngredients() {
@@ -48,8 +48,8 @@ public class RecipeNotebookGUI extends JTabbedPane {
         return lstIngredients;
     }
 
-    public JTextField getTxtTags() {
-        return txtTags;
+    public JTextField getTxtAddTags() {
+        return txtAddTags;
     }
 
     public JScrollPane getSpTags() {
@@ -96,36 +96,36 @@ public class RecipeNotebookGUI extends JTabbedPane {
         return pnlNameSearch;
     }
 
-    public JTextField getTxtNameSearch() {
-        return txtNameSearch;
+    public JTextField getTxtSearchName() {
+        return txtSearchName;
     }
 
     public JScrollPane getScrpnInstructionsSearch() {
         return scrpnInstructionsSearch;
     }
 
-    public JTextArea getTxtInstructionsSearch() {
-        return txtInstructionsSearch;
-    }
-
-    public JScrollPane getScrpnIngredientsSearch() {
-        return scrpnIngredientsSearch;
-    }
-
-    public JList getLstIngredientsSearch() {
-        return lstIngredientsSearch;
+    public JTextArea getTxtarSearchInstructions() {
+        return txtarSearchInstructions;
     }
 
     public JPanel getPnlTagsSearch() {
         return pnlTagsSearch;
     }
 
-    public JTextField getTxtTagsSearch() {
-        return txtTagsSearch;
+    public JTextField getTxtSearchTags() {
+        return txtSearchTags;
     }
 
     public JButton getBtnFind() {
         return btnFind;
+    }
+
+    public JPanel getPnlIngredientSearch() {
+        return pnlIngredientSearch;
+    }
+
+    public JTextField getTxtSearchIngredients() {
+        return txtSearchIngredients;
     }
 
     private void initComponents() {
@@ -133,13 +133,13 @@ public class RecipeNotebookGUI extends JTabbedPane {
         // Generated using JFormDesigner Educational license - Jason Handron (j-handron)
         pnlAddNew = new JPanel();
         lblRecipeName = new JLabel();
-        txtRecipeName = new JTextField();
-        txtIngredients = new JTextField();
+        txtAddRecipeName = new JTextField();
+        txtAddIngredients = new JTextField();
         spIngredients = new JScrollPane();
         lstIngredients = new JList<>();
         spInstructions = new JScrollPane();
-        txtaInstructions = new JTextArea();
-        txtTags = new JTextField();
+        txtarAddInstructions = new JTextArea();
+        txtAddTags = new JTextField();
         spTags = new JScrollPane();
         lstTags = new JList<>();
         btnAddRecipe = new JButton();
@@ -151,13 +151,13 @@ public class RecipeNotebookGUI extends JTabbedPane {
         rbTags = new JRadioButton();
         pnlSearchInput = new JPanel();
         pnlNameSearch = new JPanel();
-        txtNameSearch = new JTextField();
+        txtSearchName = new JTextField();
         scrpnInstructionsSearch = new JScrollPane();
-        txtInstructionsSearch = new JTextArea();
-        scrpnIngredientsSearch = new JScrollPane();
-        lstIngredientsSearch = new JList();
+        txtarSearchInstructions = new JTextArea();
+        pnlIngredientSearch = new JPanel();
+        txtSearchIngredients = new JTextField();
         pnlTagsSearch = new JPanel();
-        txtTagsSearch = new JTextField();
+        txtSearchTags = new JTextField();
         btnFind = new JButton();
 
         //======== this ========
@@ -175,13 +175,13 @@ public class RecipeNotebookGUI extends JTabbedPane {
             pnlAddNew.add(lblRecipeName, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0,
                 GridBagConstraints.WEST, GridBagConstraints.NONE,
                 new Insets(0, 25, 0, 0), 0, 0));
-            pnlAddNew.add(txtRecipeName, new GridBagConstraints(0, 0, 2, 1, 0.0, 0.0,
+            pnlAddNew.add(txtAddRecipeName, new GridBagConstraints(0, 0, 2, 1, 0.0, 0.0,
                 GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL,
                 new Insets(5, 110, 5, 25), 0, 0));
 
-            //---- txtIngredients ----
-            txtIngredients.setToolTipText("Type ingredients and press Enter");
-            pnlAddNew.add(txtIngredients, new GridBagConstraints(0, 2, 1, 1, 0.0, 0.0,
+            //---- txtAddIngredients ----
+            txtAddIngredients.setToolTipText("Type ingredients and press Enter");
+            pnlAddNew.add(txtAddIngredients, new GridBagConstraints(0, 2, 1, 1, 0.0, 0.0,
                 GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL,
                 new Insets(5, 10, 5, 5), 0, 0));
 
@@ -197,15 +197,15 @@ public class RecipeNotebookGUI extends JTabbedPane {
             //======== spInstructions ========
             {
                 spInstructions.setViewportBorder(new TitledBorder("Instructions"));
-                spInstructions.setViewportView(txtaInstructions);
+                spInstructions.setViewportView(txtarAddInstructions);
             }
             pnlAddNew.add(spInstructions, new GridBagConstraints(0, 3, 2, 1, 0.0, 0.0,
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                 new Insets(10, 10, 10, 10), 0, 0));
 
-            //---- txtTags ----
-            txtTags.setToolTipText("Type tags and press Enter");
-            pnlAddNew.add(txtTags, new GridBagConstraints(0, 6, 1, 1, 0.0, 0.0,
+            //---- txtAddTags ----
+            txtAddTags.setToolTipText("Type tags and press Enter");
+            pnlAddNew.add(txtAddTags, new GridBagConstraints(0, 6, 1, 1, 0.0, 0.0,
                 GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL,
                 new Insets(5, 10, 5, 5), 0, 0));
 
@@ -270,13 +270,12 @@ public class RecipeNotebookGUI extends JTabbedPane {
 
                 //======== pnlNameSearch ========
                 {
-                    pnlNameSearch.setBorder(new EmptyBorder(60, 50, 60, 50));
                     pnlNameSearch.setLayout(new GridBagLayout());
                     ((GridBagLayout)pnlNameSearch.getLayout()).columnWidths = new int[] {0, 0};
                     ((GridBagLayout)pnlNameSearch.getLayout()).rowHeights = new int[] {0, 0};
                     ((GridBagLayout)pnlNameSearch.getLayout()).columnWeights = new double[] {1.0, 1.0E-4};
                     ((GridBagLayout)pnlNameSearch.getLayout()).rowWeights = new double[] {1.0, 1.0E-4};
-                    pnlNameSearch.add(txtNameSearch, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0,
+                    pnlNameSearch.add(txtSearchName, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0,
                         GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL,
                         new Insets(0, 0, 0, 0), 0, 0));
                 }
@@ -284,20 +283,33 @@ public class RecipeNotebookGUI extends JTabbedPane {
 
                 //======== scrpnInstructionsSearch ========
                 {
-                    scrpnInstructionsSearch.setViewportView(txtInstructionsSearch);
+                    scrpnInstructionsSearch.setViewportView(txtarSearchInstructions);
                 }
                 pnlSearchInput.add(scrpnInstructionsSearch, "descriptionSearchCard");
 
-                //======== scrpnIngredientsSearch ========
+                //======== pnlIngredientSearch ========
                 {
-                    scrpnIngredientsSearch.setViewportView(lstIngredientsSearch);
+                    pnlIngredientSearch.setLayout(new GridBagLayout());
+                    ((GridBagLayout)pnlIngredientSearch.getLayout()).columnWidths = new int[] {0, 0};
+                    ((GridBagLayout)pnlIngredientSearch.getLayout()).rowHeights = new int[] {0, 0};
+                    ((GridBagLayout)pnlIngredientSearch.getLayout()).columnWeights = new double[] {1.0, 1.0E-4};
+                    ((GridBagLayout)pnlIngredientSearch.getLayout()).rowWeights = new double[] {1.0, 1.0E-4};
+                    pnlIngredientSearch.add(txtSearchIngredients, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0,
+                        GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL,
+                        new Insets(0, 0, 0, 0), 0, 0));
                 }
-                pnlSearchInput.add(scrpnIngredientsSearch, "ingredientSearchCard");
+                pnlSearchInput.add(pnlIngredientSearch, "ingredientSearchCard");
 
                 //======== pnlTagsSearch ========
                 {
-                    pnlTagsSearch.setLayout(new BorderLayout());
-                    pnlTagsSearch.add(txtTagsSearch, BorderLayout.CENTER);
+                    pnlTagsSearch.setLayout(new GridBagLayout());
+                    ((GridBagLayout)pnlTagsSearch.getLayout()).columnWidths = new int[] {318, 0};
+                    ((GridBagLayout)pnlTagsSearch.getLayout()).rowHeights = new int[] {0, 0};
+                    ((GridBagLayout)pnlTagsSearch.getLayout()).columnWeights = new double[] {1.0, 1.0E-4};
+                    ((GridBagLayout)pnlTagsSearch.getLayout()).rowWeights = new double[] {1.0, 1.0E-4};
+                    pnlTagsSearch.add(txtSearchTags, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0,
+                        GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL,
+                        new Insets(0, 0, 0, 0), 0, 0));
                 }
                 pnlSearchInput.add(pnlTagsSearch, "tagsSearchCard");
             }
@@ -326,13 +338,13 @@ public class RecipeNotebookGUI extends JTabbedPane {
     // Generated using JFormDesigner Educational license - Jason Handron (j-handron)
     private JPanel pnlAddNew;
     private JLabel lblRecipeName;
-    private JTextField txtRecipeName;
-    private JTextField txtIngredients;
+    private JTextField txtAddRecipeName;
+    private JTextField txtAddIngredients;
     private JScrollPane spIngredients;
     private JList<String> lstIngredients;
     private JScrollPane spInstructions;
-    private JTextArea txtaInstructions;
-    private JTextField txtTags;
+    private JTextArea txtarAddInstructions;
+    private JTextField txtAddTags;
     private JScrollPane spTags;
     private JList<String> lstTags;
     private JButton btnAddRecipe;
@@ -344,13 +356,13 @@ public class RecipeNotebookGUI extends JTabbedPane {
     private JRadioButton rbTags;
     private JPanel pnlSearchInput;
     private JPanel pnlNameSearch;
-    private JTextField txtNameSearch;
+    private JTextField txtSearchName;
     private JScrollPane scrpnInstructionsSearch;
-    private JTextArea txtInstructionsSearch;
-    private JScrollPane scrpnIngredientsSearch;
-    private JList lstIngredientsSearch;
+    private JTextArea txtarSearchInstructions;
+    private JPanel pnlIngredientSearch;
+    private JTextField txtSearchIngredients;
     private JPanel pnlTagsSearch;
-    private JTextField txtTagsSearch;
+    private JTextField txtSearchTags;
     private JButton btnFind;
     // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 }
