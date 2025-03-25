@@ -9,8 +9,8 @@ new FormModel {
 		add( new FormContainer( "javax.swing.JTabbedPane", new FormLayoutManager( class javax.swing.JTabbedPane ) ) {
 			name: "this"
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.GridBagLayout ) {
-				"$columnSpecs": "251:1.0, 337:1.0"
-				"$rowSpecs": "center:51, bottom:10, 124, bottom:8, center:110:1.0, bottom:7, center:118:1.0, center:56:1.0"
+				"$columnSpecs": "395:1.0, 337:1.0"
+				"$rowSpecs": "center:51, bottom:10, center:110:1.0, 124, bottom:8, bottom:7, center:118:1.0, center:56:1.0"
 				"$alignTop": true
 				"$alignLeft": true
 			} ) {
@@ -28,22 +28,11 @@ new FormModel {
 					"insets": new java.awt.Insets( 5, 110, 5, 25 )
 					"gridwidth": 2
 				} )
-				add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
-					name: "spInstructions"
-					"viewportBorder": new javax.swing.border.TitledBorder( "Instructions" )
-					add( new FormComponent( "javax.swing.JTextArea" ) {
-						name: "txtaInstructions"
-					} )
-				}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
-					"gridy": 2
-					"gridwidth": 2
-					"insets": new java.awt.Insets( 10, 10, 10, 10 )
-				} )
 				add( new FormComponent( "javax.swing.JTextField" ) {
 					name: "txtIngredients"
 					"toolTipText": "Type ingredients and press Enter"
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
-					"gridy": 4
+					"gridy": 2
 					"insets": new java.awt.Insets( 5, 10, 5, 5 )
 				} )
 				add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
@@ -56,11 +45,22 @@ new FormModel {
 						}
 					} )
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
-					"gridy": 4
+					"gridy": 2
 					"hAlign": 5
 					"vAlign": 5
-					"gridx": 1
 					"insets": new java.awt.Insets( 0, 0, 0, 10 )
+					"gridx": 1
+				} )
+				add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+					name: "spInstructions"
+					"viewportBorder": new javax.swing.border.TitledBorder( "Instructions" )
+					add( new FormComponent( "javax.swing.JTextArea" ) {
+						name: "txtaInstructions"
+					} )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+					"gridy": 3
+					"gridwidth": 2
+					"insets": new java.awt.Insets( 10, 10, 10, 10 )
 				} )
 				add( new FormComponent( "javax.swing.JTextField" ) {
 					name: "txtTags"
@@ -82,8 +82,8 @@ new FormModel {
 					"gridy": 6
 					"hAlign": 5
 					"vAlign": 5
-					"gridx": 1
 					"insets": new java.awt.Insets( 0, 0, 0, 10 )
+					"gridx": 1
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "btnAddRecipe"
@@ -98,8 +98,8 @@ new FormModel {
 				"title": "Add New Recipe"
 			} )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.GridBagLayout ) {
-				"$columnSpecs": "212, 200, 142:1.0"
-				"$rowSpecs": "79:1.0, 269:1.0, 34:1.0, 56:1.0"
+				"$columnSpecs": "315, 142:1.0"
+				"$rowSpecs": "56:1.0, 269:1.0, 52:1.0, 56:1.0"
 				"$alignTop": true
 				"$alignLeft": true
 			} ) {
@@ -137,7 +137,7 @@ new FormModel {
 						"$buttonGroup": new FormReference( "buttonGroup1" )
 					} )
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
-					"gridwidth": 3
+					"gridwidth": 2
 				} )
 				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.CardLayout ) ) {
 					name: "pnlSearchInput"
@@ -185,7 +185,7 @@ new FormModel {
 						"value": "tagsSearchCard"
 					} )
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
-					"gridwidth": 3
+					"gridwidth": 2
 					"gridy": 1
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
@@ -193,21 +193,21 @@ new FormModel {
 					"text": "Find"
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
 					"gridy": 3
-					"gridx": 1
 					"hAlign": 0
 					"vAlign": 0
+					"gridwidth": 2
 				} )
 			}, new FormLayoutConstraints( null ) {
 				"title": "Search Recipes"
 			} )
 		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 110, 55 )
-			"size": new java.awt.Dimension( 600, 500 )
+			"location": new java.awt.Point( 110, 30 )
+			"size": new java.awt.Dimension( 450, 580 )
 		} )
 		add( new FormNonVisual( "javax.swing.ButtonGroup" ) {
 			name: "buttonGroup1"
 		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 0, 571 )
+			"location": new java.awt.Point( 5, 790 )
 		} )
 	}
 }

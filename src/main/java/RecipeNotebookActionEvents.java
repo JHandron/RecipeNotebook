@@ -1,14 +1,17 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
 
-public class RecipeNotebookActionEvents {
+public class RecipeNotebookActionEvents implements IRecipeNotebookActions {
 
     private final static DefaultListModel<String> listModelIngredients = new DefaultListModel<>();
     private final static DefaultListModel<String> listModelTags = new DefaultListModel<>();
     public final static RecipeNotebookGUI GUI = new RecipeNotebookGUI();
 
     public void bindListModelsAndActions(){
+
+        //TODO: Better way to bind these
         //ListModels
         GUI.getLstIngredients().setModel(listModelIngredients);
         GUI.getLstTags().setModel(listModelTags);
@@ -23,45 +26,60 @@ public class RecipeNotebookActionEvents {
         GUI.getRbIngredients().addActionListener(this::rbIngredientsSelected);
         GUI.getRbInstructions().addActionListener(this::rbInstructionSelected);
         GUI.getRbTags().addActionListener(this::rbTagsSelected);
+        GUI.getBtnFind().addActionListener(this::findButtonClicked);
 
     }
 
-    private void addRecipeButtonClicked(ActionEvent e) {
+    public void addRecipeButtonClicked(ActionEvent e) {
         final Recipe recipe = new Recipe();
-        recipe.setName(GUI.getTxtRecipeName().getText().trim());
+        recipe.setName(GUI.getTxtRecipeName().getText().trim()); //TODO:Better input sanitization
         recipe.setInstructions(GUI.getTxtaInstructions().getText().trim());
-        //Make this insert the tags from the list model
-        //TODO: translate listModel into RecipeModel
+        recipe.setTagsList(new ArrayList<>()); //TODO:??
+        recipe.setIngredientList(new ArrayList<>()); //TODO:??
+
+        //Add Strings in the list to the model
+        for (Object o : listModelTags.toArray()){
+            recipe.getTagsList().add((String)o);
+        }
+
+        for (Object o : listModelIngredients.toArray()){
+            recipe.getIngredientList().add((String)o);
+        }
+
         MongoDelegator.doInsert(recipe);
     }
 
-    private void rbNameSelected(ActionEvent e) {
+    public void findButtonClicked(ActionEvent e){
+        MongoDelegator.getByName(GUI.getTxtNameSearch().getText().trim());
+    }
+
+    public void rbNameSelected(ActionEvent e) {
         CardLayout layout = (CardLayout) GUI.getPnlSearchInput().getLayout();
         layout.show(GUI.getPnlSearchInput(), "nameSearchCard");
     }
 
-    private void rbInstructionSelected(ActionEvent e) {
+    public void rbInstructionSelected(ActionEvent e) {
         CardLayout layout = (CardLayout) GUI.getPnlSearchInput().getLayout();
         layout.show(GUI.getPnlSearchInput(), "descriptionSearchCard");
     }
 
-    private void rbIngredientsSelected(ActionEvent e) {
+    public void rbIngredientsSelected(ActionEvent e) {
         CardLayout layout = (CardLayout) GUI.getPnlSearchInput().getLayout();
         layout.show(GUI.getPnlSearchInput(), "ingredientSearchCard");
     }
 
-    private void rbTagsSelected(ActionEvent e) {
+    public void rbTagsSelected(ActionEvent e) {
         CardLayout layout = (CardLayout) GUI.getPnlSearchInput().getLayout();
         layout.show(GUI.getPnlSearchInput(), "tagsSearchCard");
     }
 
     //Naming these methods "Entered" since that's when the event fires
-    private void txtIngredientsEntered(ActionEvent e) {
+    public void txtIngredientsEntered(ActionEvent e) {
         listModelIngredients.addElement(GUI.getTxtIngredients().getText().trim());
         GUI.getTxtIngredients().setText("");
     }
 
-    private void txtTagsEntered(ActionEvent e) {
+    public void txtTagsEntered(ActionEvent e) {
         listModelTags.addElement(GUI.getTxtTags().getText().trim());
         GUI.getTxtTags().setText("");
     }

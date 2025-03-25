@@ -10,7 +10,7 @@ public class RecipeNotebook {
 
         frame = new JFrame("Recipe Notebook");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(600,500); //TODO: Why do this here?
+        frame.setSize(450,580); //TODO: Why do this here?
         frame.add(RecipeNotebookActionEvents.GUI); //TODO: find more intuitive way to bind this
     }
 
