@@ -1,12 +1,12 @@
+import org.bson.Document;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.*;
 import javax.swing.border.*;
-/*
- * Created by JFormDesigner on Fri Feb 21 17:53:54 EST 2025
- */
+import javax.swing.table.*;
 
 /**
  * @author Jason
@@ -17,9 +17,11 @@ public class RecipeNotebookGUI extends JFrame {
     //TODO:Here?
     private final static DefaultListModel<String> listModelIngredients = new DefaultListModel<>();
     private final static DefaultListModel<String> listModelTags = new DefaultListModel<>();
+    private final static DefaultTableModel tableModelSearch = new DefaultTableModel();
 
     public RecipeNotebookGUI() {
         initComponents();
+        tableModelSearch.setColumnIdentifiers(new Object[]{"Name", "Tags"});
     }
     
     private void addNewRecipe(ActionEvent e) {
@@ -39,6 +41,14 @@ public class RecipeNotebookGUI extends JFrame {
         }
 
         MongoDelegator.doInsert(recipe);
+    }
+
+    private void updateIngredientsList(){
+        lstIngredients.setModel(listModelIngredients);
+    }
+
+    private void updateTagsList(){
+        lstTags.setModel(listModelTags);
     }
 
     private void rbNameSelected(ActionEvent e) {
@@ -63,7 +73,10 @@ public class RecipeNotebookGUI extends JFrame {
 
     private void doFind(ActionEvent e) {
         if (rbName.isSelected()){
-            MongoDelegator.getByName(txtSearchName.getText().trim());
+            List<Document> results = MongoDelegator.getBulkByName(txtSearchName.getText().trim());
+            if (!results.isEmpty()) {
+                updateSearchTable(results);
+            }
         }
         else if (rbInstructions.isSelected()){
             MongoDelegator.getByInstructions(txtarSearchInstructions.getText().trim());
@@ -76,15 +89,23 @@ public class RecipeNotebookGUI extends JFrame {
         }
     }
 
+    private void updateSearchTable(List<Document> p_results) {
+        for (Document doc : p_results) {
+            tableModelSearch.addRow(new Object[]{doc.get("name"), doc.get("tags")});
+        }
+        tblSearchResults.setModel(tableModelSearch);
+    }
+
     private void txtAddIngredientsEnter(ActionEvent e) {
         listModelIngredients.addElement(txtAddIngredients.getText().trim());
         txtAddIngredients.setText("");
+        updateIngredientsList();
     }
-    
 
     private void txtAddTagsEntered(ActionEvent e) {
         listModelTags.addElement(txtAddTags.getText().trim());
         txtAddTags.setText("");
+        updateTagsList();
     }
 
     private void initComponents() {
@@ -119,8 +140,11 @@ public class RecipeNotebookGUI extends JFrame {
         txtSearchIngredients = new JTextField();
         pnlTagsSearch = new JPanel();
         txtSearchTags = new JTextField();
+        scrollPane1 = new JScrollPane();
+        tblSearchResults = new JTable();
 
         //======== this ========
+        setTitle("Jason's Recipe Notebook");
         var contentPane = getContentPane();
         contentPane.setLayout(new BorderLayout());
 
@@ -150,7 +174,7 @@ public class RecipeNotebookGUI extends JFrame {
                 txtAddIngredients.addActionListener(e -> txtAddIngredientsEnter(e));
                 pnlAddNew.add(txtAddIngredients, new GridBagConstraints(0, 2, 1, 1, 0.0, 0.0,
                     GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL,
-                    new Insets(5, 10, 5, 5), 0, 0));
+                    new Insets(5, 10, 5, 10), 0, 0));
 
                 //======== spIngredients ========
                 {
@@ -166,7 +190,7 @@ public class RecipeNotebookGUI extends JFrame {
                 txtAddTags.addActionListener(e -> txtAddTagsEntered(e));
                 pnlAddNew.add(txtAddTags, new GridBagConstraints(0, 4, 1, 1, 0.0, 0.0,
                     GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL,
-                    new Insets(5, 10, 5, 5), 0, 0));
+                    new Insets(5, 10, 5, 10), 0, 0));
 
                 //======== spTags ========
                 {
@@ -199,7 +223,7 @@ public class RecipeNotebookGUI extends JFrame {
             {
                 pnlFindRecipe.setLayout(new GridBagLayout());
                 ((GridBagLayout)pnlFindRecipe.getLayout()).columnWidths = new int[] {315, 0};
-                ((GridBagLayout)pnlFindRecipe.getLayout()).rowHeights = new int[] {62, 75, 412, 0};
+                ((GridBagLayout)pnlFindRecipe.getLayout()).rowHeights = new int[] {75, 75, 347, 0};
                 ((GridBagLayout)pnlFindRecipe.getLayout()).columnWeights = new double[] {1.0, 1.0E-4};
                 ((GridBagLayout)pnlFindRecipe.getLayout()).rowWeights = new double[] {1.0, 1.0, 1.0, 1.0E-4};
 
@@ -245,9 +269,9 @@ public class RecipeNotebookGUI extends JFrame {
                     //======== pnlNameSearch ========
                     {
                         pnlNameSearch.setLayout(new GridBagLayout());
-                        ((GridBagLayout)pnlNameSearch.getLayout()).columnWidths = new int[] {453, 110, 18, 0};
+                        ((GridBagLayout)pnlNameSearch.getLayout()).columnWidths = new int[] {376, 110, 0};
                         ((GridBagLayout)pnlNameSearch.getLayout()).rowHeights = new int[] {0, 0};
-                        ((GridBagLayout)pnlNameSearch.getLayout()).columnWeights = new double[] {1.0, 0.0, 1.0, 1.0E-4};
+                        ((GridBagLayout)pnlNameSearch.getLayout()).columnWeights = new double[] {1.0, 0.0, 1.0E-4};
                         ((GridBagLayout)pnlNameSearch.getLayout()).rowWeights = new double[] {1.0, 1.0E-4};
                         pnlNameSearch.add(txtSearchName, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0,
                             GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL,
@@ -297,11 +321,36 @@ public class RecipeNotebookGUI extends JFrame {
                 pnlFindRecipe.add(pnlSearchInput, new GridBagConstraints(0, 1, 1, 1, 0.0, 0.0,
                     GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                     new Insets(0, 0, 0, 0), 0, 0));
+
+                //======== scrollPane1 ========
+                {
+
+                    //---- tblSearchResults ----
+                    tblSearchResults.setModel(new DefaultTableModel(
+                        new Object[][] {
+                        },
+                        new String[] {
+                            null, null
+                        }
+                    ) {
+                        boolean[] columnEditable = new boolean[] {
+                            false, true
+                        };
+                        @Override
+                        public boolean isCellEditable(int rowIndex, int columnIndex) {
+                            return columnEditable[columnIndex];
+                        }
+                    });
+                    scrollPane1.setViewportView(tblSearchResults);
+                }
+                pnlFindRecipe.add(scrollPane1, new GridBagConstraints(0, 2, 1, 1, 0.0, 0.0,
+                    GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+                    new Insets(5, 5, 5, 5), 0, 0));
             }
             tabbedPane1.addTab("Search Recipes", pnlFindRecipe);
         }
         contentPane.add(tabbedPane1, BorderLayout.CENTER);
-        setSize(685, 595);
+        setSize(555, 500);
         setLocationRelativeTo(null);
 
         //---- buttonGroup1 ----
@@ -344,5 +393,7 @@ public class RecipeNotebookGUI extends JFrame {
     private JTextField txtSearchIngredients;
     private JPanel pnlTagsSearch;
     private JTextField txtSearchTags;
+    private JScrollPane scrollPane1;
+    private JTable tblSearchResults;
     // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 }

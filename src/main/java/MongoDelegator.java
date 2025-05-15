@@ -3,13 +3,12 @@ import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Filters;
 import com.mongodb.client.result.InsertOneResult;
 import org.bson.Document;
 
+import java.util.ArrayList;
 import java.util.List;
-
-import static com.mongodb.client.model.Filters.eq;
-import static com.mongodb.client.model.Filters.in;
 
 public class MongoDelegator {
 
@@ -38,7 +37,7 @@ public class MongoDelegator {
         try (MongoClient mongoClient = MongoClients.create(CONNECTION_STRING)) {
             MongoDatabase database = mongoClient.getDatabase(DATABASE_NAME);
             MongoCollection<Document> collection = database.getCollection(COLLECTION_NAME);
-            Document doc = collection.find(eq("name", p_name)).first(); //TODO: Duplicates?
+            Document doc = collection.find(Filters.eq("name", p_name)).first(); //TODO: Duplicates?
             if (doc != null) {
                 System.out.println(doc.toJson());
             } else {
@@ -47,11 +46,29 @@ public class MongoDelegator {
         }
     }
 
+    public static List<Document> getBulkByName(String p_name){
+        try (MongoClient mongoClient = MongoClients.create(CONNECTION_STRING)) {
+            MongoDatabase database = mongoClient.getDatabase(DATABASE_NAME);
+            MongoCollection<Document> collection = database.getCollection(COLLECTION_NAME);
+
+            List<Document> results;
+            results = collection.find(Filters.regex("name", ".*" + p_name + ".*", "i")).into(new ArrayList<>());
+
+            if (!results.isEmpty()) {
+                System.out.println("We got documents.");
+                results.forEach(o -> System.out.println(o.toJson()));
+            } else {
+                System.out.println("No matching documents found.");
+            }
+            return results;
+        }
+    }
+
     public static void getByInstructions(String p_instructions){
         try (MongoClient mongoClient = MongoClients.create(CONNECTION_STRING)) {
             MongoDatabase database = mongoClient.getDatabase(DATABASE_NAME);
             MongoCollection<Document> collection = database.getCollection(COLLECTION_NAME);
-            Document doc = collection.find(eq("instructions", p_instructions)).first();
+            Document doc = collection.find(Filters.eq("instructions", p_instructions)).first();
             if (doc != null) {
                 System.out.println(doc.toJson());
             } else {
@@ -64,7 +81,7 @@ public class MongoDelegator {
         try (MongoClient mongoClient = MongoClients.create(CONNECTION_STRING)) {
             MongoDatabase database = mongoClient.getDatabase(DATABASE_NAME);
             MongoCollection<Document> collection = database.getCollection(COLLECTION_NAME);
-            Document doc = collection.find(in("tagsList", p_lstTags)).first();
+            Document doc = collection.find(Filters.in("tagsList", p_lstTags)).first();
             if (doc != null) {
                 System.out.println(doc.toJson());
             } else {
