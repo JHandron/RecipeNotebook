@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class Recipe {
@@ -32,7 +33,7 @@ public class Recipe {
     }
 
     public List<String> getIngredientList() {
-        return ingredientList;
+        return ingredientList == null ? new ArrayList<>() : ingredientList;
     }
 
     public void setIngredientList(List<String> ingredientList) {
@@ -40,7 +41,7 @@ public class Recipe {
     }
 
     public List<String> getTagsList() {
-        return tagsList;
+        return tagsList == null ? new ArrayList<>() : tagsList;
     }
 
     public void setTagsList(List<String> tagsList) {

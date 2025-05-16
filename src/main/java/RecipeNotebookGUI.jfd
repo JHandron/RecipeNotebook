@@ -56,6 +56,7 @@ new FormModel {
 							auxiliary() {
 								"JavaCodeGenerator.typeParameters": "String"
 							}
+							addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "lstIngredientsMouseClicked", true ) )
 						} )
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
 						"gridy": 2
@@ -185,52 +186,21 @@ new FormModel {
 								"gridx": 1
 							} )
 						}, new FormLayoutConstraints( class java.lang.String ) {
-							"value": "nameSearchCard"
+							"value": "txtSearchCard"
 						} )
 						add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
-							name: "scrpnInstructionsSearch"
+							name: "scrInstructionsSearch"
 							add( new FormComponent( "javax.swing.JTextArea" ) {
 								name: "txtarSearchInstructions"
 							} )
 						}, new FormLayoutConstraints( class java.lang.String ) {
 							"value": "descriptionSearchCard"
 						} )
-						add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.GridBagLayout ) {
-							"$columnSpecs": "0:1.0"
-							"$rowSpecs": "0:1.0"
-							"$alignTop": true
-							"$alignLeft": true
-						} ) {
-							name: "pnlIngredientSearch"
-							add( new FormComponent( "javax.swing.JTextField" ) {
-								name: "txtSearchIngredients"
-							}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
-								"vAlign": 0
-							} )
-						}, new FormLayoutConstraints( class java.lang.String ) {
-							"value": "ingredientSearchCard"
-						} )
-						add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.GridBagLayout ) {
-							"$columnSpecs": "318:1.0"
-							"$rowSpecs": "0:1.0"
-							"$alignTop": true
-							"$alignLeft": true
-						} ) {
-							name: "pnlTagsSearch"
-							add( new FormComponent( "javax.swing.JTextField" ) {
-								name: "txtSearchTags"
-							}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
-								"vAlign": 0
-								"hAlign": 5
-							} )
-						}, new FormLayoutConstraints( class java.lang.String ) {
-							"value": "tagsSearchCard"
-						} )
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
 						"gridy": 1
 					} )
 					add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
-						name: "scrollPane1"
+						name: "scrSearchResults"
 						add( new FormComponent( "javax.swing.JTable" ) {
 							name: "tblSearchResults"
 							"model": new com.jformdesigner.model.SwingTableModel( new java.util.Vector, new java.util.Vector {
@@ -249,7 +219,7 @@ new FormModel {
 						} )
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
 						"gridy": 2
-						"insets": new java.awt.Insets( 5, 5, 5, 5 )
+						"insets": new java.awt.Insets( 10, 10, 10, 10 )
 					} )
 				}, new FormLayoutConstraints( null ) {
 					"title": "Search Recipes"
@@ -257,6 +227,24 @@ new FormModel {
 			}, new FormLayoutConstraints( class java.lang.String ) {
 				"value": "Center"
 			} )
+			menuBar: new FormContainer( "javax.swing.JMenuBar", new FormLayoutManager( class javax.swing.JMenuBar ) ) {
+				name: "menuBar1"
+				add( new FormContainer( "javax.swing.JMenu", new FormLayoutManager( class javax.swing.JMenu ) ) {
+					name: "menu1"
+					"text": "File"
+					add( new FormComponent( "javax.swing.JMenuItem" ) {
+						name: "menuItem1"
+						"text": "Import Recipe"
+					} )
+					add( new FormComponent( "javax.swing.JMenuItem" ) {
+						name: "menuItem2"
+						"text": "Exit"
+					} )
+					add( new FormComponent( "javax.swing.JPopupMenu$Separator" ) {
+						name: "separator1"
+					} )
+				} )
+			}
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 160, 45 )
 			"size": new java.awt.Dimension( 555, 500 )
