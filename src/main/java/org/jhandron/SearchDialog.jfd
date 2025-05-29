@@ -1,0 +1,141 @@
+JFDML JFormDesigner: "8.2.4.0.393" Java: "17.0.6" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JDialog", new FormLayoutManager( class java.awt.GridBagLayout ) {
+			"$columnSpecs": "0:1.0"
+			"$rowSpecs": "0:1.0"
+			"$alignTop": true
+			"$alignLeft": true
+		} ) {
+			name: "this"
+			"title": "Search"
+			"modalityType": enum java.awt.Dialog$ModalityType APPLICATION_MODAL
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.GridBagLayout ) {
+				"$columnSpecs": "315:1.0"
+				"$rowSpecs": "75:1.0, 75:1.0, 280:1.0"
+				"$alignTop": true
+				"$alignLeft": true
+			} ) {
+				name: "pnlFindRecipe"
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.GridLayout ) {
+					"columns": 1
+					"hgap": 5
+					"vgap": 5
+				} ) {
+					name: "pnlSearchBy"
+					"border": new javax.swing.border.TitledBorder( "Search By" )
+					add( new FormComponent( "javax.swing.JRadioButton" ) {
+						name: "rbName"
+						"text": "Name"
+						"horizontalAlignment": 0
+						"selected": true
+						"$buttonGroup": new FormReference( "buttonGroup1" )
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "rbNameSelected", true ) )
+					} )
+					add( new FormComponent( "javax.swing.JRadioButton" ) {
+						name: "rbInstructions"
+						"text": "Instructions"
+						"horizontalAlignment": 0
+						"$buttonGroup": new FormReference( "buttonGroup1" )
+						"enabled": false
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "rbInstructionsSelected", true ) )
+					} )
+					add( new FormComponent( "javax.swing.JRadioButton" ) {
+						name: "rbIngredients"
+						"text": "Ingredients"
+						"horizontalAlignment": 0
+						"$buttonGroup": new FormReference( "buttonGroup1" )
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "rbIngredientsSelected", true ) )
+					} )
+					add( new FormComponent( "javax.swing.JRadioButton" ) {
+						name: "rbTags"
+						"text": "Tags"
+						"horizontalAlignment": 0
+						"$buttonGroup": new FormReference( "buttonGroup1" )
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "rbTagsSelected", true ) )
+					} )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+					"insets": new java.awt.Insets( 5, 5, 5, 5 )
+				} )
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.CardLayout ) ) {
+					name: "pnlSearchInput"
+					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.GridBagLayout ) {
+						"$columnSpecs": "376:1.0, 110"
+						"$rowSpecs": "0:1.0"
+						"$alignTop": true
+						"$alignLeft": true
+					} ) {
+						name: "pnlNameSearch"
+						add( new FormComponent( "javax.swing.JTextField" ) {
+							name: "txtSearchName"
+						}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+							"vAlign": 0
+							"hAlign": 5
+							"insets": new java.awt.Insets( 10, 10, 10, 10 )
+						} )
+						add( new FormComponent( "javax.swing.JButton" ) {
+							name: "btnFind"
+							"text": "Find"
+							addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "doFind", true ) )
+							addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "doFind", true ) )
+						}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+							"hAlign": 0
+							"vAlign": 0
+							"gridx": 1
+						} )
+					}, new FormLayoutConstraints( class java.lang.String ) {
+						"value": "txtSearchCard"
+					} )
+					add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+						name: "scrInstructionsSearch"
+						add( new FormComponent( "javax.swing.JTextArea" ) {
+							name: "txtarSearchInstructions"
+						} )
+					}, new FormLayoutConstraints( class java.lang.String ) {
+						"value": "descriptionSearchCard"
+					} )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+					"gridy": 1
+				} )
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.GridBagLayout ) {
+					"$columnSpecs": "315:1.0"
+					"$rowSpecs": "60:1.0"
+					"$alignTop": true
+					"$alignLeft": true
+				} ) {
+					name: "panel2"
+					"border": new javax.swing.border.TitledBorder( "Search Results" )
+					"maximumSize": sfield com.jformdesigner.model.FormObject NULL_VALUE
+					"minimumSize": sfield com.jformdesigner.model.FormObject NULL_VALUE
+					add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+						name: "scrSearchResults"
+						add( new FormComponent( "javax.swing.JTable" ) {
+							name: "tblSearchResults"
+							"model": new com.jformdesigner.model.SwingTableModel( new java.util.Vector, new java.util.Vector {
+								add( null )
+								add( null )
+							}, new java.util.Vector {
+								add( null )
+								add( null )
+							}, new java.util.Vector {
+								add( false )
+								add( null )
+							}, new java.util.Vector {
+								add( null )
+								add( null )
+							} )
+							"preferredScrollableViewportSize": sfield com.jformdesigner.model.FormObject NULL_VALUE
+						} )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+					"gridy": 2
+				} )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 285, 185 )
+			"size": new java.awt.Dimension( 500, 415 )
+		} )
+	}
+}

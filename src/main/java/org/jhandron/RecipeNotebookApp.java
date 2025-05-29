@@ -1,3 +1,5 @@
+package org.jhandron;
+
 import com.formdev.flatlaf.FlatDarkLaf;
 
 import javax.swing.*;
@@ -11,6 +13,5 @@ public class RecipeNotebookApp {
 //        recipeNotebook.run();
         RecipeNotebookGUI gui = new RecipeNotebookGUI();
         gui.setVisible(true);
-        gui.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 }

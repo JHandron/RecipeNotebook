@@ -1,3 +1,5 @@
+package org.jhandron;
+
 import com.mongodb.MongoException;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
@@ -33,7 +35,7 @@ public class MongoDelegator {
         }
     }
 
-    public static void getByName(String p_name){
+    public static Document getByName(String p_name){
         try (MongoClient mongoClient = MongoClients.create(CONNECTION_STRING)) {
             MongoDatabase database = mongoClient.getDatabase(DATABASE_NAME);
             MongoCollection<Document> collection = database.getCollection(COLLECTION_NAME);
@@ -43,6 +45,7 @@ public class MongoDelegator {
             } else {
                 System.out.println("No matching documents found.");
             }
+            return doc;
         }
     }
 
