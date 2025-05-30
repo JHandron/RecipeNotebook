@@ -8,6 +8,7 @@ import org.bson.Document;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.swing.*;
@@ -19,7 +20,6 @@ import javax.swing.table.*;
  */
 public class SearchDialog extends JDialog {
 
-    //TODO:Here?
     private final static DefaultTableModel tableModelSearch = new DefaultTableModel();
 
     public SearchDialog(Window owner) {
@@ -34,31 +34,16 @@ public class SearchDialog extends JDialog {
         tblSearchResults.setModel(tableModelSearch);
     }
 
-    private void rbNameSelected(ActionEvent e) {
-        // TODO add your code here
-    }
-
-    private void rbInstructionsSelected(ActionEvent e) {
-        // TODO add your code here
-    }
-
-    private void rbIngredientsSelected(ActionEvent e) {
-        // TODO add your code here
-    }
-
-    private void rbTagsSelected(ActionEvent e) {
-        // TODO add your code here
-    }
-
     private void doFind(ActionEvent e) {
         if (rbName.isSelected()){
-            java.util.List<Document> results = MongoDelegator.getBulkByName(txtSearchName.getText().trim());
-            if (!results.isEmpty()) {
-                updateSearchTable(results);
+//            java.util.List<Document> results = MongoDelegator.getBulkByName(txtSearchName.getText().trim());
+//            if (!results.isEmpty()) {
+//                updateSearchTable(results);
+//            }
+            Collection<Recipe> recipes = MongoDelegator.getRecipesByName(txtSearchName.getText().trim());
+            if (!recipes.isEmpty()) {
+                recipes.forEach(System.out::println);
             }
-        }
-        else if (rbInstructions.isSelected()){
-            //do Search
         }
         else if (rbIngredients.isSelected()){
             MongoDelegator.getByInstructions(txtSearchName.getText().trim());
@@ -68,6 +53,7 @@ public class SearchDialog extends JDialog {
         }
     }
 
+    //TODO: Put this in a model
     private void updateSearchTable(List<Document> p_results) {
         tableModelSearch.setRowCount(0); //clear prior results
         for (Document doc : p_results) {
@@ -88,13 +74,22 @@ public class SearchDialog extends JDialog {
         tblSearchResults.setModel(tableModelSearch);
     }
 
+//    private Collection<Recipe> loadModels(List<Document> p_results){
+////        for (Document doc : p_results) {
+////            doc.get()
+////        }
+//    }
+
+    private void selectRecipe(ActionEvent e) {
+
+    }
+
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
         // Generated using JFormDesigner Educational license - Jason Handron (j-handron)
-        pnlFindRecipe = new JPanel();
+        pnlSearch = new JPanel();
         pnlSearchBy = new JPanel();
         rbName = new JRadioButton();
-        rbInstructions = new JRadioButton();
         rbIngredients = new JRadioButton();
         rbTags = new JRadioButton();
         pnlSearchInput = new JPanel();
@@ -103,27 +98,28 @@ public class SearchDialog extends JDialog {
         btnFind = new JButton();
         scrInstructionsSearch = new JScrollPane();
         txtarSearchInstructions = new JTextArea();
-        panel2 = new JPanel();
+        pnlSearchResults = new JPanel();
         scrSearchResults = new JScrollPane();
         tblSearchResults = new JTable();
+        button1 = new JButton();
 
         //======== this ========
         setTitle("Search");
         setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
         var contentPane = getContentPane();
         contentPane.setLayout(new GridBagLayout());
-        ((GridBagLayout)contentPane.getLayout()).columnWidths = new int[] {0, 0};
-        ((GridBagLayout)contentPane.getLayout()).rowHeights = new int[] {0, 0};
-        ((GridBagLayout)contentPane.getLayout()).columnWeights = new double[] {1.0, 1.0E-4};
+        ((GridBagLayout)contentPane.getLayout()).columnWidths = new int[] {0, 0, 0, 0};
+        ((GridBagLayout)contentPane.getLayout()).rowHeights = new int[] {352, 0};
+        ((GridBagLayout)contentPane.getLayout()).columnWeights = new double[] {1.0, 1.0, 1.0, 1.0E-4};
         ((GridBagLayout)contentPane.getLayout()).rowWeights = new double[] {1.0, 1.0E-4};
 
-        //======== pnlFindRecipe ========
+        //======== pnlSearch ========
         {
-            pnlFindRecipe.setLayout(new GridBagLayout());
-            ((GridBagLayout)pnlFindRecipe.getLayout()).columnWidths = new int[] {315, 0};
-            ((GridBagLayout)pnlFindRecipe.getLayout()).rowHeights = new int[] {75, 75, 280, 0};
-            ((GridBagLayout)pnlFindRecipe.getLayout()).columnWeights = new double[] {1.0, 1.0E-4};
-            ((GridBagLayout)pnlFindRecipe.getLayout()).rowWeights = new double[] {1.0, 1.0, 1.0, 1.0E-4};
+            pnlSearch.setLayout(new GridBagLayout());
+            ((GridBagLayout)pnlSearch.getLayout()).columnWidths = new int[] {315, 0};
+            ((GridBagLayout)pnlSearch.getLayout()).rowHeights = new int[] {62, 56, 226, 0};
+            ((GridBagLayout)pnlSearch.getLayout()).columnWeights = new double[] {1.0, 1.0E-4};
+            ((GridBagLayout)pnlSearch.getLayout()).rowWeights = new double[] {1.0, 1.0, 1.0, 1.0E-4};
 
             //======== pnlSearchBy ========
             {
@@ -134,29 +130,19 @@ public class SearchDialog extends JDialog {
                 rbName.setText("Name");
                 rbName.setHorizontalAlignment(SwingConstants.CENTER);
                 rbName.setSelected(true);
-                rbName.addActionListener(e -> rbNameSelected(e));
                 pnlSearchBy.add(rbName);
-
-                //---- rbInstructions ----
-                rbInstructions.setText("Instructions");
-                rbInstructions.setHorizontalAlignment(SwingConstants.CENTER);
-                rbInstructions.setEnabled(false);
-                rbInstructions.addActionListener(e -> rbInstructionsSelected(e));
-                pnlSearchBy.add(rbInstructions);
 
                 //---- rbIngredients ----
                 rbIngredients.setText("Ingredients");
                 rbIngredients.setHorizontalAlignment(SwingConstants.CENTER);
-                rbIngredients.addActionListener(e -> rbIngredientsSelected(e));
                 pnlSearchBy.add(rbIngredients);
 
                 //---- rbTags ----
                 rbTags.setText("Tags");
                 rbTags.setHorizontalAlignment(SwingConstants.CENTER);
-                rbTags.addActionListener(e -> rbTagsSelected(e));
                 pnlSearchBy.add(rbTags);
             }
-            pnlFindRecipe.add(pnlSearchBy, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0,
+            pnlSearch.add(pnlSearchBy, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0,
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                 new Insets(5, 5, 5, 5), 0, 0));
 
@@ -193,20 +179,18 @@ public class SearchDialog extends JDialog {
                 }
                 pnlSearchInput.add(scrInstructionsSearch, "descriptionSearchCard");
             }
-            pnlFindRecipe.add(pnlSearchInput, new GridBagConstraints(0, 1, 1, 1, 0.0, 0.0,
+            pnlSearch.add(pnlSearchInput, new GridBagConstraints(0, 1, 1, 1, 0.0, 0.0,
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                 new Insets(0, 0, 0, 0), 0, 0));
 
-            //======== panel2 ========
+            //======== pnlSearchResults ========
             {
-                panel2.setBorder(new TitledBorder("Search Results"));
-                panel2.setMaximumSize(null);
-                panel2.setMinimumSize(null);
-                panel2.setLayout(new GridBagLayout());
-                ((GridBagLayout)panel2.getLayout()).columnWidths = new int[] {315, 0};
-                ((GridBagLayout)panel2.getLayout()).rowHeights = new int[] {60, 0};
-                ((GridBagLayout)panel2.getLayout()).columnWeights = new double[] {1.0, 1.0E-4};
-                ((GridBagLayout)panel2.getLayout()).rowWeights = new double[] {1.0, 1.0E-4};
+                pnlSearchResults.setBorder(new TitledBorder("Search Results"));
+                pnlSearchResults.setLayout(new GridBagLayout());
+                ((GridBagLayout)pnlSearchResults.getLayout()).columnWidths = new int[] {172, 96, 152, 0};
+                ((GridBagLayout)pnlSearchResults.getLayout()).rowHeights = new int[] {0, 0, 0};
+                ((GridBagLayout)pnlSearchResults.getLayout()).columnWeights = new double[] {1.0, 0.0, 1.0, 1.0E-4};
+                ((GridBagLayout)pnlSearchResults.getLayout()).rowWeights = new double[] {1.0, 0.0, 1.0E-4};
 
                 //======== scrSearchResults ========
                 {
@@ -216,38 +200,35 @@ public class SearchDialog extends JDialog {
                         new Object[][] {
                         },
                         new String[] {
-                            null, null
+                            null, null, null
                         }
-                    ) {
-                        boolean[] columnEditable = new boolean[] {
-                            false, true
-                        };
-                        @Override
-                        public boolean isCellEditable(int rowIndex, int columnIndex) {
-                            return columnEditable[columnIndex];
-                        }
-                    });
-                    tblSearchResults.setPreferredScrollableViewportSize(null);
+                    ));
                     scrSearchResults.setViewportView(tblSearchResults);
                 }
-                panel2.add(scrSearchResults, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0,
+                pnlSearchResults.add(scrSearchResults, new GridBagConstraints(0, 0, 3, 1, 0.0, 0.0,
                     GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-                    new Insets(0, 0, 0, 0), 0, 0));
+                    new Insets(0, 0, 5, 0), 0, 0));
+
+                //---- button1 ----
+                button1.setText("Select");
+                button1.addActionListener(e -> selectRecipe(e));
+                pnlSearchResults.add(button1, new GridBagConstraints(1, 1, 1, 1, 0.0, 0.0,
+                    GridBagConstraints.CENTER, GridBagConstraints.VERTICAL,
+                    new Insets(0, 0, 0, 5), 0, 0));
             }
-            pnlFindRecipe.add(panel2, new GridBagConstraints(0, 2, 1, 1, 0.0, 0.0,
+            pnlSearch.add(pnlSearchResults, new GridBagConstraints(0, 2, 1, 1, 0.0, 0.0,
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-                new Insets(0, 0, 0, 0), 0, 0));
+                new Insets(0, 5, 5, 5), 0, 0));
         }
-        contentPane.add(pnlFindRecipe, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0,
+        contentPane.add(pnlSearch, new GridBagConstraints(0, 0, 3, 1, 0.0, 0.0,
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
             new Insets(0, 0, 0, 0), 0, 0));
-        pack();
+        setSize(415, 375);
         setLocationRelativeTo(getOwner());
 
         //---- buttonGroup1 ----
         var buttonGroup1 = new ButtonGroup();
         buttonGroup1.add(rbName);
-        buttonGroup1.add(rbInstructions);
         buttonGroup1.add(rbIngredients);
         buttonGroup1.add(rbTags);
         // JFormDesigner - End of component initialization  //GEN-END:initComponents  @formatter:on
@@ -255,10 +236,9 @@ public class SearchDialog extends JDialog {
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables  @formatter:off
     // Generated using JFormDesigner Educational license - Jason Handron (j-handron)
-    private JPanel pnlFindRecipe;
+    private JPanel pnlSearch;
     private JPanel pnlSearchBy;
     private JRadioButton rbName;
-    private JRadioButton rbInstructions;
     private JRadioButton rbIngredients;
     private JRadioButton rbTags;
     private JPanel pnlSearchInput;
@@ -267,8 +247,9 @@ public class SearchDialog extends JDialog {
     private JButton btnFind;
     private JScrollPane scrInstructionsSearch;
     private JTextArea txtarSearchInstructions;
-    private JPanel panel2;
+    private JPanel pnlSearchResults;
     private JScrollPane scrSearchResults;
     private JTable tblSearchResults;
+    private JButton button1;
     // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 }

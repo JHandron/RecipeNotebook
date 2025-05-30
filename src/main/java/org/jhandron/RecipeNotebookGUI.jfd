@@ -21,7 +21,7 @@ new FormModel {
 				}
 				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.GridBagLayout ) {
 					"$columnSpecs": "153, 162:1.0, 205:1.0"
-					"$rowSpecs": "center:56, center:79:1.0, center:69:1.0, 125, center:59:1.0"
+					"$rowSpecs": "center:56, center:88, center:86, 103, center:59:1.0"
 					"$alignTop": true
 					"$alignLeft": true
 					"$hGap": 10
@@ -47,7 +47,7 @@ new FormModel {
 					} )
 					add( new FormComponent( "javax.swing.JLabel" ) {
 						name: "label1"
-						"text": "Ingredient"
+						"text": "Ingredient(s)"
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
 						"gridy": 1
 						"insets": new java.awt.Insets( 0, 25, 0, 0 )
@@ -80,7 +80,7 @@ new FormModel {
 					} )
 					add( new FormComponent( "javax.swing.JLabel" ) {
 						name: "label2"
-						"text": "Tag"
+						"text": "Tag(s)"
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
 						"gridy": 2
 						"insets": new java.awt.Insets( 0, 25, 0, 0 )
@@ -117,6 +117,7 @@ new FormModel {
 							name: "txtarAddInstructions"
 							"lineWrap": true
 							"wrapStyleWord": true
+							"minimumSize": sfield com.jformdesigner.model.FormObject NULL_VALUE
 						} )
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
 						"gridy": 3
@@ -125,7 +126,7 @@ new FormModel {
 					} )
 					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.GridBagLayout ) {
 						"$columnSpecs": "205:1.0"
-						"$rowSpecs": "182, 0"
+						"$rowSpecs": "116, 0"
 						"$hGap": 10
 						"$vGap": 10
 						"$alignTop": true
@@ -133,6 +134,7 @@ new FormModel {
 					} ) {
 						name: "panel3"
 						"border": new javax.swing.border.TitledBorder( "Related Recipes" )
+						"minimumSize": sfield com.jformdesigner.model.FormObject NULL_VALUE
 						add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
 							name: "scrollPane1"
 							add( new FormComponent( "javax.swing.JList" ) {
@@ -141,7 +143,7 @@ new FormModel {
 						}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) )
 						add( new FormComponent( "javax.swing.JButton" ) {
 							name: "button1"
-							"text": "Add"
+							"text": "Add..."
 							addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "spawnSearchDialog", true ) )
 						}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
 							"gridy": 1
@@ -162,138 +164,6 @@ new FormModel {
 					} )
 				}, new FormLayoutConstraints( null ) {
 					"title": "Add New "
-				} )
-				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.GridBagLayout ) {
-					"$columnSpecs": "315:1.0"
-					"$rowSpecs": "75:1.0, 75:1.0, 347:1.0"
-					"$alignTop": true
-					"$alignLeft": true
-				} ) {
-					name: "pnlFindRecipe"
-					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.GridLayout ) {
-						"columns": 1
-						"hgap": 5
-						"vgap": 5
-					} ) {
-						name: "pnlSearchBy"
-						"border": new javax.swing.border.TitledBorder( "Search By" )
-						add( new FormComponent( "javax.swing.JRadioButton" ) {
-							name: "rbName"
-							"text": "Name"
-							"horizontalAlignment": 0
-							"selected": true
-							"$buttonGroup": new FormReference( "buttonGroup1" )
-							addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "rbNameSelected", true ) )
-						} )
-						add( new FormComponent( "javax.swing.JRadioButton" ) {
-							name: "rbInstructions"
-							"text": "Instructions"
-							"horizontalAlignment": 0
-							"$buttonGroup": new FormReference( "buttonGroup1" )
-							"enabled": false
-							addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "rbInstructionsSelected", true ) )
-						} )
-						add( new FormComponent( "javax.swing.JRadioButton" ) {
-							name: "rbIngredients"
-							"text": "Ingredients"
-							"horizontalAlignment": 0
-							"$buttonGroup": new FormReference( "buttonGroup1" )
-							addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "rbIngredientsSelected", true ) )
-						} )
-						add( new FormComponent( "javax.swing.JRadioButton" ) {
-							name: "rbTags"
-							"text": "Tags"
-							"horizontalAlignment": 0
-							"$buttonGroup": new FormReference( "buttonGroup1" )
-							addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "rbTagsSelected", true ) )
-						} )
-					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
-						"insets": new java.awt.Insets( 5, 5, 5, 5 )
-					} )
-					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.CardLayout ) ) {
-						name: "pnlSearchInput"
-						add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.GridBagLayout ) {
-							"$columnSpecs": "376:1.0, 110"
-							"$rowSpecs": "0:1.0"
-							"$alignTop": true
-							"$alignLeft": true
-						} ) {
-							name: "pnlNameSearch"
-							add( new FormComponent( "javax.swing.JTextField" ) {
-								name: "txtSearchName"
-							}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
-								"vAlign": 0
-								"hAlign": 5
-								"insets": new java.awt.Insets( 10, 10, 10, 10 )
-							} )
-							add( new FormComponent( "javax.swing.JButton" ) {
-								name: "btnFind"
-								"text": "Find"
-								addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "doFind", true ) )
-							}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
-								"hAlign": 0
-								"vAlign": 0
-								"gridx": 1
-							} )
-						}, new FormLayoutConstraints( class java.lang.String ) {
-							"value": "txtSearchCard"
-						} )
-						add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
-							name: "scrInstructionsSearch"
-							add( new FormComponent( "javax.swing.JTextArea" ) {
-								name: "txtarSearchInstructions"
-							} )
-						}, new FormLayoutConstraints( class java.lang.String ) {
-							"value": "descriptionSearchCard"
-						} )
-					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
-						"gridy": 1
-					} )
-					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.GridBagLayout ) {
-						"$columnSpecs": "315:1.0"
-						"$rowSpecs": "347:1.0"
-						"$alignTop": true
-						"$alignLeft": true
-					} ) {
-						name: "panel2"
-						"border": new javax.swing.border.TitledBorder( "Search Results" )
-						add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
-							name: "scrSearchResults"
-							add( new FormComponent( "javax.swing.JTable" ) {
-								name: "tblSearchResults"
-								"model": new com.jformdesigner.model.SwingTableModel( new java.util.Vector, new java.util.Vector {
-									add( null )
-									add( null )
-								}, new java.util.Vector {
-									add( null )
-									add( null )
-								}, new java.util.Vector {
-									add( false )
-									add( null )
-								}, new java.util.Vector {
-									add( null )
-									add( null )
-								} )
-							} )
-						}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) )
-					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
-						"gridy": 2
-						"insets": new java.awt.Insets( 10, 10, 10, 10 )
-					} )
-				}, new FormLayoutConstraints( null ) {
-					"title": "Search"
-				} )
-				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.GridBagLayout ) {
-					"$columnSpecs": "0, 0"
-					"$rowSpecs": "0, 0, 0"
-					"$hGap": 5
-					"$vGap": 5
-					"$alignLeft": true
-					"$alignTop": true
-				} ) {
-					name: "panel1"
-				}, new FormLayoutConstraints( null ) {
-					"title": "Edit"
 				} )
 			}, new FormLayoutConstraints( class java.lang.String ) {
 				"value": "Center"

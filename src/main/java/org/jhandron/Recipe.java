@@ -1,14 +1,24 @@
 package org.jhandron;
+import org.bson.BsonType;
+import org.bson.codecs.pojo.annotations.BsonId;
+import org.bson.codecs.pojo.annotations.BsonRepresentation;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringJoiner;
 
 public class Recipe {
+
+    @BsonId
+    @BsonRepresentation(BsonType.OBJECT_ID)
     private String id;
+
     private String name;
     private String instructions;
-    private List<String> ingredientList;
-    private List<String> tagsList;
-    private List<String> relatedRecipeList;
+    private List<String> ingredients;
+    private List<String> tags;
+    private List<String> relatedRecipes;
+
 
     public String getId() {
         return id;
@@ -52,27 +62,39 @@ Accepts-Content-Type: MIME:JSON
         this.instructions = instructions;
     }
 
-    public List<String> getIngredientList() {
-        return ingredientList == null ? new ArrayList<>() : ingredientList;
+    public List<String> getIngredients() {
+        return ingredients == null ? new ArrayList<>() : ingredients;
     }
 
-    public void setIngredientList(List<String> ingredientList) {
-        this.ingredientList = ingredientList;
+    public void setIngredients(List<String> ingredients) {
+        this.ingredients = ingredients;
     }
 
-    public List<String> getTagsList() {
-        return tagsList == null ? new ArrayList<>() : tagsList;
+    public List<String> getTags() {
+        return tags == null ? new ArrayList<>() : tags;
     }
 
-    public void setTagsList(List<String> tagsList) {
-        this.tagsList = tagsList;
+    public void setTags(List<String> tags) {
+        this.tags = tags;
     }
 
-    public List<String> getRelatedRecipeList() {
-        return relatedRecipeList;
+    public List<String> getRelatedRecipes() {
+        return relatedRecipes;
     }
 
-    public void setRelatedRecipeList(List<String> relatedRecipeList) {
-        this.relatedRecipeList = relatedRecipeList;
+    public void setRelatedRecipes(List<String> relatedRecipes) {
+        this.relatedRecipes = relatedRecipes;
+    }
+
+    @Override
+    public String toString() {
+        StringJoiner sj = new StringJoiner("; ");
+        sj.add(id);
+        sj.add(name);
+        sj.add(instructions);
+//        sj.add(ingredients.toString());
+//        sj.add(tags.toString());
+//        sj.add(relatedRecipes.toString());
+        return sj.toString();
     }
 }
