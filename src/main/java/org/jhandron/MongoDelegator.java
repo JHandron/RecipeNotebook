@@ -19,6 +19,7 @@ import java.util.List;
 import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
 import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 
+
 public class MongoDelegator {
 
     private static final String CONNECTION_STRING = "mongodb://localhost:27017/";
@@ -83,24 +84,6 @@ public class MongoDelegator {
             if (!results.isEmpty()) {
                 System.out.println("We got documents.");
                 results.forEach(o -> System.out.println(o.toString()));
-            } else {
-                System.out.println("No matching documents found.");
-            }
-            return results;
-        }
-    }
-
-    public static List<Document> getBulkByName(String p_name){
-        try (MongoClient mongoClient = MongoClients.create(CONNECTION_STRING)) {
-            MongoDatabase database = mongoClient.getDatabase(DATABASE_NAME);
-            MongoCollection<Document> collection = database.getCollection(COLLECTION_NAME);
-
-            List<Document> results;
-            results = collection.find(Filters.regex("name", ".*" + p_name + ".*", "i")).into(new ArrayList<>());
-
-            if (!results.isEmpty()) {
-                System.out.println("We got documents.");
-                results.forEach(o -> System.out.println(o.toJson()));
             } else {
                 System.out.println("No matching documents found.");
             }

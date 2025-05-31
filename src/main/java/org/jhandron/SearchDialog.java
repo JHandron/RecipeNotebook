@@ -8,6 +8,7 @@ import org.bson.Document;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,29 +21,35 @@ import javax.swing.table.*;
  */
 public class SearchDialog extends JDialog {
 
+    //TODO: Shouldn't be static
     private final static DefaultTableModel tableModelSearch = new DefaultTableModel();
+
+    //TODO:Probably a way to JFD this
+    private RecipeSelectionListener selectionListener;
+    public void setRecipeSelectionListener(RecipeSelectionListener listener) {
+        this.selectionListener = listener;
+    }
 
     public SearchDialog(Window owner) {
         super(owner);
         initComponents();
         init();
-        setVisible(true); //TODO: Probably a better way to do this
     }
 
     public void init(){
-        tableModelSearch.setColumnIdentifiers(new Object[]{"Name", "Tags"});
+        tableModelSearch.setColumnIdentifiers(new Object[]{"Id", "Name", "Tags", "Ingredients"});
         tblSearchResults.setModel(tableModelSearch);
+        //Hide the Id column
+        tblSearchResults.getColumnModel().getColumn(0).setMaxWidth(0);
+        tblSearchResults.getColumnModel().getColumn(0).setMinWidth(0);
+        tblSearchResults.getColumnModel().getColumn(0).setWidth(0);
     }
 
     private void doFind(ActionEvent e) {
         if (rbName.isSelected()){
-//            java.util.List<Document> results = MongoDelegator.getBulkByName(txtSearchName.getText().trim());
-//            if (!results.isEmpty()) {
-//                updateSearchTable(results);
-//            }
-            Collection<Recipe> recipes = MongoDelegator.getRecipesByName(txtSearchName.getText().trim());
-            if (!recipes.isEmpty()) {
-                recipes.forEach(System.out::println);
+            Collection<Recipe> recipeSearchResults = MongoDelegator.getRecipesByName(txtSearchName.getText().trim());
+            if (!recipeSearchResults.isEmpty()) {
+                updateSearchTable((List<Recipe>) recipeSearchResults);
             }
         }
         else if (rbIngredients.isSelected()){
@@ -53,35 +60,34 @@ public class SearchDialog extends JDialog {
         }
     }
 
-    //TODO: Put this in a model
-    private void updateSearchTable(List<Document> p_results) {
+    private void updateSearchTable(List<Recipe> p_results) {
         tableModelSearch.setRowCount(0); //clear prior results
-        for (Document doc : p_results) {
-            Object tags = doc.get("tagsList");
-            String tagsString = "";
+        for (Recipe recipe : p_results){
+            String ingredientsString = ((List<?>) recipe.getIngredients()).stream()
+                    .map(Object::toString)
+                    .collect(Collectors.joining(", "));
 
-            if (tags instanceof List) {
-                tagsString = ((List<?>) tags).stream()
+            String tagsString = ((List<?>) recipe.getTags()).stream()
                         .map(Object::toString)
                         .collect(Collectors.joining(", "));
-            }
-            if (tagsString.isEmpty()){
-                tagsString = "(No tags entered)";
-            }
-            final Object[] rowData = {doc.get("name"), tagsString};
-            tableModelSearch.addRow(rowData);
+
+            final Object[] data = new Object[]{recipe.getId(), recipe.getName(), tagsString, ingredientsString};
+            tableModelSearch.addRow(data);
         }
         tblSearchResults.setModel(tableModelSearch);
     }
 
-//    private Collection<Recipe> loadModels(List<Document> p_results){
-////        for (Document doc : p_results) {
-////            doc.get()
-////        }
-//    }
-
     private void selectRecipe(ActionEvent e) {
-
+        //TODO: Make a RecipeTableModel and return Recipes instead of index
+        int[] selectedRowIndexes = tblSearchResults.getSelectedRows();
+        List<String> selectedRecipesIds = new ArrayList<>();
+        for (int index : selectedRowIndexes) {
+            String recipeId = (String) tableModelSearch.getValueAt(index, 0); //id is column 0
+            selectedRecipesIds.add(recipeId);
+        }
+        selectionListener.onRecipesSelected(selectedRecipesIds); // 🔥 Fire the callback
+        //TODO: Clear table selection before closing
+        dispose();
     }
 
     private void initComponents() {
@@ -187,7 +193,7 @@ public class SearchDialog extends JDialog {
             {
                 pnlSearchResults.setBorder(new TitledBorder("Search Results"));
                 pnlSearchResults.setLayout(new GridBagLayout());
-                ((GridBagLayout)pnlSearchResults.getLayout()).columnWidths = new int[] {172, 96, 152, 0};
+                ((GridBagLayout)pnlSearchResults.getLayout()).columnWidths = new int[] {157, 96, 152, 0};
                 ((GridBagLayout)pnlSearchResults.getLayout()).rowHeights = new int[] {0, 0, 0};
                 ((GridBagLayout)pnlSearchResults.getLayout()).columnWeights = new double[] {1.0, 0.0, 1.0, 1.0E-4};
                 ((GridBagLayout)pnlSearchResults.getLayout()).rowWeights = new double[] {1.0, 0.0, 1.0E-4};

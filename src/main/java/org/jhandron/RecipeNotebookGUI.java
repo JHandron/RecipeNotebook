@@ -2,6 +2,7 @@ package org.jhandron;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.List;
 import javax.swing.*;
 import javax.swing.border.*;
 import javax.swing.table.*;
@@ -10,7 +11,7 @@ import javax.swing.table.*;
  * @author Jason
  */
 
-public class RecipeNotebookGUI extends JFrame {
+public class RecipeNotebookGUI extends JFrame implements RecipeSelectionListener {
 
     //TODO:Here?
     private final static DefaultListModel<String> listModelIngredients = new DefaultListModel<>();
@@ -41,7 +42,6 @@ public class RecipeNotebookGUI extends JFrame {
     private void updateTagsList(){
         lstTags.setModel(listModelTags);
     }
-
 
     private void txtAddIngredientsEnter(ActionEvent e) {
         listModelIngredients.addElement(txtAddIngredients.getText().trim());
@@ -98,6 +98,14 @@ public class RecipeNotebookGUI extends JFrame {
 
     private void spawnSearchDialog(ActionEvent e) {
         SearchDialog dialog = new SearchDialog(this);
+        dialog.setRecipeSelectionListener(this);
+        dialog.setVisible(true);
+    }
+
+    public void onRecipesSelected(List<String> p_recipeIds) {
+        // This is where you handle the selected recipes
+        System.out.println("Recipes selected: " + p_recipeIds);
+//        updateRelatedRecipesTable(recipeIds);
     }
 
     private void initComponents() {
@@ -124,7 +132,7 @@ public class RecipeNotebookGUI extends JFrame {
         txtarAddInstructions = new JTextArea();
         panel3 = new JPanel();
         scrollPane1 = new JScrollPane();
-        list1 = new JList();
+        tblRelatedRecipes = new JTable();
         button1 = new JButton();
         btnAddRecipe = new JButton();
 
@@ -259,7 +267,16 @@ public class RecipeNotebookGUI extends JFrame {
 
                     //======== scrollPane1 ========
                     {
-                        scrollPane1.setViewportView(list1);
+
+                        //---- tblRelatedRecipes ----
+                        tblRelatedRecipes.setModel(new DefaultTableModel(
+                            new Object[][] {
+                            },
+                            new String[] {
+                                null, null
+                            }
+                        ));
+                        scrollPane1.setViewportView(tblRelatedRecipes);
                     }
                     panel3.add(scrollPane1, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0,
                         GridBagConstraints.CENTER, GridBagConstraints.BOTH,
@@ -314,7 +331,7 @@ public class RecipeNotebookGUI extends JFrame {
     private JTextArea txtarAddInstructions;
     private JPanel panel3;
     private JScrollPane scrollPane1;
-    private JList list1;
+    private JTable tblRelatedRecipes;
     private JButton button1;
     private JButton btnAddRecipe;
     // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on

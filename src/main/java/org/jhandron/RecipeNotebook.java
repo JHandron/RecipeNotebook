@@ -11,7 +11,11 @@ public class RecipeNotebook {
 //        UIManager.put( "TabbedPane.selectedBackground", Color.white);
 //        RecipeNotebook recipeNotebook = new RecipeNotebook();
 //        recipeNotebook.run();
+
+
         RecipeNotebookGUI gui = new RecipeNotebookGUI();
         gui.setVisible(true);
     }
+
+
 }

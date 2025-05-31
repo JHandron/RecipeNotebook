@@ -137,8 +137,21 @@ new FormModel {
 						"minimumSize": sfield com.jformdesigner.model.FormObject NULL_VALUE
 						add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
 							name: "scrollPane1"
-							add( new FormComponent( "javax.swing.JList" ) {
-								name: "list1"
+							add( new FormComponent( "javax.swing.JTable" ) {
+								name: "tblRelatedRecipes"
+								"model": new com.jformdesigner.model.SwingTableModel( new java.util.Vector, new java.util.Vector {
+									add( null )
+									add( null )
+								}, new java.util.Vector {
+									add( null )
+									add( null )
+								}, new java.util.Vector {
+									add( null )
+									add( null )
+								}, new java.util.Vector {
+									add( null )
+									add( null )
+								} )
 							} )
 						}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) )
 						add( new FormComponent( "javax.swing.JButton" ) {

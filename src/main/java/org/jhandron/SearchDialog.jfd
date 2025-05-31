@@ -90,7 +90,7 @@ new FormModel {
 					"gridy": 1
 				} )
 				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.GridBagLayout ) {
-					"$columnSpecs": "left:167:1.0, center:91, left:152:1.0"
+					"$columnSpecs": "left:152:1.0, center:91, left:152:1.0"
 					"$rowSpecs": "0:1.0, 0"
 					"$hGap": 5
 					"$vGap": 5
