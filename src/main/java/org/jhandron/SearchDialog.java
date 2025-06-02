@@ -30,14 +30,16 @@ public class SearchDialog extends JDialog {
         this.selectionListener = listener;
     }
 
-    public SearchDialog(Window owner) {
+    public SearchDialog(Window owner, RecipeSelectionListener recipeSelectionListener) {
         super(owner);
+        this.selectionListener = recipeSelectionListener;
         initComponents();
         init();
     }
 
     public void init(){
         tableModelSearch.setColumnIdentifiers(new Object[]{"Id", "Name", "Tags", "Ingredients"});
+        tableModelSearch.setRowCount(0); //Clear any previous results upon reopening dialog
         tblSearchResults.setModel(tableModelSearch);
         //Hide the Id column
         tblSearchResults.getColumnModel().getColumn(0).setMaxWidth(0);
@@ -47,7 +49,7 @@ public class SearchDialog extends JDialog {
 
     private void doFind(ActionEvent e) {
         if (rbName.isSelected()){
-            Collection<Recipe> recipeSearchResults = MongoDelegator.getRecipesByName(txtSearchName.getText().trim());
+            Collection<Recipe> recipeSearchResults = MongoDelegator.getCollectionByName(txtSearchName.getText().trim());
             if (!recipeSearchResults.isEmpty()) {
                 updateSearchTable((List<Recipe>) recipeSearchResults);
             }

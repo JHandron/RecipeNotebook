@@ -21,11 +21,9 @@ new FormModel {
 				}
 				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.GridBagLayout ) {
 					"$columnSpecs": "153, 162:1.0, 205:1.0"
-					"$rowSpecs": "center:56, center:88, center:86, 103, center:59:1.0"
+					"$rowSpecs": "center:56, center:88, center:86, 207, center:59:1.0"
 					"$alignTop": true
 					"$alignLeft": true
-					"$hGap": 10
-					"$vGap": 10
 				} ) {
 					name: "pnlAddNew"
 					auxiliary() {
@@ -122,13 +120,10 @@ new FormModel {
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
 						"gridy": 3
 						"gridwidth": 2
-						"insets": new java.awt.Insets( 10, 25, 0, 25 )
 					} )
 					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.GridBagLayout ) {
 						"$columnSpecs": "205:1.0"
-						"$rowSpecs": "116, 0"
-						"$hGap": 10
-						"$vGap": 10
+						"$rowSpecs": "116, bottom:0:1.0"
 						"$alignTop": true
 						"$alignLeft": true
 					} ) {
@@ -160,6 +155,8 @@ new FormModel {
 							addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "spawnSearchDialog", true ) )
 						}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
 							"gridy": 1
+							"hAlign": 5
+							"vAlign": 0
 						} )
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
 						"gridx": 2

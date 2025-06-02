@@ -26,21 +26,19 @@ public class MongoDelegator {
     private static final String DATABASE_NAME = "recipe";
     private static final String COLLECTION_NAME = "recipes";
 
-
     //TODO: Put in try-catch block
-    private static CodecRegistry pojoCodecRegistry = fromRegistries(
+    private static final CodecRegistry pojoCodecRegistry = fromRegistries(
             MongoClientSettings.getDefaultCodecRegistry(),
             fromProviders(PojoCodecProvider.builder().automatic(true).build())
     );
 
-   private static MongoClientSettings settings = MongoClientSettings.builder()
+   private static final MongoClientSettings settings = MongoClientSettings.builder()
             .codecRegistry(pojoCodecRegistry)
             .build();
 
 //    MongoClient client = MongoClients.create(settings);
 //    MongoDatabase database = client.getDatabase(DATABASE_NAME);
 //    MongoCollection<Recipe> recipes = database.getCollection(COLLECTION_NAME, Recipe.class);
-
 
     public static void doInsert(Recipe p_recipe){
         try (MongoClient mongoClient = MongoClients.create(CONNECTION_STRING)) {
@@ -50,8 +48,9 @@ public class MongoDelegator {
                 InsertOneResult result = collection.insertOne(new Document()
                         .append("name", p_recipe.getName())
                         .append("instructions", p_recipe.getInstructions())
-                        .append("ingredientsList", p_recipe.getIngredients())
-                        .append("tagsList", p_recipe.getTags()));
+                        .append("ingredients", p_recipe.getIngredients())
+                        .append("tags", p_recipe.getTags())
+                        .append("relatedRecipes", p_recipe.getRelatedRecipes()));
                 System.out.println("Success! Inserted document id: " + result.getInsertedId());
             } catch (MongoException e) {
                 System.err.println("Unable to insert due to an error: " + e);
@@ -59,27 +58,27 @@ public class MongoDelegator {
         }
     }
 
-    public static Document getByName(String p_name){
-        try (MongoClient mongoClient = MongoClients.create(CONNECTION_STRING)) {
-            MongoDatabase database = mongoClient.getDatabase(DATABASE_NAME);
-            MongoCollection<Document> collection = database.getCollection(COLLECTION_NAME);
-            Document doc = collection.find(Filters.eq("name", p_name)).first(); //TODO: Duplicates?
-            if (doc != null) {
-                System.out.println(doc.toJson());
-            } else {
-                System.out.println("No matching documents found.");
-            }
-            return doc;
-        }
-    }
-
-    public static Collection<Recipe> getRecipesByName(String p_name) {
+    public static Recipe getByName(String p_name){
         try (MongoClient mongoClient = MongoClients.create(settings)) {
             MongoDatabase database = mongoClient.getDatabase(DATABASE_NAME);
             MongoCollection<Recipe> collection = database.getCollection(COLLECTION_NAME, Recipe.class);
 
-            List<Recipe> results;
-            results = collection.find(Filters.regex("name", ".*" + p_name + ".*", "i")).into(new ArrayList<>());
+            Recipe recipe = collection.find(Filters.eq("name", p_name)).first(); //TODO: Duplicates?
+            if (recipe != null) {
+                System.out.println(recipe.toString());
+            } else {
+                System.out.println("No matching documents found.");
+            }
+            return recipe;
+        }
+    }
+
+    public static Collection<Recipe> getCollectionByName(String p_name) {
+        try (MongoClient mongoClient = MongoClients.create(settings)) {
+            MongoDatabase database = mongoClient.getDatabase(DATABASE_NAME);
+            MongoCollection<Recipe> collection = database.getCollection(COLLECTION_NAME, Recipe.class);
+
+            List<Recipe> results = collection.find(Filters.regex("name", ".*" + p_name + ".*", "i")).into(new ArrayList<>());
 
             if (!results.isEmpty()) {
                 System.out.println("We got documents.");
@@ -91,16 +90,17 @@ public class MongoDelegator {
         }
     }
 
-    public static void getByInstructions(String p_instructions){
+    public static Recipe getByInstructions(String p_instructions){
         try (MongoClient mongoClient = MongoClients.create(CONNECTION_STRING)) {
             MongoDatabase database = mongoClient.getDatabase(DATABASE_NAME);
-            MongoCollection<Document> collection = database.getCollection(COLLECTION_NAME);
-            Document doc = collection.find(Filters.eq("instructions", p_instructions)).first();
-            if (doc != null) {
-                System.out.println(doc.toJson());
+            MongoCollection<Recipe> collection = database.getCollection(COLLECTION_NAME, Recipe.class);
+            Recipe recipe = collection.find(Filters.eq("instructions", p_instructions)).first(); //TODO:Duplicates
+            if (recipe != null) {
+                System.out.println(recipe.toString());
             } else {
                 System.out.println("No matching documents found.");
             }
+            return recipe;
         }
     }
 

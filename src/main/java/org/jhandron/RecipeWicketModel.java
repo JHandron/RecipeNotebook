@@ -15,11 +15,11 @@ public class RecipeWicketModel extends LoadableDetachableModel<String> {
 
     @Override
     protected String load() {
-        Document rec = MongoDelegator.getByName(r);
+        Recipe recipe = MongoDelegator.getByName(r);
         StringJoiner sj = new StringJoiner("\n");
-        System.out.println(rec);
-        sj.add(rec.get("name").toString() + "(" + rec.get("id").toString() + ")");
-        sj.add(rec.get("instuctions").toString());
+        System.out.println(recipe.toString());
+        sj.add(recipe.getName() + "(" + recipe.getId() +" )");
+        sj.add(recipe.getInstructions());
         return sj.toString() ;
     }
 }

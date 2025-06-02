@@ -13,12 +13,26 @@ import javax.swing.table.*;
 
 public class RecipeNotebookGUI extends JFrame implements RecipeSelectionListener {
 
-    //TODO:Here?
+    //TODO: Here?
     private final static DefaultListModel<String> listModelIngredients = new DefaultListModel<>();
     private final static DefaultListModel<String> listModelTags = new DefaultListModel<>();
+    private final DefaultTableModel tableModelRelatedRecipes = new DefaultTableModel(); //TODO: RecipeTableModel
+
+    private final RecipeTableModel recipeTableModel = new RecipeTableModel();
 
     public RecipeNotebookGUI() {
         initComponents();
+        init();
+    }
+
+    private void init() {
+        tableModelRelatedRecipes.setColumnIdentifiers(new Object[]{"Id"});
+        tblRelatedRecipes.setModel(tableModelRelatedRecipes);
+        tableModelRelatedRecipes.setRowCount(0);
+
+        //TODO:Testing
+//        recipeTableModel.setRowCount(0);
+//        tblRelatedRecipes.setModel(recipeTableModel);
     }
 
     private void addNewRecipe(ActionEvent e) {
@@ -32,6 +46,7 @@ public class RecipeNotebookGUI extends JFrame implements RecipeSelectionListener
         for (Object o : listModelIngredients.toArray()) {
             recipe.getIngredients().add((String)o);
         }
+        //TODO: Put relatedRecipeData into the recipe
         MongoDelegator.doInsert(recipe);
     }
 
@@ -97,15 +112,23 @@ public class RecipeNotebookGUI extends JFrame implements RecipeSelectionListener
     }
 
     private void spawnSearchDialog(ActionEvent e) {
-        SearchDialog dialog = new SearchDialog(this);
+        SearchDialog dialog = new SearchDialog(this, this);
         dialog.setRecipeSelectionListener(this);
         dialog.setVisible(true);
     }
 
     public void onRecipesSelected(List<String> p_recipeIds) {
-        // This is where you handle the selected recipes
         System.out.println("Recipes selected: " + p_recipeIds);
-//        updateRelatedRecipesTable(recipeIds);
+        updateRelatedRecipesTable(p_recipeIds);
+    }
+
+    public void updateRelatedRecipesTable(List<String> p_recipeIds) {
+        tableModelRelatedRecipes.setRowCount(0); //clear prior results
+        for (String id : p_recipeIds){
+            final Object[] data = new Object[]{id};
+            tableModelRelatedRecipes.addRow(data);
+        }
+        tblRelatedRecipes.setModel(tableModelRelatedRecipes);
     }
 
     private void initComponents() {
@@ -175,8 +198,8 @@ public class RecipeNotebookGUI extends JFrame implements RecipeSelectionListener
             //======== pnlAddNew ========
             {
                 pnlAddNew.setLayout(new GridBagLayout());
-                ((GridBagLayout)pnlAddNew.getLayout()).columnWidths = new int[] {163, 172, 205, 0};
-                ((GridBagLayout)pnlAddNew.getLayout()).rowHeights = new int[] {66, 98, 96, 113, 59, 0};
+                ((GridBagLayout)pnlAddNew.getLayout()).columnWidths = new int[] {153, 162, 205, 0};
+                ((GridBagLayout)pnlAddNew.getLayout()).rowHeights = new int[] {56, 88, 86, 207, 59, 0};
                 ((GridBagLayout)pnlAddNew.getLayout()).columnWeights = new double[] {0.0, 1.0, 1.0, 1.0E-4};
                 ((GridBagLayout)pnlAddNew.getLayout()).rowWeights = new double[] {0.0, 0.0, 0.0, 0.0, 1.0, 1.0E-4};
 
@@ -184,23 +207,23 @@ public class RecipeNotebookGUI extends JFrame implements RecipeSelectionListener
                 lblRecipeName.setText("Recipe Name");
                 pnlAddNew.add(lblRecipeName, new GridBagConstraints(0, 0, 2, 1, 0.0, 0.0,
                     GridBagConstraints.WEST, GridBagConstraints.NONE,
-                    new Insets(0, 25, 10, 10), 0, 0));
+                    new Insets(0, 25, 0, 0), 0, 0));
                 pnlAddNew.add(txtAddRecipeName, new GridBagConstraints(0, 0, 3, 1, 0.0, 0.0,
                     GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL,
-                    new Insets(0, 110, 10, 25), 0, 0));
+                    new Insets(0, 110, 0, 25), 0, 0));
 
                 //---- label1 ----
                 label1.setText("Ingredient(s)");
                 pnlAddNew.add(label1, new GridBagConstraints(0, 1, 1, 1, 0.0, 0.0,
                     GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL,
-                    new Insets(0, 25, 10, 10), 0, 0));
+                    new Insets(0, 25, 0, 0), 0, 0));
 
                 //---- txtAddIngredients ----
                 txtAddIngredients.setToolTipText("Press Enter to add an ingredient");
                 txtAddIngredients.addActionListener(e -> txtAddIngredientsEnter(e));
                 pnlAddNew.add(txtAddIngredients, new GridBagConstraints(0, 1, 2, 1, 0.0, 0.0,
                     GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL,
-                    new Insets(0, 110, 10, 10), 0, 0));
+                    new Insets(0, 110, 0, 0), 0, 0));
 
                 //======== spIngredients ========
                 {
@@ -217,20 +240,20 @@ public class RecipeNotebookGUI extends JFrame implements RecipeSelectionListener
                 }
                 pnlAddNew.add(spIngredients, new GridBagConstraints(2, 1, 1, 1, 0.0, 0.0,
                     GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-                    new Insets(0, 0, 10, 25), 0, 0));
+                    new Insets(0, 0, 0, 25), 0, 0));
 
                 //---- label2 ----
                 label2.setText("Tag(s)");
                 pnlAddNew.add(label2, new GridBagConstraints(0, 2, 1, 1, 0.0, 0.0,
                     GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL,
-                    new Insets(0, 25, 10, 10), 0, 0));
+                    new Insets(0, 25, 0, 0), 0, 0));
 
                 //---- txtAddTags ----
                 txtAddTags.setToolTipText("Press Enter to add a tag");
                 txtAddTags.addActionListener(e -> txtAddTagsEntered(e));
                 pnlAddNew.add(txtAddTags, new GridBagConstraints(0, 2, 2, 1, 0.0, 0.0,
                     GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL,
-                    new Insets(0, 110, 10, 10), 0, 0));
+                    new Insets(0, 110, 0, 0), 0, 0));
 
                 //======== spTags ========
                 {
@@ -239,7 +262,7 @@ public class RecipeNotebookGUI extends JFrame implements RecipeSelectionListener
                 }
                 pnlAddNew.add(spTags, new GridBagConstraints(2, 2, 1, 1, 0.0, 0.0,
                     GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-                    new Insets(0, 0, 10, 25), 0, 0));
+                    new Insets(0, 0, 0, 25), 0, 0));
 
                 //======== spInstructions ========
                 {
@@ -253,7 +276,7 @@ public class RecipeNotebookGUI extends JFrame implements RecipeSelectionListener
                 }
                 pnlAddNew.add(spInstructions, new GridBagConstraints(0, 3, 2, 1, 0.0, 0.0,
                     GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-                    new Insets(10, 25, 10, 35), 0, 0));
+                    new Insets(0, 0, 0, 0), 0, 0));
 
                 //======== panel3 ========
                 {
@@ -261,9 +284,9 @@ public class RecipeNotebookGUI extends JFrame implements RecipeSelectionListener
                     panel3.setMinimumSize(null);
                     panel3.setLayout(new GridBagLayout());
                     ((GridBagLayout)panel3.getLayout()).columnWidths = new int[] {205, 0};
-                    ((GridBagLayout)panel3.getLayout()).rowHeights = new int[] {126, 0, 0};
+                    ((GridBagLayout)panel3.getLayout()).rowHeights = new int[] {116, 0, 0};
                     ((GridBagLayout)panel3.getLayout()).columnWeights = new double[] {1.0, 1.0E-4};
-                    ((GridBagLayout)panel3.getLayout()).rowWeights = new double[] {0.0, 0.0, 1.0E-4};
+                    ((GridBagLayout)panel3.getLayout()).rowWeights = new double[] {0.0, 1.0, 1.0E-4};
 
                     //======== scrollPane1 ========
                     {
@@ -280,18 +303,18 @@ public class RecipeNotebookGUI extends JFrame implements RecipeSelectionListener
                     }
                     panel3.add(scrollPane1, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0,
                         GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-                        new Insets(0, 0, 10, 0), 0, 0));
+                        new Insets(0, 0, 0, 0), 0, 0));
 
                     //---- button1 ----
                     button1.setText("Add...");
                     button1.addActionListener(e -> spawnSearchDialog(e));
                     panel3.add(button1, new GridBagConstraints(0, 1, 1, 1, 0.0, 0.0,
-                        GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+                        GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL,
                         new Insets(0, 0, 0, 0), 0, 0));
                 }
                 pnlAddNew.add(panel3, new GridBagConstraints(2, 3, 1, 1, 0.0, 0.0,
                     GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-                    new Insets(0, 0, 10, 0), 0, 0));
+                    new Insets(0, 0, 0, 0), 0, 0));
 
                 //---- btnAddRecipe ----
                 btnAddRecipe.setText("Add Recipe");

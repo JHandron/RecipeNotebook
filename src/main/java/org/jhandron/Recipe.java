@@ -12,13 +12,11 @@ public class Recipe {
     @BsonId
     @BsonRepresentation(BsonType.OBJECT_ID)
     private String id;
-
     private String name;
     private String instructions;
     private List<String> ingredients;
     private List<String> tags;
     private List<String> relatedRecipes;
-
 
     public String getId() {
         return id;
@@ -47,7 +45,6 @@ Accepts-Content-Type: MIME:JSON
 "sealed" : true,
 "display_public_seals": false
 }
-
 
  */
     public void setName(String name) {
@@ -79,7 +76,7 @@ Accepts-Content-Type: MIME:JSON
     }
 
     public List<String> getRelatedRecipes() {
-        return relatedRecipes;
+        return relatedRecipes == null ? new ArrayList<>() : relatedRecipes;
     }
 
     public void setRelatedRecipes(List<String> relatedRecipes) {
