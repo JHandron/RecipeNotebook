@@ -19,10 +19,8 @@ import java.util.List;
 import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
 import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 
-
 public class MongoDelegator {
 
-    private static final String CONNECTION_STRING = "mongodb://localhost:27017/";
     private static final String DATABASE_NAME = "recipe";
     private static final String COLLECTION_NAME = "recipes";
 
@@ -36,12 +34,8 @@ public class MongoDelegator {
             .codecRegistry(pojoCodecRegistry)
             .build();
 
-//    MongoClient client = MongoClients.create(settings);
-//    MongoDatabase database = client.getDatabase(DATABASE_NAME);
-//    MongoCollection<Recipe> recipes = database.getCollection(COLLECTION_NAME, Recipe.class);
-
     public static void doInsert(Recipe p_recipe){
-        try (MongoClient mongoClient = MongoClients.create(CONNECTION_STRING)) {
+        try (MongoClient mongoClient = MongoClients.create(settings)) {
             MongoDatabase database = mongoClient.getDatabase(DATABASE_NAME);
             MongoCollection<Document> collection = database.getCollection(COLLECTION_NAME);
             try {
@@ -50,7 +44,7 @@ public class MongoDelegator {
                         .append("instructions", p_recipe.getInstructions())
                         .append("ingredients", p_recipe.getIngredients())
                         .append("tags", p_recipe.getTags())
-                        .append("relatedRecipes", p_recipe.getRelatedRecipes()));
+                        .append("relatedRecipeIds", p_recipe.getRelatedRecipeIds()));
                 System.out.println("Success! Inserted document id: " + result.getInsertedId());
             } catch (MongoException e) {
                 System.err.println("Unable to insert due to an error: " + e);
@@ -65,7 +59,7 @@ public class MongoDelegator {
 
             Recipe recipe = collection.find(Filters.eq("name", p_name)).first(); //TODO: Duplicates?
             if (recipe != null) {
-                System.out.println(recipe.toString());
+                System.out.println(recipe);
             } else {
                 System.out.println("No matching documents found.");
             }
@@ -87,11 +81,12 @@ public class MongoDelegator {
                 System.out.println("No matching documents found.");
             }
             return results;
+
         }
     }
 
     public static Recipe getByInstructions(String p_instructions){
-        try (MongoClient mongoClient = MongoClients.create(CONNECTION_STRING)) {
+        try (MongoClient mongoClient = MongoClients.create(settings)) {
             MongoDatabase database = mongoClient.getDatabase(DATABASE_NAME);
             MongoCollection<Recipe> collection = database.getCollection(COLLECTION_NAME, Recipe.class);
             Recipe recipe = collection.find(Filters.eq("instructions", p_instructions)).first(); //TODO:Duplicates
@@ -105,15 +100,15 @@ public class MongoDelegator {
     }
 
     public static void getByTags(List<String> p_lstTags){
-        try (MongoClient mongoClient = MongoClients.create(CONNECTION_STRING)) {
+        try (MongoClient mongoClient = MongoClients.create(settings)) {
             MongoDatabase database = mongoClient.getDatabase(DATABASE_NAME);
-            MongoCollection<Document> collection = database.getCollection(COLLECTION_NAME);
-            Document doc = collection.find(Filters.in("tagsList", p_lstTags)).first();
-            if (doc != null) {
-                System.out.println(doc.toJson());
-            } else {
-                System.out.println("No matching documents found.");
-            }
+            MongoCollection<Recipe> collection = database.getCollection(COLLECTION_NAME, Recipe.class);
+            Recipe recipe = collection.find(Filters.in("tagsList", p_lstTags)).first();
+//            if (doc != null) {
+//                System.out.println(doc.toJson());
+//            } else {
+//                System.out.println("No matching documents found.");
+//            }
         }
     }
 }

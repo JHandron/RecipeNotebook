@@ -4,14 +4,11 @@
 
 package org.jhandron;
 
-import org.bson.Document;
-
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collectors;
 import javax.swing.*;
 import javax.swing.border.*;
 import javax.swing.table.*;
@@ -21,8 +18,7 @@ import javax.swing.table.*;
  */
 public class SearchDialog extends JDialog {
 
-    //TODO: Shouldn't be static
-    private final static DefaultTableModel tableModelSearch = new DefaultTableModel();
+    private final RecipeTableModel tblMdlSearchResults = new RecipeTableModel();
 
     //TODO:Probably a way to JFD this
     private RecipeSelectionListener selectionListener;
@@ -38,13 +34,8 @@ public class SearchDialog extends JDialog {
     }
 
     public void init(){
-        tableModelSearch.setColumnIdentifiers(new Object[]{"Id", "Name", "Tags", "Ingredients"});
-        tableModelSearch.setRowCount(0); //Clear any previous results upon reopening dialog
-        tblSearchResults.setModel(tableModelSearch);
-        //Hide the Id column
-        tblSearchResults.getColumnModel().getColumn(0).setMaxWidth(0);
-        tblSearchResults.getColumnModel().getColumn(0).setMinWidth(0);
-        tblSearchResults.getColumnModel().getColumn(0).setWidth(0);
+        tblMdlSearchResults.clearModel();
+        tblSearchResults.setModel(tblMdlSearchResults);
     }
 
     private void doFind(ActionEvent e) {
@@ -63,32 +54,20 @@ public class SearchDialog extends JDialog {
     }
 
     private void updateSearchTable(List<Recipe> p_results) {
-        tableModelSearch.setRowCount(0); //clear prior results
+        tblMdlSearchResults.clearModel(); //clear prior results
         for (Recipe recipe : p_results){
-            String ingredientsString = ((List<?>) recipe.getIngredients()).stream()
-                    .map(Object::toString)
-                    .collect(Collectors.joining(", "));
-
-            String tagsString = ((List<?>) recipe.getTags()).stream()
-                        .map(Object::toString)
-                        .collect(Collectors.joining(", "));
-
-            final Object[] data = new Object[]{recipe.getId(), recipe.getName(), tagsString, ingredientsString};
-            tableModelSearch.addRow(data);
+            tblMdlSearchResults.addRecipe(recipe);
         }
-        tblSearchResults.setModel(tableModelSearch);
+//        tblSearchResults.setModel(tblMdlSearchResults);
     }
 
     private void selectRecipe(ActionEvent e) {
-        //TODO: Make a RecipeTableModel and return Recipes instead of index
         int[] selectedRowIndexes = tblSearchResults.getSelectedRows();
-        List<String> selectedRecipesIds = new ArrayList<>();
-        for (int index : selectedRowIndexes) {
-            String recipeId = (String) tableModelSearch.getValueAt(index, 0); //id is column 0
-            selectedRecipesIds.add(recipeId);
+        List<Recipe> selectedRecipes = new ArrayList<>();
+        for (int i : selectedRowIndexes) {
+            selectedRecipes.add(tblMdlSearchResults.getRecipeAt(i));
         }
-        selectionListener.onRecipesSelected(selectedRecipesIds); // 🔥 Fire the callback
-        //TODO: Clear table selection before closing
+        selectionListener.onRecipesSelected(selectedRecipes); // 🔥 Fire the callback
         dispose();
     }
 
