@@ -30,12 +30,12 @@ public class MongoDelegator {
             fromProviders(PojoCodecProvider.builder().automatic(true).build())
     );
 
-   private static final MongoClientSettings settings = MongoClientSettings.builder()
+   private static final MongoClientSettings SETTINGS = MongoClientSettings.builder()
             .codecRegistry(pojoCodecRegistry)
             .build();
 
     public static void doInsert(Recipe p_recipe){
-        try (MongoClient mongoClient = MongoClients.create(settings)) {
+        try (MongoClient mongoClient = MongoClients.create(SETTINGS)) {
             MongoDatabase database = mongoClient.getDatabase(DATABASE_NAME);
             MongoCollection<Document> collection = database.getCollection(COLLECTION_NAME);
             try {
@@ -53,7 +53,7 @@ public class MongoDelegator {
     }
 
     public static Recipe getByName(String p_name){
-        try (MongoClient mongoClient = MongoClients.create(settings)) {
+        try (MongoClient mongoClient = MongoClients.create(SETTINGS)) {
             MongoDatabase database = mongoClient.getDatabase(DATABASE_NAME);
             MongoCollection<Recipe> collection = database.getCollection(COLLECTION_NAME, Recipe.class);
 
@@ -68,7 +68,7 @@ public class MongoDelegator {
     }
 
     public static Collection<Recipe> getCollectionByName(String p_name) {
-        try (MongoClient mongoClient = MongoClients.create(settings)) {
+        try (MongoClient mongoClient = MongoClients.create(SETTINGS)) {
             MongoDatabase database = mongoClient.getDatabase(DATABASE_NAME);
             MongoCollection<Recipe> collection = database.getCollection(COLLECTION_NAME, Recipe.class);
 
@@ -86,7 +86,7 @@ public class MongoDelegator {
     }
 
     public static Recipe getByInstructions(String p_instructions){
-        try (MongoClient mongoClient = MongoClients.create(settings)) {
+        try (MongoClient mongoClient = MongoClients.create(SETTINGS)) {
             MongoDatabase database = mongoClient.getDatabase(DATABASE_NAME);
             MongoCollection<Recipe> collection = database.getCollection(COLLECTION_NAME, Recipe.class);
             Recipe recipe = collection.find(Filters.eq("instructions", p_instructions)).first(); //TODO:Duplicates
@@ -100,7 +100,7 @@ public class MongoDelegator {
     }
 
     public static void getByTags(List<String> p_lstTags){
-        try (MongoClient mongoClient = MongoClients.create(settings)) {
+        try (MongoClient mongoClient = MongoClients.create(SETTINGS)) {
             MongoDatabase database = mongoClient.getDatabase(DATABASE_NAME);
             MongoCollection<Recipe> collection = database.getCollection(COLLECTION_NAME, Recipe.class);
             Recipe recipe = collection.find(Filters.in("tagsList", p_lstTags)).first();

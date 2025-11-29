@@ -2,11 +2,15 @@ package org.jhandron;
 
 import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class RecipeTableModel extends AbstractTableModel {
     private List<Recipe> recipes = new ArrayList<>();
-    private static final String[] COLUMN_NAMES = {"Id", "Name", "Ingredients", "Tags", "Related Recipes"};
+    //TODO:Hide the ID column
+    public static final String[] COLUMN_NAMES = {"Id", "Name", "Ingredients", "Tags", "Related Recipes"};
+    public static final HashMap<String, Integer> mapColumnHeaderToIndex = new HashMap<>();
 
     public void clearModel() {
         recipes.clear();
@@ -59,14 +63,14 @@ public class RecipeTableModel extends AbstractTableModel {
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         Recipe recipe = recipes.get(rowIndex);
-        switch (columnIndex) {
-            case 0: return recipe.getId();
-            case 1: return recipe.getName();
-            case 2: return recipe.getIngredientsFormattedString();
-            case 3: return recipe.getTagsFormattedString();
-            case 4: return recipe.getRelatedRecipeIds();
-            default: return null;
-        }
+        return switch (columnIndex) {
+            case 0 -> recipe.getId();
+            case 1 -> recipe.getName();
+            case 2 -> recipe.getIngredientsFormattedString();
+            case 3 -> recipe.getTagsFormattedString();
+            case 4 -> recipe.getRelatedRecipeIds(); //TODO: Should use a formatted version?
+            default -> null;
+        };
     }
 
 //    @Override

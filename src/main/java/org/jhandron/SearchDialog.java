@@ -36,6 +36,11 @@ public class SearchDialog extends JDialog {
     public void init(){
         tblMdlSearchResults.clearModel();
         tblSearchResults.setModel(tblMdlSearchResults);
+        hideColumns();
+    }
+
+    private void hideColumns() {
+        tblSearchResults.removeColumn(tblSearchResults.getColumnModel().getColumn(0)); //ID
     }
 
     private void doFind(ActionEvent e) {
@@ -58,7 +63,6 @@ public class SearchDialog extends JDialog {
         for (Recipe recipe : p_results){
             tblMdlSearchResults.addRecipe(recipe);
         }
-//        tblSearchResults.setModel(tblMdlSearchResults);
     }
 
     private void selectRecipe(ActionEvent e) {

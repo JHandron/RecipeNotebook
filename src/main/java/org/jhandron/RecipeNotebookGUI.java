@@ -6,6 +6,8 @@ import java.util.List;
 import javax.swing.*;
 import javax.swing.border.*;
 import javax.swing.table.*;
+import com.jgoodies.forms.layout.*;
+import net.miginfocom.swing.*;
 
 /**
  * @author Jason
@@ -126,33 +128,30 @@ public class RecipeNotebookGUI extends JFrame implements RecipeSelectionListener
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
         // Generated using JFormDesigner Educational license - Jason Handron (j-handron)
-        menuBar1 = new JMenuBar();
-        menu1 = new JMenu();
-        menuItem1 = new JMenuItem();
-        menuItem3 = new JMenuItem();
-        menuItem2 = new JMenuItem();
-        tabbedPane1 = new JTabbedPane();
+        pnlMain = new JPanel();
         pnlAddNew = new JPanel();
-        lblRecipeName = new JLabel();
+        panel5 = new JPanel();
         txtAddRecipeName = new JTextField();
+        lblRecipeName = new JLabel();
+        panel11 = new JPanel();
+        panel9 = new JPanel();
         label1 = new JLabel();
         txtAddIngredients = new JTextField();
-        panel4 = new JPanel();
         spIngredients = new JScrollPane();
         lstIngredients = new JList<>();
-        label2 = new JLabel();
-        txtAddTags = new JTextField();
-        panel2 = new JPanel();
+        panel10 = new JPanel();
         spTags = new JScrollPane();
         lstTags = new JList<>();
+        label2 = new JLabel();
+        txtAddTags = new JTextField();
         panel1 = new JPanel();
         spInstructions = new JScrollPane();
         txtarAddInstructions = new JTextArea();
-        panel3 = new JPanel();
+        panel6 = new JPanel();
+        btnAddRecipe = new JButton();
         scrollPane1 = new JScrollPane();
         tblRelatedRecipes = new JTable();
         button1 = new JButton();
-        btnAddRecipe = new JButton();
 
         //======== this ========
         setTitle("Jason's Recipe Notebook");
@@ -160,139 +159,144 @@ public class RecipeNotebookGUI extends JFrame implements RecipeSelectionListener
         var contentPane = getContentPane();
         contentPane.setLayout(new BorderLayout());
 
-        //======== menuBar1 ========
+        //======== pnlMain ========
         {
-
-            //======== menu1 ========
-            {
-                menu1.setText("File");
-
-                //---- menuItem1 ----
-                menuItem1.setText("Import Recipe");
-                menu1.add(menuItem1);
-
-                //---- menuItem3 ----
-                menuItem3.setText("Generate PDF");
-                menu1.add(menuItem3);
-                menu1.addSeparator();
-
-                //---- menuItem2 ----
-                menuItem2.setText("Exit");
-                menuItem2.addActionListener(e -> exitMenuItem(e));
-                menu1.add(menuItem2);
-            }
-            menuBar1.add(menu1);
-        }
-        setJMenuBar(menuBar1);
-
-        //======== tabbedPane1 ========
-        {
-            tabbedPane1.setTabPlacement(SwingConstants.LEFT);
+            pnlMain.setMinimumSize(new Dimension(0, 0));
+            pnlMain.setLayout(new BorderLayout());
 
             //======== pnlAddNew ========
             {
-                pnlAddNew.setLayout(new GridBagLayout());
-                ((GridBagLayout)pnlAddNew.getLayout()).columnWidths = new int[] {375, 240, 0};
-                ((GridBagLayout)pnlAddNew.getLayout()).rowHeights = new int[] {71, 121, 110, 183, 45, 0};
-                ((GridBagLayout)pnlAddNew.getLayout()).columnWeights = new double[] {1.0, 1.0, 1.0E-4};
-                ((GridBagLayout)pnlAddNew.getLayout()).rowWeights = new double[] {0.0, 0.0, 0.0, 1.0, 0.0, 1.0E-4};
+                pnlAddNew.setLayout(new BoxLayout(pnlAddNew, BoxLayout.Y_AXIS));
 
-                //---- lblRecipeName ----
-                lblRecipeName.setText("Recipe Name");
-                pnlAddNew.add(lblRecipeName, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0,
-                    GridBagConstraints.WEST, GridBagConstraints.NONE,
-                    new Insets(10, 15, 5, 5), 0, 0));
-                pnlAddNew.add(txtAddRecipeName, new GridBagConstraints(0, 0, 2, 1, 0.0, 0.0,
-                    GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL,
-                    new Insets(10, 100, 5, 10), 0, 0));
-
-                //---- label1 ----
-                label1.setText("Ingredient(s)");
-                pnlAddNew.add(label1, new GridBagConstraints(0, 1, 1, 1, 0.0, 0.0,
-                    GridBagConstraints.WEST, GridBagConstraints.NONE,
-                    new Insets(0, 15, 5, 5), 0, 0));
-
-                //---- txtAddIngredients ----
-                txtAddIngredients.setToolTipText("Press Enter to add an ingredient");
-                txtAddIngredients.addActionListener(e -> txtAddIngredientsEnter(e));
-                pnlAddNew.add(txtAddIngredients, new GridBagConstraints(0, 1, 1, 1, 0.0, 0.0,
-                    GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL,
-                    new Insets(0, 100, 5, 15), 0, 0));
-
-                //======== panel4 ========
+                //======== panel5 ========
                 {
-                    panel4.setBorder(new TitledBorder("Ingredients"));
-                    panel4.setOpaque(false);
-                    panel4.setLayout(new GridBagLayout());
-                    ((GridBagLayout)panel4.getLayout()).columnWidths = new int[] {240, 0};
-                    ((GridBagLayout)panel4.getLayout()).rowHeights = new int[] {114, 0};
-                    ((GridBagLayout)panel4.getLayout()).columnWeights = new double[] {1.0, 1.0E-4};
-                    ((GridBagLayout)panel4.getLayout()).rowWeights = new double[] {0.0, 1.0E-4};
 
-                    //======== spIngredients ========
+                    //---- lblRecipeName ----
+                    lblRecipeName.setText("Recipe Name");
+
+                    GroupLayout panel5Layout = new GroupLayout(panel5);
+                    panel5.setLayout(panel5Layout);
+                    panel5Layout.setHorizontalGroup(
+                        panel5Layout.createParallelGroup()
+                            .addGroup(GroupLayout.Alignment.TRAILING, panel5Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(panel5Layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lblRecipeName, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txtAddRecipeName))
+                                .addContainerGap())
+                    );
+                    panel5Layout.setVerticalGroup(
+                        panel5Layout.createParallelGroup()
+                            .addGroup(panel5Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(lblRecipeName)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtAddRecipeName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap())
+                    );
+                }
+                pnlAddNew.add(panel5);
+
+                //======== panel11 ========
+                {
+                    panel11.setLayout(new BoxLayout(panel11, BoxLayout.X_AXIS));
+
+                    //======== panel9 ========
                     {
 
-                        //---- lstIngredients ----
-                        lstIngredients.addMouseListener(new MouseAdapter() {
-                            @Override
-                            public void mouseClicked(MouseEvent e) {
-                                lstIngredientsMouseClicked(e);
-                            }
-                        });
-                        spIngredients.setViewportView(lstIngredients);
+                        //---- label1 ----
+                        label1.setText("Ingredient(s)");
+
+                        //---- txtAddIngredients ----
+                        txtAddIngredients.setToolTipText("Press Enter to add an ingredient");
+                        txtAddIngredients.addActionListener(e -> txtAddIngredientsEnter(e));
+
+                        //======== spIngredients ========
+                        {
+
+                            //---- lstIngredients ----
+                            lstIngredients.addMouseListener(new MouseAdapter() {
+                                @Override
+                                public void mouseClicked(MouseEvent e) {
+                                    lstIngredientsMouseClicked(e);
+                                }
+                            });
+                            spIngredients.setViewportView(lstIngredients);
+                        }
+
+                        GroupLayout panel9Layout = new GroupLayout(panel9);
+                        panel9.setLayout(panel9Layout);
+                        panel9Layout.setHorizontalGroup(
+                            panel9Layout.createParallelGroup()
+                                .addGroup(GroupLayout.Alignment.TRAILING, panel9Layout.createSequentialGroup()
+                                    .addContainerGap()
+                                    .addGroup(panel9Layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                                        .addComponent(txtAddIngredients)
+                                        .addComponent(label1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(spIngredients))
+                                    .addContainerGap())
+                        );
+                        panel9Layout.setVerticalGroup(
+                            panel9Layout.createParallelGroup()
+                                .addGroup(panel9Layout.createSequentialGroup()
+                                    .addContainerGap()
+                                    .addComponent(label1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(txtAddIngredients, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(spIngredients)
+                                    .addContainerGap())
+                        );
                     }
-                    panel4.add(spIngredients, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0,
-                        GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-                        new Insets(0, 0, 0, 0), 0, 0));
-                }
-                pnlAddNew.add(panel4, new GridBagConstraints(1, 1, 1, 1, 0.0, 0.0,
-                    GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL,
-                    new Insets(0, 0, 5, 10), 0, 0));
+                    panel11.add(panel9);
 
-                //---- label2 ----
-                label2.setText("Tag(s)");
-                pnlAddNew.add(label2, new GridBagConstraints(0, 2, 1, 1, 0.0, 0.0,
-                    GridBagConstraints.WEST, GridBagConstraints.NONE,
-                    new Insets(0, 15, 5, 5), 0, 0));
-
-                //---- txtAddTags ----
-                txtAddTags.setToolTipText("Press Enter to add a tag");
-                txtAddTags.addActionListener(e -> txtAddTagsEntered(e));
-                pnlAddNew.add(txtAddTags, new GridBagConstraints(0, 2, 1, 1, 0.0, 0.0,
-                    GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL,
-                    new Insets(0, 100, 5, 15), 0, 0));
-
-                //======== panel2 ========
-                {
-                    panel2.setBorder(new TitledBorder("Tags"));
-                    panel2.setRequestFocusEnabled(false);
-                    panel2.setPreferredSize(null);
-                    panel2.setLayout(new GridBagLayout());
-                    ((GridBagLayout)panel2.getLayout()).columnWidths = new int[] {240, 0};
-                    ((GridBagLayout)panel2.getLayout()).rowHeights = new int[] {124, 0};
-                    ((GridBagLayout)panel2.getLayout()).columnWeights = new double[] {1.0, 1.0E-4};
-                    ((GridBagLayout)panel2.getLayout()).rowWeights = new double[] {0.0, 1.0E-4};
-
-                    //======== spTags ========
+                    //======== panel10 ========
                     {
-                        spTags.setViewportView(lstTags);
+
+                        //======== spTags ========
+                        {
+                            spTags.setViewportView(lstTags);
+                        }
+
+                        //---- label2 ----
+                        label2.setText("Tag(s)");
+
+                        //---- txtAddTags ----
+                        txtAddTags.setToolTipText("Press Enter to add a tag");
+                        txtAddTags.addActionListener(e -> txtAddTagsEntered(e));
+
+                        GroupLayout panel10Layout = new GroupLayout(panel10);
+                        panel10.setLayout(panel10Layout);
+                        panel10Layout.setHorizontalGroup(
+                            panel10Layout.createParallelGroup()
+                                .addGroup(panel10Layout.createSequentialGroup()
+                                    .addContainerGap()
+                                    .addGroup(panel10Layout.createParallelGroup()
+                                        .addComponent(txtAddTags)
+                                        .addComponent(label2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(spTags, GroupLayout.Alignment.TRAILING))
+                                    .addContainerGap())
+                        );
+                        panel10Layout.setVerticalGroup(
+                            panel10Layout.createParallelGroup()
+                                .addGroup(panel10Layout.createSequentialGroup()
+                                    .addContainerGap()
+                                    .addComponent(label2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(txtAddTags, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(spTags)
+                                    .addContainerGap())
+                        );
                     }
-                    panel2.add(spTags, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0,
-                        GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-                        new Insets(0, 0, 0, 0), 0, 0));
+                    panel11.add(panel10);
                 }
-                pnlAddNew.add(panel2, new GridBagConstraints(1, 2, 1, 1, 0.0, 0.0,
-                    GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL,
-                    new Insets(0, 0, 5, 10), 0, 0));
+                pnlAddNew.add(panel11);
 
                 //======== panel1 ========
                 {
                     panel1.setBorder(new TitledBorder("Instructions"));
-                    panel1.setLayout(new GridBagLayout());
-                    ((GridBagLayout)panel1.getLayout()).columnWidths = new int[] {158, 162, 0};
-                    ((GridBagLayout)panel1.getLayout()).rowHeights = new int[] {193, 0};
-                    ((GridBagLayout)panel1.getLayout()).columnWeights = new double[] {0.0, 1.0, 1.0E-4};
-                    ((GridBagLayout)panel1.getLayout()).rowWeights = new double[] {1.0, 1.0E-4};
+                    panel1.setLayout(new BorderLayout());
 
                     //======== spInstructions ========
                     {
@@ -303,95 +307,72 @@ public class RecipeNotebookGUI extends JFrame implements RecipeSelectionListener
                         txtarAddInstructions.setMinimumSize(null);
                         spInstructions.setViewportView(txtarAddInstructions);
                     }
-                    panel1.add(spInstructions, new GridBagConstraints(0, 0, 2, 1, 0.0, 0.0,
-                        GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-                        new Insets(0, 0, 0, 0), 0, 0));
+                    panel1.add(spInstructions, BorderLayout.CENTER);
                 }
-                pnlAddNew.add(panel1, new GridBagConstraints(0, 3, 1, 1, 0.0, 0.0,
-                    GridBagConstraints.NORTH, GridBagConstraints.HORIZONTAL,
-                    new Insets(0, 15, 5, 10), 0, 0));
+                pnlAddNew.add(panel1);
 
-                //======== panel3 ========
+                //======== panel6 ========
                 {
-                    panel3.setBorder(new TitledBorder("Related Recipes"));
-                    panel3.setMinimumSize(null);
-                    panel3.setLayout(new GridBagLayout());
-                    ((GridBagLayout)panel3.getLayout()).columnWidths = new int[] {205, 0};
-                    ((GridBagLayout)panel3.getLayout()).rowHeights = new int[] {138, 0, 0};
-                    ((GridBagLayout)panel3.getLayout()).columnWeights = new double[] {1.0, 1.0E-4};
-                    ((GridBagLayout)panel3.getLayout()).rowWeights = new double[] {1.0, 1.0, 1.0E-4};
+                    panel6.setLayout(new FlowLayout());
 
-                    //======== scrollPane1 ========
-                    {
-
-                        //---- tblRelatedRecipes ----
-                        tblRelatedRecipes.setModel(new DefaultTableModel(
-                            new Object[][] {
-                            },
-                            new String[] {
-                                null
-                            }
-                        ));
-                        scrollPane1.setViewportView(tblRelatedRecipes);
-                    }
-                    panel3.add(scrollPane1, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0,
-                        GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-                        new Insets(0, 0, 0, 0), 0, 0));
-
-                    //---- button1 ----
-                    button1.setText("Search...");
-                    button1.addActionListener(e -> spawnSearchDialog(e));
-                    panel3.add(button1, new GridBagConstraints(0, 1, 1, 1, 0.0, 0.0,
-                        GridBagConstraints.CENTER, GridBagConstraints.NONE,
-                        new Insets(0, 0, 0, 0), 0, 0));
+                    //---- btnAddRecipe ----
+                    btnAddRecipe.setText("Add Recipe");
+                    btnAddRecipe.addActionListener(e -> addNewRecipe(e));
+                    panel6.add(btnAddRecipe);
                 }
-                pnlAddNew.add(panel3, new GridBagConstraints(1, 3, 1, 1, 0.0, 0.0,
-                    GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-                    new Insets(0, 0, 5, 10), 0, 0));
-
-                //---- btnAddRecipe ----
-                btnAddRecipe.setText("Add Recipe");
-                btnAddRecipe.addActionListener(e -> addNewRecipe(e));
-                pnlAddNew.add(btnAddRecipe, new GridBagConstraints(0, 4, 2, 1, 0.0, 0.0,
-                    GridBagConstraints.CENTER, GridBagConstraints.NONE,
-                    new Insets(0, 0, 0, 0), 0, 0));
+                pnlAddNew.add(panel6);
             }
-            tabbedPane1.addTab("Add New ", pnlAddNew);
+            pnlMain.add(pnlAddNew, BorderLayout.CENTER);
         }
-        contentPane.add(tabbedPane1, BorderLayout.CENTER);
-        setSize(700, 650);
+        contentPane.add(pnlMain, BorderLayout.CENTER);
+        setSize(605, 495);
         setLocationRelativeTo(null);
+
+        //======== scrollPane1 ========
+        {
+
+            //---- tblRelatedRecipes ----
+            tblRelatedRecipes.setModel(new DefaultTableModel(
+                new Object[][] {
+                },
+                new String[] {
+                    null
+                }
+            ));
+            scrollPane1.setViewportView(tblRelatedRecipes);
+        }
+
+        //---- button1 ----
+        button1.setText("Search...");
+        button1.addActionListener(e -> spawnSearchDialog(e));
         // JFormDesigner - End of component initialization  //GEN-END:initComponents  @formatter:on
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables  @formatter:off
     // Generated using JFormDesigner Educational license - Jason Handron (j-handron)
-    private JMenuBar menuBar1;
-    private JMenu menu1;
-    private JMenuItem menuItem1;
-    private JMenuItem menuItem3;
-    private JMenuItem menuItem2;
-    private JTabbedPane tabbedPane1;
+    private JPanel pnlMain;
     private JPanel pnlAddNew;
-    private JLabel lblRecipeName;
+    private JPanel panel5;
     private JTextField txtAddRecipeName;
+    private JLabel lblRecipeName;
+    private JPanel panel11;
+    private JPanel panel9;
     private JLabel label1;
     private JTextField txtAddIngredients;
-    private JPanel panel4;
     private JScrollPane spIngredients;
     private JList<String> lstIngredients;
-    private JLabel label2;
-    private JTextField txtAddTags;
-    private JPanel panel2;
+    private JPanel panel10;
     private JScrollPane spTags;
     private JList<String> lstTags;
+    private JLabel label2;
+    private JTextField txtAddTags;
     private JPanel panel1;
     private JScrollPane spInstructions;
     private JTextArea txtarAddInstructions;
-    private JPanel panel3;
+    private JPanel panel6;
+    private JButton btnAddRecipe;
     private JScrollPane scrollPane1;
     private JTable tblRelatedRecipes;
     private JButton button1;
-    private JButton btnAddRecipe;
     // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 }
