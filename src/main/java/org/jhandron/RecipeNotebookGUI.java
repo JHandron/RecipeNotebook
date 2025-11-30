@@ -6,8 +6,6 @@ import java.util.List;
 import javax.swing.*;
 import javax.swing.border.*;
 import javax.swing.table.*;
-import com.jgoodies.forms.layout.*;
-import net.miginfocom.swing.*;
 
 /**
  * @author Jason
@@ -55,15 +53,31 @@ public class RecipeNotebookGUI extends JFrame implements RecipeSelectionListener
     }
 
     private void txtAddIngredientsEnter(ActionEvent e) {
-        lstMdlIngredients.addElement(txtAddIngredients.getText().trim());
+        final String[] ingredients = parseCommaSeparatedTxtString(txtAddIngredients.getText(), ",");
+        for (final String ingredient : ingredients) {
+            lstMdlIngredients.addElement(ingredient);
+        }
         txtAddIngredients.setText("");
         updateIngredientsList();
     }
 
     private void txtAddTagsEntered(ActionEvent e) {
-        lstMdlTags.addElement(txtAddTags.getText().trim());
+        final String[] tags = parseCommaSeparatedTxtString(txtAddTags.getText(), ",");
+        for (final String tag : tags) {
+            lstMdlTags.addElement(tag);
+        }
         txtAddTags.setText("");
         updateTagsList();
+    }
+
+    //TODO: Should this exist here?
+    private String[] parseCommaSeparatedTxtString(final String p_txtString, final String p_delimiter) {
+        final String[] tokens = p_txtString.split(p_delimiter);
+        final String[] trimmedTokens = new String[tokens.length];
+        for (int i = 0; i < tokens.length; i++) {
+            trimmedTokens[i] = tokens[i].trim();
+        }
+        return trimmedTokens;
     }
 
     private void lstIngredientsMouseClicked(MouseEvent e) {
@@ -144,18 +158,23 @@ public class RecipeNotebookGUI extends JFrame implements RecipeSelectionListener
         lstTags = new JList<>();
         label2 = new JLabel();
         txtAddTags = new JTextField();
-        panel1 = new JPanel();
+        pnlBottom = new JPanel();
+        panel4 = new JPanel();
+        label3 = new JLabel();
         spInstructions = new JScrollPane();
         txtarAddInstructions = new JTextArea();
-        panel6 = new JPanel();
-        btnAddRecipe = new JButton();
+        panel2 = new JPanel();
         scrollPane1 = new JScrollPane();
         tblRelatedRecipes = new JTable();
+        panel3 = new JPanel();
         button1 = new JButton();
+        panel6 = new JPanel();
+        btnAddRecipe = new JButton();
 
         //======== this ========
         setTitle("Jason's Recipe Notebook");
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        setIconImage(new ImageIcon("C:\\Users\\Jason\\Documents\\Projects\\RecipeNotebook\\src\\onkoyybdqdc81.png").getImage());
         var contentPane = getContentPane();
         contentPane.setLayout(new BorderLayout());
 
@@ -240,11 +259,11 @@ public class RecipeNotebookGUI extends JFrame implements RecipeSelectionListener
                             panel9Layout.createParallelGroup()
                                 .addGroup(panel9Layout.createSequentialGroup()
                                     .addContainerGap()
-                                    .addComponent(label1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(label1)
                                     .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(txtAddIngredients, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(spIngredients)
+                                    .addComponent(spIngredients, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                                     .addContainerGap())
                         );
                     }
@@ -281,11 +300,11 @@ public class RecipeNotebookGUI extends JFrame implements RecipeSelectionListener
                             panel10Layout.createParallelGroup()
                                 .addGroup(panel10Layout.createSequentialGroup()
                                     .addContainerGap()
-                                    .addComponent(label2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(label2)
                                     .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(txtAddTags, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(spTags)
+                                    .addComponent(spTags, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                                     .addContainerGap())
                         );
                     }
@@ -293,23 +312,87 @@ public class RecipeNotebookGUI extends JFrame implements RecipeSelectionListener
                 }
                 pnlAddNew.add(panel11);
 
-                //======== panel1 ========
+                //======== pnlBottom ========
                 {
-                    panel1.setBorder(new TitledBorder("Instructions"));
-                    panel1.setLayout(new BorderLayout());
+                    pnlBottom.setLayout(new BoxLayout(pnlBottom, BoxLayout.X_AXIS));
 
-                    //======== spInstructions ========
+                    //======== panel4 ========
                     {
 
-                        //---- txtarAddInstructions ----
-                        txtarAddInstructions.setLineWrap(true);
-                        txtarAddInstructions.setWrapStyleWord(true);
-                        txtarAddInstructions.setMinimumSize(null);
-                        spInstructions.setViewportView(txtarAddInstructions);
+                        //---- label3 ----
+                        label3.setText("Instructions");
+
+                        //======== spInstructions ========
+                        {
+
+                            //---- txtarAddInstructions ----
+                            txtarAddInstructions.setLineWrap(true);
+                            txtarAddInstructions.setWrapStyleWord(true);
+                            txtarAddInstructions.setMinimumSize(null);
+                            txtarAddInstructions.setPreferredSize(new Dimension(400, 20));
+                            txtarAddInstructions.setRequestFocusEnabled(false);
+                            spInstructions.setViewportView(txtarAddInstructions);
+                        }
+
+                        GroupLayout panel4Layout = new GroupLayout(panel4);
+                        panel4.setLayout(panel4Layout);
+                        panel4Layout.setHorizontalGroup(
+                            panel4Layout.createParallelGroup()
+                                .addGroup(GroupLayout.Alignment.TRAILING, panel4Layout.createSequentialGroup()
+                                    .addContainerGap()
+                                    .addGroup(panel4Layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                                        .addComponent(label3, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(spInstructions))
+                                    .addContainerGap())
+                        );
+                        panel4Layout.setVerticalGroup(
+                            panel4Layout.createParallelGroup()
+                                .addGroup(panel4Layout.createSequentialGroup()
+                                    .addContainerGap()
+                                    .addComponent(label3)
+                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(spInstructions, GroupLayout.PREFERRED_SIZE, 169, GroupLayout.PREFERRED_SIZE)
+                                    .addContainerGap())
+                        );
                     }
-                    panel1.add(spInstructions, BorderLayout.CENTER);
+                    pnlBottom.add(panel4);
+
+                    //======== panel2 ========
+                    {
+                        panel2.setBorder(new TitledBorder("Related Recipes"));
+                        panel2.setPreferredSize(new Dimension(100, 100));
+                        panel2.setLayout(new BorderLayout());
+
+                        //======== scrollPane1 ========
+                        {
+                            scrollPane1.setPreferredSize(null);
+
+                            //---- tblRelatedRecipes ----
+                            tblRelatedRecipes.setModel(new DefaultTableModel(
+                                new Object[][] {
+                                },
+                                new String[] {
+                                    null
+                                }
+                            ));
+                            scrollPane1.setViewportView(tblRelatedRecipes);
+                        }
+                        panel2.add(scrollPane1, BorderLayout.CENTER);
+
+                        //======== panel3 ========
+                        {
+                            panel3.setLayout(new FlowLayout());
+
+                            //---- button1 ----
+                            button1.setText("Search...");
+                            button1.addActionListener(e -> spawnSearchDialog(e));
+                            panel3.add(button1);
+                        }
+                        panel2.add(panel3, BorderLayout.SOUTH);
+                    }
+                    pnlBottom.add(panel2);
                 }
-                pnlAddNew.add(panel1);
+                pnlAddNew.add(pnlBottom);
 
                 //======== panel6 ========
                 {
@@ -325,26 +408,8 @@ public class RecipeNotebookGUI extends JFrame implements RecipeSelectionListener
             pnlMain.add(pnlAddNew, BorderLayout.CENTER);
         }
         contentPane.add(pnlMain, BorderLayout.CENTER);
-        setSize(605, 495);
+        setSize(580, 520);
         setLocationRelativeTo(null);
-
-        //======== scrollPane1 ========
-        {
-
-            //---- tblRelatedRecipes ----
-            tblRelatedRecipes.setModel(new DefaultTableModel(
-                new Object[][] {
-                },
-                new String[] {
-                    null
-                }
-            ));
-            scrollPane1.setViewportView(tblRelatedRecipes);
-        }
-
-        //---- button1 ----
-        button1.setText("Search...");
-        button1.addActionListener(e -> spawnSearchDialog(e));
         // JFormDesigner - End of component initialization  //GEN-END:initComponents  @formatter:on
     }
 
@@ -366,13 +431,17 @@ public class RecipeNotebookGUI extends JFrame implements RecipeSelectionListener
     private JList<String> lstTags;
     private JLabel label2;
     private JTextField txtAddTags;
-    private JPanel panel1;
+    private JPanel pnlBottom;
+    private JPanel panel4;
+    private JLabel label3;
     private JScrollPane spInstructions;
     private JTextArea txtarAddInstructions;
-    private JPanel panel6;
-    private JButton btnAddRecipe;
+    private JPanel panel2;
     private JScrollPane scrollPane1;
     private JTable tblRelatedRecipes;
+    private JPanel panel3;
     private JButton button1;
+    private JPanel panel6;
+    private JButton btnAddRecipe;
     // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 }

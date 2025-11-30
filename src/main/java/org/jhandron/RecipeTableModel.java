@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class RecipeTableModel extends AbstractTableModel {
     private List<Recipe> recipes = new ArrayList<>();
-    //TODO:Hide the ID column
+
     public static final String[] COLUMN_NAMES = {"Id", "Name", "Ingredients", "Tags", "Related Recipes"};
     public static final HashMap<String, Integer> mapColumnHeaderToIndex = new HashMap<>();
 
