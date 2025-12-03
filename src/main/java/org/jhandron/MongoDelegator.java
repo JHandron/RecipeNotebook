@@ -85,30 +85,37 @@ public class MongoDelegator {
         }
     }
 
-    public static Recipe getByInstructions(String p_instructions){
+    public static Collection<Recipe> getByInstructions(String p_instructions){
         try (MongoClient mongoClient = MongoClients.create(SETTINGS)) {
             MongoDatabase database = mongoClient.getDatabase(DATABASE_NAME);
             MongoCollection<Recipe> collection = database.getCollection(COLLECTION_NAME, Recipe.class);
-            Recipe recipe = collection.find(Filters.eq("instructions", p_instructions)).first(); //TODO:Duplicates
-            if (recipe != null) {
-                System.out.println(recipe.toString());
+
+            List<Recipe> results = collection.find(Filters.regex("instructions", ".*" + p_instructions + ".*", "i")).into(new ArrayList<>()); //TODO:Duplicates
+
+            if (!results.isEmpty()) {
+                System.out.println("We got documents.");
+                results.forEach(o -> System.out.println(o.toString()));
             } else {
                 System.out.println("No matching documents found.");
             }
-            return recipe;
+            return results;
         }
     }
 
-    public static void getByTags(List<String> p_lstTags){
+    public static Collection<Recipe> getByTags(String p_tag){
         try (MongoClient mongoClient = MongoClients.create(SETTINGS)) {
             MongoDatabase database = mongoClient.getDatabase(DATABASE_NAME);
             MongoCollection<Recipe> collection = database.getCollection(COLLECTION_NAME, Recipe.class);
-            Recipe recipe = collection.find(Filters.in("tagsList", p_lstTags)).first();
-//            if (doc != null) {
-//                System.out.println(doc.toJson());
-//            } else {
-//                System.out.println("No matching documents found.");
-//            }
+
+            List<Recipe> results = collection.find(Filters.regex("instructions", ".*" + p_tag + ".*", "i")).into(new ArrayList<>()); //TODO:Duplicates
+
+            if (!results.isEmpty()) {
+                System.out.println("We got documents.");
+                results.forEach(o -> System.out.println(o.toString()));
+            } else {
+                System.out.println("No matching documents found.");
+            }
+            return results;
         }
     }
 }

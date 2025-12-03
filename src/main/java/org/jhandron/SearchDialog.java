@@ -40,7 +40,7 @@ public class SearchDialog extends JDialog {
     }
 
     private void hideColumns() {
-        tblSearchResults.removeColumn(tblSearchResults.getColumnModel().getColumn(0)); //ID
+        tblSearchResults.removeColumn(tblSearchResults.getColumnModel().getColumn(0)); //ID //TODO: Magic number
     }
 
     private void doFind(ActionEvent e) {
@@ -51,10 +51,16 @@ public class SearchDialog extends JDialog {
             }
         }
         else if (rbIngredients.isSelected()){
-            MongoDelegator.getByInstructions(txtSearchName.getText().trim());
+            Collection<Recipe> recipeSearchResults = MongoDelegator.getByInstructions(txtSearchName.getText().trim());
+            if (!recipeSearchResults.isEmpty()) {
+                updateSearchTable((List<Recipe>) recipeSearchResults);
+            }
         }
         else if (rbTags.isSelected()){
-            MongoDelegator.getByTags(List.of(txtSearchName.getText().split(", ")));//TODO: Adjust split value to account for whitespace or not
+            Collection<Recipe> recipeSearchResults = MongoDelegator.getByTags(txtSearchName.getText().trim());//TODO: Adjust split value to account for whitespace or not
+            if (!recipeSearchResults.isEmpty()) {
+                updateSearchTable((List<Recipe>) recipeSearchResults);
+            }
         }
     }
 
@@ -154,10 +160,7 @@ public class SearchDialog extends JDialog {
 
                     //---- btnFind ----
                     btnFind.setText("Find");
-                    btnFind.addActionListener(e -> {
-			doFind(e);
-			doFind(e);
-		});
+                    btnFind.addActionListener(e -> doFind(e));
                     pnlNameSearch.add(btnFind, new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0,
                         GridBagConstraints.CENTER, GridBagConstraints.NONE,
                         new Insets(0, 0, 0, 0), 0, 0));

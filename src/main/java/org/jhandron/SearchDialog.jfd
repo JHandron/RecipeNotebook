@@ -69,7 +69,6 @@ new FormModel {
 							name: "btnFind"
 							"text": "Find"
 							addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "doFind", true ) )
-							addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "doFind", true ) )
 						}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
 							"hAlign": 0
 							"vAlign": 0

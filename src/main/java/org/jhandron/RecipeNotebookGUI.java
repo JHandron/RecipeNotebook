@@ -4,7 +4,6 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.List;
 import javax.swing.*;
-import javax.swing.border.*;
 import javax.swing.table.*;
 
 /**
@@ -25,6 +24,28 @@ public class RecipeNotebookGUI extends JFrame implements RecipeSelectionListener
     private void init() {
         tblMdlRelatedRecipes.getRecipes().clear();
         tblRelatedRecipes.setModel(tblMdlRelatedRecipes);
+        hideColumns();
+    }
+
+    //TODO:This is shit
+    private void hideColumns(){
+        tblRelatedRecipes.removeColumn(tblRelatedRecipes.getColumnModel().getColumn(0));//ID //TODO: Magic number
+        tblRelatedRecipes.removeColumn(tblRelatedRecipes.getColumnModel().getColumn(2));//Ingredients //TODO: Magic number
+        tblRelatedRecipes.removeColumn(tblRelatedRecipes.getColumnModel().getColumn(1));//Tags //TODO: Magic number??
+        tblRelatedRecipes.removeColumn(tblRelatedRecipes.getColumnModel().getColumn(1));//RelatedRecipes //TODO: Magic number??
+    }
+
+    //TODO: Make this work
+    private boolean shouldAddNewRecipeButtonEnable() {
+        if (!txtAddRecipeName.getText().trim().isEmpty() &&
+            !lstMdlIngredients.isEmpty() &&
+            !lstMdlTags.isEmpty() &&
+            !txtarAddInstructions.getText().trim().isEmpty()) {
+            //No check for related recipes, maybe nothing is related.
+            return true;
+        } else {
+            return false;
+        }
     }
 
     private void addNewRecipe(ActionEvent e) {
@@ -53,7 +74,7 @@ public class RecipeNotebookGUI extends JFrame implements RecipeSelectionListener
     }
 
     private void txtAddIngredientsEnter(ActionEvent e) {
-        final String[] ingredients = parseCommaSeparatedTxtString(txtAddIngredients.getText(), ",");
+        final String[] ingredients = parseCommaSeparatedTxtString(txtAddIngredients.getText());
         for (final String ingredient : ingredients) {
             lstMdlIngredients.addElement(ingredient);
         }
@@ -62,7 +83,7 @@ public class RecipeNotebookGUI extends JFrame implements RecipeSelectionListener
     }
 
     private void txtAddTagsEntered(ActionEvent e) {
-        final String[] tags = parseCommaSeparatedTxtString(txtAddTags.getText(), ",");
+        final String[] tags = parseCommaSeparatedTxtString(txtAddTags.getText());
         for (final String tag : tags) {
             lstMdlTags.addElement(tag);
         }
@@ -71,8 +92,8 @@ public class RecipeNotebookGUI extends JFrame implements RecipeSelectionListener
     }
 
     //TODO: Should this exist here?
-    private String[] parseCommaSeparatedTxtString(final String p_txtString, final String p_delimiter) {
-        final String[] tokens = p_txtString.split(p_delimiter);
+    private String[] parseCommaSeparatedTxtString(final String p_txtString) {
+        final String[] tokens = p_txtString.split(",");
         final String[] trimmedTokens = new String[tokens.length];
         for (int i = 0; i < tokens.length; i++) {
             trimmedTokens[i] = tokens[i].trim();
@@ -80,42 +101,42 @@ public class RecipeNotebookGUI extends JFrame implements RecipeSelectionListener
         return trimmedTokens;
     }
 
-    private void lstIngredientsMouseClicked(MouseEvent e) {
-        JPopupMenu popupMenu = new JPopupMenu();
-        JMenuItem deleteItem = new JMenuItem("Delete");
-        popupMenu.add(deleteItem);
-
-        // Add mouse listener for right-click popup
-        lstIngredients.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) {
-                showPopup(e);
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-                showPopup(e);
-            }
-
-            private void showPopup(MouseEvent e) {
-                if (e.isPopupTrigger()) { // Detect right-click trigger
-                    int index = lstIngredients.locationToIndex(e.getPoint());
-                    if (index != -1) {
-                        lstIngredients.setSelectedIndex(index); // Highlight selection
-                        popupMenu.show(lstIngredients, e.getX(), e.getY());
-                    }
-                }
-            }
-        });
-
-        deleteItem.addActionListener(o -> {
-            int selectedIndex = lstIngredients.getSelectedIndex();
-            if (selectedIndex != -1) {
-                lstMdlIngredients.remove(selectedIndex);
-                updateIngredientsList();
-            }
-        });
-    }
+//    private void lstIngredientsMouseClicked(MouseEvent e) {
+//        JPopupMenu popupMenu = new JPopupMenu();
+//        JMenuItem deleteItem = new JMenuItem("Delete");
+//        popupMenu.add(deleteItem);
+//
+//        // Add mouse listener for right-click popup
+//        lstIngredients.addMouseListener(new MouseAdapter() {
+//            @Override
+//            public void mousePressed(MouseEvent e) {
+//                showPopup(e);
+//            }
+//
+//            @Override
+//            public void mouseReleased(MouseEvent e) {
+//                showPopup(e);
+//            }
+//
+//            private void showPopup(MouseEvent e) {
+//                if (e.isPopupTrigger()) { // Detect right-click trigger
+//                    int index = lstIngredients.locationToIndex(e.getPoint());
+//                    if (index != -1) {
+//                        lstIngredients.setSelectedIndex(index); // Highlight selection
+//                        popupMenu.show(lstIngredients, e.getX(), e.getY());
+//                    }
+//                }
+//            }
+//        });
+//
+//        deleteItem.addActionListener(o -> {
+//            int selectedIndex = lstIngredients.getSelectedIndex();
+//            if (selectedIndex != -1) {
+//                lstMdlIngredients.remove(selectedIndex);
+//                updateIngredientsList();
+//            }
+//        });
+//    }
 
     private void exitMenuItem(ActionEvent e) {
         System.exit(0);
@@ -142,6 +163,9 @@ public class RecipeNotebookGUI extends JFrame implements RecipeSelectionListener
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
         // Generated using JFormDesigner Educational license - Jason Handron (j-handron)
+        menuBar1 = new JMenuBar();
+        menu1 = new JMenu();
+        menuItem3 = new JMenuItem();
         pnlMain = new JPanel();
         pnlAddNew = new JPanel();
         panel5 = new JPanel();
@@ -163,13 +187,17 @@ public class RecipeNotebookGUI extends JFrame implements RecipeSelectionListener
         label3 = new JLabel();
         spInstructions = new JScrollPane();
         txtarAddInstructions = new JTextArea();
-        panel2 = new JPanel();
+        panel7 = new JPanel();
+        label4 = new JLabel();
         scrollPane1 = new JScrollPane();
         tblRelatedRecipes = new JTable();
         panel3 = new JPanel();
         button1 = new JButton();
         panel6 = new JPanel();
         btnAddRecipe = new JButton();
+        popupMenu1 = new JPopupMenu();
+        menuItem1 = new JMenuItem();
+        menuItem2 = new JMenuItem();
 
         //======== this ========
         setTitle("Jason's Recipe Notebook");
@@ -177,6 +205,22 @@ public class RecipeNotebookGUI extends JFrame implements RecipeSelectionListener
         setIconImage(new ImageIcon("C:\\Users\\Jason\\Documents\\Projects\\RecipeNotebook\\src\\onkoyybdqdc81.png").getImage());
         var contentPane = getContentPane();
         contentPane.setLayout(new BorderLayout());
+
+        //======== menuBar1 ========
+        {
+
+            //======== menu1 ========
+            {
+                menu1.setText("File");
+
+                //---- menuItem3 ----
+                menuItem3.setText("Exit");
+                menuItem3.addActionListener(e -> exitMenuItem(e));
+                menu1.add(menuItem3);
+            }
+            menuBar1.add(menu1);
+        }
+        setJMenuBar(menuBar1);
 
         //======== pnlMain ========
         {
@@ -192,24 +236,25 @@ public class RecipeNotebookGUI extends JFrame implements RecipeSelectionListener
 
                     //---- lblRecipeName ----
                     lblRecipeName.setText("Recipe Name");
+                    lblRecipeName.setFont(lblRecipeName.getFont().deriveFont(lblRecipeName.getFont().getStyle() | Font.BOLD));
 
                     GroupLayout panel5Layout = new GroupLayout(panel5);
                     panel5.setLayout(panel5Layout);
                     panel5Layout.setHorizontalGroup(
                         panel5Layout.createParallelGroup()
-                            .addGroup(GroupLayout.Alignment.TRAILING, panel5Layout.createSequentialGroup()
+                            .addGroup(panel5Layout.createSequentialGroup()
                                 .addContainerGap()
-                                .addGroup(panel5Layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                                    .addComponent(lblRecipeName, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtAddRecipeName))
+                                .addGroup(panel5Layout.createParallelGroup()
+                                    .addComponent(txtAddRecipeName, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 581, Short.MAX_VALUE)
+                                    .addComponent(lblRecipeName, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addContainerGap())
                     );
                     panel5Layout.setVerticalGroup(
                         panel5Layout.createParallelGroup()
                             .addGroup(panel5Layout.createSequentialGroup()
-                                .addContainerGap()
+                                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(lblRecipeName)
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtAddRecipeName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap())
                     );
@@ -225,6 +270,7 @@ public class RecipeNotebookGUI extends JFrame implements RecipeSelectionListener
 
                         //---- label1 ----
                         label1.setText("Ingredient(s)");
+                        label1.setFont(label1.getFont().deriveFont(label1.getFont().getStyle() | Font.BOLD));
 
                         //---- txtAddIngredients ----
                         txtAddIngredients.setToolTipText("Press Enter to add an ingredient");
@@ -234,12 +280,7 @@ public class RecipeNotebookGUI extends JFrame implements RecipeSelectionListener
                         {
 
                             //---- lstIngredients ----
-                            lstIngredients.addMouseListener(new MouseAdapter() {
-                                @Override
-                                public void mouseClicked(MouseEvent e) {
-                                    lstIngredientsMouseClicked(e);
-                                }
-                            });
+                            lstIngredients.setComponentPopupMenu(popupMenu1);
                             spIngredients.setViewportView(lstIngredients);
                         }
 
@@ -279,6 +320,7 @@ public class RecipeNotebookGUI extends JFrame implements RecipeSelectionListener
 
                         //---- label2 ----
                         label2.setText("Tag(s)");
+                        label2.setFont(label2.getFont().deriveFont(label2.getFont().getStyle() | Font.BOLD));
 
                         //---- txtAddTags ----
                         txtAddTags.setToolTipText("Press Enter to add a tag");
@@ -321,6 +363,7 @@ public class RecipeNotebookGUI extends JFrame implements RecipeSelectionListener
 
                         //---- label3 ----
                         label3.setText("Instructions");
+                        label3.setFont(label3.getFont().deriveFont(label3.getFont().getStyle() | Font.BOLD));
 
                         //======== spInstructions ========
                         {
@@ -329,8 +372,7 @@ public class RecipeNotebookGUI extends JFrame implements RecipeSelectionListener
                             txtarAddInstructions.setLineWrap(true);
                             txtarAddInstructions.setWrapStyleWord(true);
                             txtarAddInstructions.setMinimumSize(null);
-                            txtarAddInstructions.setPreferredSize(new Dimension(400, 20));
-                            txtarAddInstructions.setRequestFocusEnabled(false);
+                            txtarAddInstructions.setPreferredSize(null);
                             spInstructions.setViewportView(txtarAddInstructions);
                         }
 
@@ -338,9 +380,9 @@ public class RecipeNotebookGUI extends JFrame implements RecipeSelectionListener
                         panel4.setLayout(panel4Layout);
                         panel4Layout.setHorizontalGroup(
                             panel4Layout.createParallelGroup()
-                                .addGroup(GroupLayout.Alignment.TRAILING, panel4Layout.createSequentialGroup()
+                                .addGroup(panel4Layout.createSequentialGroup()
                                     .addContainerGap()
-                                    .addGroup(panel4Layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                                    .addGroup(panel4Layout.createParallelGroup()
                                         .addComponent(label3, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(spInstructions))
                                     .addContainerGap())
@@ -351,17 +393,18 @@ public class RecipeNotebookGUI extends JFrame implements RecipeSelectionListener
                                     .addContainerGap()
                                     .addComponent(label3)
                                     .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(spInstructions, GroupLayout.PREFERRED_SIZE, 169, GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(spInstructions)
                                     .addContainerGap())
                         );
                     }
                     pnlBottom.add(panel4);
 
-                    //======== panel2 ========
+                    //======== panel7 ========
                     {
-                        panel2.setBorder(new TitledBorder("Related Recipes"));
-                        panel2.setPreferredSize(new Dimension(100, 100));
-                        panel2.setLayout(new BorderLayout());
+
+                        //---- label4 ----
+                        label4.setText("Related Recipes");
+                        label4.setFont(label4.getFont().deriveFont(label4.getFont().getStyle() | Font.BOLD));
 
                         //======== scrollPane1 ========
                         {
@@ -377,10 +420,10 @@ public class RecipeNotebookGUI extends JFrame implements RecipeSelectionListener
                             ));
                             scrollPane1.setViewportView(tblRelatedRecipes);
                         }
-                        panel2.add(scrollPane1, BorderLayout.CENTER);
 
                         //======== panel3 ========
                         {
+                            panel3.setPreferredSize(null);
                             panel3.setLayout(new FlowLayout());
 
                             //---- button1 ----
@@ -388,9 +431,32 @@ public class RecipeNotebookGUI extends JFrame implements RecipeSelectionListener
                             button1.addActionListener(e -> spawnSearchDialog(e));
                             panel3.add(button1);
                         }
-                        panel2.add(panel3, BorderLayout.SOUTH);
+
+                        GroupLayout panel7Layout = new GroupLayout(panel7);
+                        panel7.setLayout(panel7Layout);
+                        panel7Layout.setHorizontalGroup(
+                            panel7Layout.createParallelGroup()
+                                .addGroup(panel7Layout.createSequentialGroup()
+                                    .addContainerGap()
+                                    .addGroup(panel7Layout.createParallelGroup()
+                                        .addComponent(label4, GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
+                                        .addComponent(scrollPane1, GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE)
+                                        .addComponent(panel3, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE))
+                                    .addContainerGap())
+                        );
+                        panel7Layout.setVerticalGroup(
+                            panel7Layout.createParallelGroup()
+                                .addGroup(panel7Layout.createSequentialGroup()
+                                    .addContainerGap()
+                                    .addComponent(label4)
+                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 137, GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(panel3, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addContainerGap())
+                        );
                     }
-                    pnlBottom.add(panel2);
+                    pnlBottom.add(panel7);
                 }
                 pnlAddNew.add(pnlBottom);
 
@@ -408,13 +474,28 @@ public class RecipeNotebookGUI extends JFrame implements RecipeSelectionListener
             pnlMain.add(pnlAddNew, BorderLayout.CENTER);
         }
         contentPane.add(pnlMain, BorderLayout.CENTER);
-        setSize(580, 520);
+        setSize(595, 535);
         setLocationRelativeTo(null);
+
+        //======== popupMenu1 ========
+        {
+
+            //---- menuItem1 ----
+            menuItem1.setText("Edit");
+            popupMenu1.add(menuItem1);
+
+            //---- menuItem2 ----
+            menuItem2.setText("Delete");
+            popupMenu1.add(menuItem2);
+        }
         // JFormDesigner - End of component initialization  //GEN-END:initComponents  @formatter:on
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables  @formatter:off
     // Generated using JFormDesigner Educational license - Jason Handron (j-handron)
+    private JMenuBar menuBar1;
+    private JMenu menu1;
+    private JMenuItem menuItem3;
     private JPanel pnlMain;
     private JPanel pnlAddNew;
     private JPanel panel5;
@@ -436,12 +517,16 @@ public class RecipeNotebookGUI extends JFrame implements RecipeSelectionListener
     private JLabel label3;
     private JScrollPane spInstructions;
     private JTextArea txtarAddInstructions;
-    private JPanel panel2;
+    private JPanel panel7;
+    private JLabel label4;
     private JScrollPane scrollPane1;
     private JTable tblRelatedRecipes;
     private JPanel panel3;
     private JButton button1;
     private JPanel panel6;
     private JButton btnAddRecipe;
+    private JPopupMenu popupMenu1;
+    private JMenuItem menuItem1;
+    private JMenuItem menuItem2;
     // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 }
