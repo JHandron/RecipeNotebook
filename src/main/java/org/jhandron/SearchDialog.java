@@ -21,10 +21,7 @@ public class SearchDialog extends JDialog {
     private final RecipeTableModel tblMdlSearchResults = new RecipeTableModel();
 
     //TODO:Probably a way to JFD this
-    private RecipeSelectionListener selectionListener;
-    public void setRecipeSelectionListener(RecipeSelectionListener listener) {
-        this.selectionListener = listener;
-    }
+    private final RecipeSelectionListener selectionListener;
 
     public SearchDialog(Window owner, RecipeSelectionListener recipeSelectionListener) {
         super(owner);

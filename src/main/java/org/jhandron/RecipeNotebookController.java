@@ -7,33 +7,26 @@ import java.util.List;
 public class RecipeNotebookController implements RecipeSelectionListener {
 
     private final RecipeNotebookView view;
-    private final DefaultListModel<String> ingredientModel = new DefaultListModel<>();
-    private final DefaultListModel<String> tagModel = new DefaultListModel<>();
-    private final RecipeTableModel relatedRecipesModel = new RecipeTableModel();
+    private final DefaultListModel<String> lstMdlIngredients = new DefaultListModel<>();
+    private final DefaultListModel<String> lstMdlTags = new DefaultListModel<>();
+    private final RecipeTableModel tblMdlRelatedRecipes = new RecipeTableModel();
 
     public RecipeNotebookController(RecipeNotebookView view) {
         this.view = view;
     }
 
     public void initializeViewBindings() {
-        view.bindIngredientListModel(ingredientModel);
-        view.bindTagListModel(tagModel);
-        view.bindRelatedRecipesTableModel(relatedRecipesModel);
+        view.bindIngredientListModel(lstMdlIngredients);
+        view.bindTagListModel(lstMdlTags);
+        view.bindRelatedRecipesTableModel(tblMdlRelatedRecipes);
     }
 
     public void handleIngredientsEntered(String rawInput) {
-        addTokensToModel(rawInput, ingredientModel);
+        addTokensToModel(rawInput, lstMdlIngredients);
     }
 
     public void handleTagsEntered(String rawInput) {
-        addTokensToModel(rawInput, tagModel);
-    }
-
-    public boolean shouldAddNewRecipeButtonEnable(String recipeName, String instructions) {
-        return !recipeName.trim().isEmpty()
-            && !ingredientModel.isEmpty()
-            && !tagModel.isEmpty()
-            && !instructions.trim().isEmpty();
+        addTokensToModel(rawInput, lstMdlTags);
     }
 
     public void handleAddRecipe(String recipeName, String instructions) {
@@ -41,13 +34,13 @@ public class RecipeNotebookController implements RecipeSelectionListener {
         recipe.setName(recipeName.trim());
         recipe.setInstructions(instructions.trim());
 
-        for (final Object ingredient : ingredientModel.toArray()) {
+        for (final Object ingredient : lstMdlIngredients.toArray()) {
             recipe.getIngredients().add((String) ingredient);
         }
-        for (final Object tag : tagModel.toArray()) {
+        for (final Object tag : lstMdlTags.toArray()) {
             recipe.getTags().add((String) tag);
         }
-        for (final Recipe relatedRecipe : relatedRecipesModel.getRecipes()) {
+        for (final Recipe relatedRecipe : tblMdlRelatedRecipes.getRecipes()) {
             recipe.getRelatedRecipeIds().add(relatedRecipe.getId());
         }
         MongoDelegator.doInsert(recipe);
@@ -62,25 +55,24 @@ public class RecipeNotebookController implements RecipeSelectionListener {
     }
 
     @Override
-    public void onRecipesSelected(List<Recipe> recipes) {
-        updateRelatedRecipesTable(recipes);
+    public void onRecipesSelected(List<Recipe> p_recipes) {
+        updateRelatedRecipesTable(p_recipes);
     }
 
     private void addTokensToModel(String rawInput, DefaultListModel<String> model) {
         if (rawInput == null || rawInput.isBlank()) {
             return;
         }
-
         Arrays.stream(rawInput.split(","))
             .map(String::trim)
             .filter(token -> !token.isEmpty())
             .forEach(model::addElement);
     }
 
-    private void updateRelatedRecipesTable(List<Recipe> recipes) {
-        relatedRecipesModel.clearModel();
-        for (Recipe recipe : recipes) {
-            relatedRecipesModel.addRecipe(recipe);
+    private void updateRelatedRecipesTable(List<Recipe> p_recipes) {
+        tblMdlRelatedRecipes.clearModel();
+        for (Recipe recipe : p_recipes) {
+            tblMdlRelatedRecipes.addRecipe(recipe);
         }
     }
 }

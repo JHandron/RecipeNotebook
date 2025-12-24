@@ -92,24 +92,23 @@ public class RecipeNotebookGUI extends JFrame implements RecipeNotebookView {
     }
 
     @Override
-    public void bindIngredientListModel(ListModel<String> ingredientModel) {
-        lstIngredients.setModel(ingredientModel);
+    public void bindIngredientListModel(ListModel<String> p_ingredientModel) {
+        lstIngredients.setModel(p_ingredientModel);
     }
 
     @Override
-    public void bindTagListModel(ListModel<String> tagModel) {
-        lstTags.setModel(tagModel);
+    public void bindTagListModel(ListModel<String> p_tagModel) {
+        lstTags.setModel(p_tagModel);
     }
 
     @Override
-    public void bindRelatedRecipesTableModel(TableModel relatedRecipesModel) {
-        tblRelatedRecipes.setModel(relatedRecipesModel);
+    public void bindRelatedRecipesTableModel(TableModel p_relatedRecipesModel) {
+        tblRelatedRecipes.setModel(p_relatedRecipesModel);
     }
 
     @Override
-    public void openSearchDialog(RecipeSelectionListener selectionListener) {
-        SearchDialog dialog = new SearchDialog(this, selectionListener);
-        dialog.setRecipeSelectionListener(selectionListener);
+    public void openSearchDialog(RecipeSelectionListener p_selectionListener) {
+        SearchDialog dialog = new SearchDialog(this, p_selectionListener);
         dialog.setVisible(true);
     }
 

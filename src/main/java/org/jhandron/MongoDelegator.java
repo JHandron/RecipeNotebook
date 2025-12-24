@@ -22,7 +22,9 @@ import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 public class MongoDelegator {
 
     private static final String DATABASE_NAME = "recipe";
-    private static final String COLLECTION_NAME = "recipes";
+
+    //TODO: There is a DEV version, setup run config
+    private static final String COLLECTION_NAME = "recipes-dev";
 
     //TODO: Put in try-catch block
     private static final CodecRegistry pojoCodecRegistry = fromRegistries(
