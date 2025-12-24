@@ -6,9 +6,6 @@ package org.jhandron;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 import javax.swing.*;
 import javax.swing.border.*;
 import javax.swing.table.*;
@@ -16,23 +13,19 @@ import javax.swing.table.*;
 /**
  * @author Jason
  */
-public class SearchDialog extends JDialog {
+public class SearchDialog extends JDialog implements SearchDialogView {
 
-    private final RecipeTableModel tblMdlSearchResults = new RecipeTableModel();
-
-    //TODO:Probably a way to JFD this
-    private final RecipeSelectionListener selectionListener;
+    private final SearchDialogController controller;
 
     public SearchDialog(Window owner, RecipeSelectionListener recipeSelectionListener) {
         super(owner);
-        this.selectionListener = recipeSelectionListener;
+        controller = new SearchDialogController(this, recipeSelectionListener);
         initComponents();
         init();
     }
 
     public void init(){
-        tblMdlSearchResults.clearModel();
-        tblSearchResults.setModel(tblMdlSearchResults);
+        controller.initializeViewBindings();
         hideColumns();
     }
 
@@ -41,40 +34,31 @@ public class SearchDialog extends JDialog {
     }
 
     private void doFind(ActionEvent e) {
-        if (rbName.isSelected()){
-            Collection<Recipe> recipeSearchResults = MongoDelegator.getCollectionByName(txtSearchName.getText().trim());
-            if (!recipeSearchResults.isEmpty()) {
-                updateSearchTable((List<Recipe>) recipeSearchResults);
-            }
-        }
-        else if (rbIngredients.isSelected()){
-            Collection<Recipe> recipeSearchResults = MongoDelegator.getByInstructions(txtSearchName.getText().trim());
-            if (!recipeSearchResults.isEmpty()) {
-                updateSearchTable((List<Recipe>) recipeSearchResults);
-            }
-        }
-        else if (rbTags.isSelected()){
-            Collection<Recipe> recipeSearchResults = MongoDelegator.getByTags(txtSearchName.getText().trim());//TODO: Adjust split value to account for whitespace or not
-            if (!recipeSearchResults.isEmpty()) {
-                updateSearchTable((List<Recipe>) recipeSearchResults);
-            }
-        }
+        SearchDialogController.SearchMode searchMode = getSelectedSearchMode();
+        controller.handleSearch(searchMode, txtSearchName.getText());
     }
 
-    private void updateSearchTable(List<Recipe> p_results) {
-        tblMdlSearchResults.clearModel(); //clear prior results
-        for (Recipe recipe : p_results){
-            tblMdlSearchResults.addRecipe(recipe);
+    private SearchDialogController.SearchMode getSelectedSearchMode() {
+        if (rbIngredients.isSelected()) {
+            return SearchDialogController.SearchMode.INGREDIENTS;
         }
+        if (rbTags.isSelected()) {
+            return SearchDialogController.SearchMode.TAGS;
+        }
+        return SearchDialogController.SearchMode.NAME;
     }
 
     private void selectRecipe(ActionEvent e) {
-        int[] selectedRowIndexes = tblSearchResults.getSelectedRows();
-        List<Recipe> selectedRecipes = new ArrayList<>();
-        for (int i : selectedRowIndexes) {
-            selectedRecipes.add(tblMdlSearchResults.getRecipeAt(i));
-        }
-        selectionListener.onRecipesSelected(selectedRecipes); // 🔥 Fire the callback
+        controller.handleRecipeSelection(tblSearchResults.getSelectedRows());
+    }
+
+    @Override
+    public void bindSearchResultsTableModel(TableModel searchResultsModel) {
+        tblSearchResults.setModel(searchResultsModel);
+    }
+
+    @Override
+    public void closeDialog() {
         dispose();
     }
 
