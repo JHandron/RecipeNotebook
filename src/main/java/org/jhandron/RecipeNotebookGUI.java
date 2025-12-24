@@ -2,7 +2,6 @@ package org.jhandron;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.util.List;
 import javax.swing.*;
 import javax.swing.table.*;
 
@@ -10,20 +9,18 @@ import javax.swing.table.*;
  * @author Jason
  */
 
-public class RecipeNotebookGUI extends JFrame implements RecipeSelectionListener {
+public class RecipeNotebookGUI extends JFrame implements RecipeNotebookView {
 
-    private final DefaultListModel<String> lstMdlIngredients = new DefaultListModel<>();
-    private final DefaultListModel<String> lstMdlTags = new DefaultListModel<>();
-    private final RecipeTableModel tblMdlRelatedRecipes = new RecipeTableModel();
+    private final RecipeNotebookController controller;
 
     public RecipeNotebookGUI() {
+        controller = new RecipeNotebookController(this);
         initComponents();
         init();
     }
 
     private void init() {
-        tblMdlRelatedRecipes.getRecipes().clear();
-        tblRelatedRecipes.setModel(tblMdlRelatedRecipes);
+        controller.initializeViewBindings();
         hideColumns();
     }
 
@@ -35,70 +32,18 @@ public class RecipeNotebookGUI extends JFrame implements RecipeSelectionListener
         tblRelatedRecipes.removeColumn(tblRelatedRecipes.getColumnModel().getColumn(1));//RelatedRecipes //TODO: Magic number??
     }
 
-    //TODO: Make this work
-    private boolean shouldAddNewRecipeButtonEnable() {
-        if (!txtAddRecipeName.getText().trim().isEmpty() &&
-            !lstMdlIngredients.isEmpty() &&
-            !lstMdlTags.isEmpty() &&
-            !txtarAddInstructions.getText().trim().isEmpty()) {
-            //No check for related recipes, maybe nothing is related.
-            return true;
-        } else {
-            return false;
-        }
-    }
-
     private void addNewRecipe(ActionEvent e) {
-        final Recipe recipe = new Recipe();
-        recipe.setName(txtAddRecipeName.getText().trim()); //TODO:Better input sanitization
-        recipe.setInstructions(txtarAddInstructions.getText().trim());
-
-        for (final Object o : lstMdlIngredients.toArray()) {
-            recipe.getIngredients().add((String)o);
-        }
-        for (final Object o : lstMdlTags.toArray()) {
-            recipe.getTags().add((String)o);
-        }
-        for (final Recipe relatedRecipe : tblMdlRelatedRecipes.getRecipes()) {
-            recipe.getRelatedRecipeIds().add(relatedRecipe.getId());
-        }
-        MongoDelegator.doInsert(recipe);
-    }
-
-    private void updateIngredientsList(){
-        lstIngredients.setModel(lstMdlIngredients);
-    }
-
-    private void updateTagsList(){
-        lstTags.setModel(lstMdlTags);
+        controller.handleAddRecipe(txtAddRecipeName.getText(), txtarAddInstructions.getText());
     }
 
     private void txtAddIngredientsEnter(ActionEvent e) {
-        final String[] ingredients = parseCommaSeparatedTxtString(txtAddIngredients.getText());
-        for (final String ingredient : ingredients) {
-            lstMdlIngredients.addElement(ingredient);
-        }
+        controller.handleIngredientsEntered(txtAddIngredients.getText());
         txtAddIngredients.setText("");
-        updateIngredientsList();
     }
 
     private void txtAddTagsEntered(ActionEvent e) {
-        final String[] tags = parseCommaSeparatedTxtString(txtAddTags.getText());
-        for (final String tag : tags) {
-            lstMdlTags.addElement(tag);
-        }
+        controller.handleTagsEntered(txtAddTags.getText());
         txtAddTags.setText("");
-        updateTagsList();
-    }
-
-    //TODO: Should this exist here?
-    private String[] parseCommaSeparatedTxtString(final String p_txtString) {
-        final String[] tokens = p_txtString.split(",");
-        final String[] trimmedTokens = new String[tokens.length];
-        for (int i = 0; i < tokens.length; i++) {
-            trimmedTokens[i] = tokens[i].trim();
-        }
-        return trimmedTokens;
     }
 
 //    private void lstIngredientsMouseClicked(MouseEvent e) {
@@ -139,25 +84,38 @@ public class RecipeNotebookGUI extends JFrame implements RecipeSelectionListener
 //    }
 
     private void exitMenuItem(ActionEvent e) {
-        System.exit(0);
+        controller.handleExitRequested();
     }
 
     private void spawnSearchDialog(ActionEvent e) {
-        SearchDialog dialog = new SearchDialog(this, this);
-        dialog.setRecipeSelectionListener(this);
+        controller.handleSearchRequested();
+    }
+
+    @Override
+    public void bindIngredientListModel(ListModel<String> ingredientModel) {
+        lstIngredients.setModel(ingredientModel);
+    }
+
+    @Override
+    public void bindTagListModel(ListModel<String> tagModel) {
+        lstTags.setModel(tagModel);
+    }
+
+    @Override
+    public void bindRelatedRecipesTableModel(TableModel relatedRecipesModel) {
+        tblRelatedRecipes.setModel(relatedRecipesModel);
+    }
+
+    @Override
+    public void openSearchDialog(RecipeSelectionListener selectionListener) {
+        SearchDialog dialog = new SearchDialog(this, selectionListener);
+        dialog.setRecipeSelectionListener(selectionListener);
         dialog.setVisible(true);
     }
 
-    public void onRecipesSelected(List<Recipe> p_recipes) {
-        System.out.println("Recipes selected: " + p_recipes);
-        updateRelatedRecipesTable(p_recipes);
-    }
-
-    public void updateRelatedRecipesTable(List<Recipe> p_recipes) {
-        tblMdlRelatedRecipes.clearModel(); //clear prior results
-        for (Recipe recipe : p_recipes){
-            tblMdlRelatedRecipes.addRecipe(recipe);
-        }
+    @Override
+    public void exitApplication() {
+        System.exit(0);
     }
 
     private void initComponents() {
