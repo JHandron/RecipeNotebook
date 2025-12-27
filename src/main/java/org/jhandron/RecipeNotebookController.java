@@ -21,15 +21,23 @@ public class RecipeNotebookController implements RecipeSelectionListener {
         view.bindRelatedRecipesTableModel(tblMdlRelatedRecipes);
     }
 
-    public void handleIngredientsEntered(String rawInput) {
-        addTokensToModel(rawInput, lstMdlIngredients);
+    public void handleIngredientsAdded(String p_input) {
+        addTokensToModel(p_input, lstMdlIngredients);
     }
 
-    public void handleTagsEntered(String rawInput) {
-        addTokensToModel(rawInput, lstMdlTags);
+    public void handleIngredientsDeleted(String p_input) {
+
     }
 
-    public void handleAddRecipe(String p_recipeName, String p_instructions) {
+    public void handleTagsAdded(String p_input) {
+        addTokensToModel(p_input, lstMdlTags);
+    }
+
+    public void handleTagsDeleted(String p_input) {
+
+    }
+
+    public void handleAddNewRecipe(String p_recipeName, String p_instructions) {
         final Recipe recipe = new Recipe();
         recipe.setName(p_recipeName.trim());
         recipe.setInstructions(p_instructions.trim());

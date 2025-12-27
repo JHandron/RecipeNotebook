@@ -34,17 +34,33 @@ public class RecipeNotebookGUI extends JFrame implements RecipeNotebookView {
     }
 
     private void addNewRecipe(ActionEvent e) {
-        controller.handleAddRecipe(txtAddRecipeName.getText(), txtarAddInstructions.getText());
+        controller.handleAddNewRecipe(txtAddRecipeName.getText(), txtarAddInstructions.getText());
     }
 
-    private void txtAddIngredientsEnter(ActionEvent e) {
-        controller.handleIngredientsEntered(txtAddIngredients.getText());
+    private void addIngredients(ActionEvent e) {
+        controller.handleIngredientsAdded(txtAddIngredients.getText());
         txtAddIngredients.setText("");
     }
 
-    private void txtAddTagsEntered(ActionEvent e) {
-        controller.handleTagsEntered(txtAddTags.getText());
+    private void txtAddIngredientsEntered(ActionEvent e) {
+        addIngredients(e);
+    }
+
+    private void addTags(ActionEvent e) {
+        controller.handleTagsAdded(txtAddTags.getText());
         txtAddTags.setText("");
+    }
+
+    private void txtAddTagsEntered(ActionEvent e) {
+        addTags(e);
+    }
+
+    private void deleteIngredients(ActionEvent e) {
+        controller.handleIngredientsDeleted();
+    }
+
+    private void deleteTags(ActionEvent e) {
+        controller.handleTagsDeleted();
     }
 
     private void exitMenuItem(ActionEvent e) {
@@ -98,11 +114,15 @@ public class RecipeNotebookGUI extends JFrame implements RecipeNotebookView {
         txtAddIngredients = new JTextField();
         spIngredients = new JScrollPane();
         lstIngredients = new JList<>();
+        button2 = new JButton();
+        button3 = new JButton();
         panel10 = new JPanel();
         spTags = new JScrollPane();
         lstTags = new JList<>();
         label2 = new JLabel();
         txtAddTags = new JTextField();
+        button4 = new JButton();
+        button5 = new JButton();
         pnlBottom = new JPanel();
         panel4 = new JPanel();
         label3 = new JLabel();
@@ -116,9 +136,6 @@ public class RecipeNotebookGUI extends JFrame implements RecipeNotebookView {
         button1 = new JButton();
         panel6 = new JPanel();
         btnAddRecipe = new JButton();
-        popupMenu1 = new JPopupMenu();
-        menuItem1 = new JMenuItem();
-        menuItem2 = new JMenuItem();
 
         //======== this ========
         setTitle("Jason's Recipe Notebook");
@@ -195,15 +212,22 @@ public class RecipeNotebookGUI extends JFrame implements RecipeNotebookView {
 
                         //---- txtAddIngredients ----
                         txtAddIngredients.setToolTipText("Press Enter to add an ingredient");
-                        txtAddIngredients.addActionListener(e -> txtAddIngredientsEnter(e));
+                        txtAddIngredients.addActionListener(e -> txtAddIngredientsEntered(e));
 
                         //======== spIngredients ========
                         {
-
-                            //---- lstIngredients ----
-                            lstIngredients.setComponentPopupMenu(popupMenu1);
                             spIngredients.setViewportView(lstIngredients);
                         }
+
+                        //---- button2 ----
+                        button2.setText("\u2013");
+                        button2.setFont(button2.getFont().deriveFont(button2.getFont().getStyle() | Font.BOLD));
+                        button2.addActionListener(e -> deleteIngredients(e));
+
+                        //---- button3 ----
+                        button3.setText("+");
+                        button3.setFont(button3.getFont().deriveFont(button3.getFont().getStyle() | Font.BOLD));
+                        button3.addActionListener(e -> addIngredients(e));
 
                         GroupLayout panel9Layout = new GroupLayout(panel9);
                         panel9.setLayout(panel9Layout);
@@ -212,7 +236,12 @@ public class RecipeNotebookGUI extends JFrame implements RecipeNotebookView {
                                 .addGroup(GroupLayout.Alignment.TRAILING, panel9Layout.createSequentialGroup()
                                     .addContainerGap()
                                     .addGroup(panel9Layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                                        .addComponent(txtAddIngredients)
+                                        .addGroup(panel9Layout.createSequentialGroup()
+                                            .addComponent(txtAddIngredients)
+                                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(button3)
+                                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(button2))
                                         .addComponent(label1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(spIngredients))
                                     .addContainerGap())
@@ -223,7 +252,11 @@ public class RecipeNotebookGUI extends JFrame implements RecipeNotebookView {
                                     .addContainerGap()
                                     .addComponent(label1)
                                     .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(txtAddIngredients, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(panel9Layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                                        .addComponent(txtAddIngredients, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(panel9Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                            .addComponent(button2)
+                                            .addComponent(button3)))
                                     .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(spIngredients, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                                     .addContainerGap())
@@ -247,6 +280,16 @@ public class RecipeNotebookGUI extends JFrame implements RecipeNotebookView {
                         txtAddTags.setToolTipText("Press Enter to add a tag");
                         txtAddTags.addActionListener(e -> txtAddTagsEntered(e));
 
+                        //---- button4 ----
+                        button4.setText("\u2013");
+                        button4.setFont(button4.getFont().deriveFont(button4.getFont().getStyle() | Font.BOLD));
+                        button4.addActionListener(e -> deleteTags(e));
+
+                        //---- button5 ----
+                        button5.setText("+");
+                        button5.setFont(button5.getFont().deriveFont(button5.getFont().getStyle() | Font.BOLD));
+                        button5.addActionListener(e -> addTags(e));
+
                         GroupLayout panel10Layout = new GroupLayout(panel10);
                         panel10.setLayout(panel10Layout);
                         panel10Layout.setHorizontalGroup(
@@ -254,7 +297,12 @@ public class RecipeNotebookGUI extends JFrame implements RecipeNotebookView {
                                 .addGroup(panel10Layout.createSequentialGroup()
                                     .addContainerGap()
                                     .addGroup(panel10Layout.createParallelGroup()
-                                        .addComponent(txtAddTags)
+                                        .addGroup(panel10Layout.createSequentialGroup()
+                                            .addComponent(txtAddTags)
+                                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(button5)
+                                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(button4))
                                         .addComponent(label2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(spTags, GroupLayout.Alignment.TRAILING))
                                     .addContainerGap())
@@ -265,7 +313,11 @@ public class RecipeNotebookGUI extends JFrame implements RecipeNotebookView {
                                     .addContainerGap()
                                     .addComponent(label2)
                                     .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(txtAddTags, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(panel10Layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                                        .addGroup(panel10Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                            .addComponent(txtAddTags, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(button5))
+                                        .addComponent(button4))
                                     .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(spTags, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                                     .addContainerGap())
@@ -360,9 +412,9 @@ public class RecipeNotebookGUI extends JFrame implements RecipeNotebookView {
                                 .addGroup(panel7Layout.createSequentialGroup()
                                     .addContainerGap()
                                     .addGroup(panel7Layout.createParallelGroup()
-                                        .addComponent(label4, GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
+                                        .addComponent(label4, GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
                                         .addComponent(scrollPane1, GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE)
-                                        .addComponent(panel3, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE))
+                                        .addComponent(panel3, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE))
                                     .addContainerGap())
                         );
                         panel7Layout.setVerticalGroup(
@@ -397,18 +449,6 @@ public class RecipeNotebookGUI extends JFrame implements RecipeNotebookView {
         contentPane.add(pnlMain, BorderLayout.CENTER);
         setSize(595, 535);
         setLocationRelativeTo(null);
-
-        //======== popupMenu1 ========
-        {
-
-            //---- menuItem1 ----
-            menuItem1.setText("Edit");
-            popupMenu1.add(menuItem1);
-
-            //---- menuItem2 ----
-            menuItem2.setText("Delete");
-            popupMenu1.add(menuItem2);
-        }
         // JFormDesigner - End of component initialization  //GEN-END:initComponents  @formatter:on
     }
 
@@ -428,11 +468,15 @@ public class RecipeNotebookGUI extends JFrame implements RecipeNotebookView {
     private JTextField txtAddIngredients;
     private JScrollPane spIngredients;
     private JList<String> lstIngredients;
+    private JButton button2;
+    private JButton button3;
     private JPanel panel10;
     private JScrollPane spTags;
     private JList<String> lstTags;
     private JLabel label2;
     private JTextField txtAddTags;
+    private JButton button4;
+    private JButton button5;
     private JPanel pnlBottom;
     private JPanel panel4;
     private JLabel label3;
@@ -446,8 +490,5 @@ public class RecipeNotebookGUI extends JFrame implements RecipeNotebookView {
     private JButton button1;
     private JPanel panel6;
     private JButton btnAddRecipe;
-    private JPopupMenu popupMenu1;
-    private JMenuItem menuItem1;
-    private JMenuItem menuItem2;
     // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 }
