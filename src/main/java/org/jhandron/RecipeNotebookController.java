@@ -25,16 +25,16 @@ public class RecipeNotebookController implements RecipeSelectionListener {
         addTokensToModel(p_input, lstMdlIngredients);
     }
 
-    public void handleIngredientsDeleted(String p_input) {
-
+    public void handleIngredientsDeleted(List<String> ingredients) {
+        removeTokensFromModel(ingredients, lstMdlIngredients);
     }
 
     public void handleTagsAdded(String p_input) {
         addTokensToModel(p_input, lstMdlTags);
     }
 
-    public void handleTagsDeleted(String p_input) {
-
+    public void handleTagsDeleted(List<String> tags) {
+        removeTokensFromModel(tags, lstMdlTags);
     }
 
     public void handleAddNewRecipe(String p_recipeName, String p_instructions) {
@@ -75,6 +75,15 @@ public class RecipeNotebookController implements RecipeSelectionListener {
             .map(String::trim)
             .filter(token -> !token.isEmpty())
             .forEach(model::addElement);
+    }
+
+    private void removeTokensFromModel(List<String> tokens, DefaultListModel<String> model) {
+        if (tokens == null || tokens.isEmpty()) {
+            return;
+        }
+        for (String token : tokens) {
+            model.removeElement(token);
+        }
     }
 
     private void updateRelatedRecipesTable(List<Recipe> p_recipes) {

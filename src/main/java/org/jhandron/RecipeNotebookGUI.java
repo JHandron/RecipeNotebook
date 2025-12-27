@@ -56,11 +56,11 @@ public class RecipeNotebookGUI extends JFrame implements RecipeNotebookView {
     }
 
     private void deleteIngredients(ActionEvent e) {
-        controller.handleIngredientsDeleted();
+        controller.handleIngredientsDeleted(lstIngredients.getSelectedValuesList());
     }
 
     private void deleteTags(ActionEvent e) {
-        controller.handleTagsDeleted();
+        controller.handleTagsDeleted(lstTags.getSelectedValuesList());
     }
 
     private void exitMenuItem(ActionEvent e) {
