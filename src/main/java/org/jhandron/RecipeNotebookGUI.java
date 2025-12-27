@@ -24,12 +24,13 @@ public class RecipeNotebookGUI extends JFrame implements RecipeNotebookView {
         hideColumns();
     }
 
-    //TODO:This is shit
-    private void hideColumns(){
-        tblRelatedRecipes.removeColumn(tblRelatedRecipes.getColumnModel().getColumn(0));//ID //TODO: Magic number
-        tblRelatedRecipes.removeColumn(tblRelatedRecipes.getColumnModel().getColumn(2));//Ingredients //TODO: Magic number
-        tblRelatedRecipes.removeColumn(tblRelatedRecipes.getColumnModel().getColumn(1));//Tags //TODO: Magic number??
-        tblRelatedRecipes.removeColumn(tblRelatedRecipes.getColumnModel().getColumn(1));//RelatedRecipes //TODO: Magic number??
+    private void hideColumns() {
+        TableColumnUtils.hideColumns(tblRelatedRecipes,
+            RecipeTableModel.COLUMN_NAMES[0], // Id
+            RecipeTableModel.COLUMN_NAMES[2], // Ingredients
+            RecipeTableModel.COLUMN_NAMES[3], // Tags
+            RecipeTableModel.COLUMN_NAMES[4]  // Related Recipes
+        );
     }
 
     private void addNewRecipe(ActionEvent e) {
