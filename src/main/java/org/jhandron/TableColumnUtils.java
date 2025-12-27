@@ -12,13 +12,13 @@ public final class TableColumnUtils {
     private TableColumnUtils() {
     }
 
-    public static void hideColumns(JTable table, String... columnHeaders) {
-        if (table == null || columnHeaders == null || columnHeaders.length == 0) {
+    public static void hideColumns(JTable p_table, String... p_columnHeaders) {
+        if (p_table == null || p_columnHeaders == null || p_columnHeaders.length == 0) {
             return;
         }
 
-        final Set<String> headersToHide = new HashSet<>(Arrays.asList(columnHeaders));
-        final TableColumnModel columnModel = table.getColumnModel();
+        final Set<String> headersToHide = new HashSet<>(Arrays.asList(p_columnHeaders));
+        final TableColumnModel columnModel = p_table.getColumnModel();
 
         for (int index = 0; index < columnModel.getColumnCount(); index++) {
             final TableColumn column = columnModel.getColumn(index);
@@ -30,11 +30,11 @@ public final class TableColumnUtils {
         }
     }
 
-    private static void hideColumn(TableColumn column) {
-        column.setMinWidth(0);
-        column.setMaxWidth(0);
-        column.setPreferredWidth(0);
-        column.setWidth(0);
-        column.setResizable(false);
+    private static void hideColumn(TableColumn p_column) {
+        p_column.setMinWidth(0);
+        p_column.setMaxWidth(0);
+        p_column.setPreferredWidth(0);
+        p_column.setWidth(0);
+        p_column.setResizable(false);
     }
 }

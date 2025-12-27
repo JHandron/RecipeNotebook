@@ -58,7 +58,6 @@ new FormModel {
 								name: "spIngredients"
 								add( new FormComponent( "javax.swing.JList" ) {
 									name: "lstIngredients"
-									"componentPopupMenu": new FormReference( "popupMenu1" )
 									auxiliary() {
 										"JavaCodeGenerator.typeParameters": "String"
 									}
@@ -115,7 +114,7 @@ new FormModel {
 							} )
 						} )
 						add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-							"$horizontalGroup": "par l {seq {space :::p, par l {comp label4::l::163:x, comp scrollPane1::l::0:x, comp panel3::t::163:x}, space :::p}}"
+							"$horizontalGroup": "par l {seq {space :::p, par l {comp label4::l::164:x, comp scrollPane1::l::0:x, comp panel3::t::164:x}, space :::p}}"
 							"$verticalGroup": "par l {seq l {space :::p, comp label4:::p::p, space :::p, comp scrollPane1:::p:137:p, space :::p, comp panel3:::::x, space :::p}}"
 						} ) {
 							name: "panel7"
@@ -180,25 +179,6 @@ new FormModel {
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 170, 80 )
 			"size": new java.awt.Dimension( 595, 535 )
-		} )
-		add( new FormContainer( "javax.swing.JPopupMenu", new FormLayoutManager( class javax.swing.JPopupMenu ) ) {
-			name: "popupMenu1"
-			add( new FormComponent( "javax.swing.JMenuItem" ) {
-				name: "menuItem1"
-				"text": "Edit"
-			} )
-			add( new FormComponent( "javax.swing.JMenuItem" ) {
-				name: "menuItem2"
-				"text": "Delete"
-			} )
-		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 25, 560 )
-			"size": new java.awt.Dimension( 85, 52 )
-		} )
-		add( new FormNonVisual( "javax.swing.ButtonGroup" ) {
-			name: "buttonGroup1"
-		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 25, 665 )
 		} )
 	}
 }

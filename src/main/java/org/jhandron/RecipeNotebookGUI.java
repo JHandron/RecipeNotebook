@@ -47,43 +47,6 @@ public class RecipeNotebookGUI extends JFrame implements RecipeNotebookView {
         txtAddTags.setText("");
     }
 
-//    private void lstIngredientsMouseClicked(MouseEvent e) {
-//        JPopupMenu popupMenu = new JPopupMenu();
-//        JMenuItem deleteItem = new JMenuItem("Delete");
-//        popupMenu.add(deleteItem);
-//
-//        // Add mouse listener for right-click popup
-//        lstIngredients.addMouseListener(new MouseAdapter() {
-//            @Override
-//            public void mousePressed(MouseEvent e) {
-//                showPopup(e);
-//            }
-//
-//            @Override
-//            public void mouseReleased(MouseEvent e) {
-//                showPopup(e);
-//            }
-//
-//            private void showPopup(MouseEvent e) {
-//                if (e.isPopupTrigger()) { // Detect right-click trigger
-//                    int index = lstIngredients.locationToIndex(e.getPoint());
-//                    if (index != -1) {
-//                        lstIngredients.setSelectedIndex(index); // Highlight selection
-//                        popupMenu.show(lstIngredients, e.getX(), e.getY());
-//                    }
-//                }
-//            }
-//        });
-//
-//        deleteItem.addActionListener(o -> {
-//            int selectedIndex = lstIngredients.getSelectedIndex();
-//            if (selectedIndex != -1) {
-//                lstMdlIngredients.remove(selectedIndex);
-//                updateIngredientsList();
-//            }
-//        });
-//    }
-
     private void exitMenuItem(ActionEvent e) {
         controller.handleExitRequested();
     }

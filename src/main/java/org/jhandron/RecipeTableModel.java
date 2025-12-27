@@ -7,10 +7,9 @@ import java.util.List;
 import java.util.Map;
 
 public class RecipeTableModel extends AbstractTableModel {
-    private List<Recipe> recipes = new ArrayList<>();
 
+    private List<Recipe> recipes = new ArrayList<>();
     public static final String[] COLUMN_NAMES = {"Id", "Name", "Ingredients", "Tags", "Related Recipes"};
-    public static final HashMap<String, Integer> mapColumnHeaderToIndex = new HashMap<>();
 
     public void clearModel() {
         recipes.clear();
@@ -72,17 +71,6 @@ public class RecipeTableModel extends AbstractTableModel {
             default -> null;
         };
     }
-
-//    @Override
-//    public Class<?> getColumnClass(int columnIndex) {
-//        switch (columnIndex) {
-//            case 0: return String.class;
-//            case 1: return String.class;
-//            case 2: return Integer.class;
-//            case 3: return String.class;
-//            default: return Object.class;
-//        }
-//    }
 
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
