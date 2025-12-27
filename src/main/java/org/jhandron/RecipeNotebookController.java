@@ -29,10 +29,10 @@ public class RecipeNotebookController implements RecipeSelectionListener {
         addTokensToModel(rawInput, lstMdlTags);
     }
 
-    public void handleAddRecipe(String recipeName, String instructions) {
+    public void handleAddRecipe(String p_recipeName, String p_instructions) {
         final Recipe recipe = new Recipe();
-        recipe.setName(recipeName.trim());
-        recipe.setInstructions(instructions.trim());
+        recipe.setName(p_recipeName.trim());
+        recipe.setInstructions(p_instructions.trim());
 
         for (final Object ingredient : lstMdlIngredients.toArray()) {
             recipe.getIngredients().add((String) ingredient);

@@ -30,7 +30,7 @@ public class SearchDialog extends JDialog implements SearchDialogView {
     }
 
     private void hideColumns() {
-        tblSearchResults.removeColumn(tblSearchResults.getColumnModel().getColumn(0)); //ID //TODO: Magic number
+        TableColumnUtils.hideColumns(tblSearchResults, RecipeTableModel.COLUMN_NAMES[0]); // Id
     }
 
     private void doFind(ActionEvent e) {

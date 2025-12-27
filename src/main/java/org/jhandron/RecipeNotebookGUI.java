@@ -24,12 +24,13 @@ public class RecipeNotebookGUI extends JFrame implements RecipeNotebookView {
         hideColumns();
     }
 
-    //TODO:This is shit
-    private void hideColumns(){
-        tblRelatedRecipes.removeColumn(tblRelatedRecipes.getColumnModel().getColumn(0));//ID //TODO: Magic number
-        tblRelatedRecipes.removeColumn(tblRelatedRecipes.getColumnModel().getColumn(2));//Ingredients //TODO: Magic number
-        tblRelatedRecipes.removeColumn(tblRelatedRecipes.getColumnModel().getColumn(1));//Tags //TODO: Magic number??
-        tblRelatedRecipes.removeColumn(tblRelatedRecipes.getColumnModel().getColumn(1));//RelatedRecipes //TODO: Magic number??
+    private void hideColumns() {
+        TableColumnUtils.hideColumns(tblRelatedRecipes,
+            RecipeTableModel.COLUMN_NAMES[0], // Id
+            RecipeTableModel.COLUMN_NAMES[2], // Ingredients
+            RecipeTableModel.COLUMN_NAMES[3], // Tags
+            RecipeTableModel.COLUMN_NAMES[4]  // Related Recipes
+        );
     }
 
     private void addNewRecipe(ActionEvent e) {
@@ -45,43 +46,6 @@ public class RecipeNotebookGUI extends JFrame implements RecipeNotebookView {
         controller.handleTagsEntered(txtAddTags.getText());
         txtAddTags.setText("");
     }
-
-//    private void lstIngredientsMouseClicked(MouseEvent e) {
-//        JPopupMenu popupMenu = new JPopupMenu();
-//        JMenuItem deleteItem = new JMenuItem("Delete");
-//        popupMenu.add(deleteItem);
-//
-//        // Add mouse listener for right-click popup
-//        lstIngredients.addMouseListener(new MouseAdapter() {
-//            @Override
-//            public void mousePressed(MouseEvent e) {
-//                showPopup(e);
-//            }
-//
-//            @Override
-//            public void mouseReleased(MouseEvent e) {
-//                showPopup(e);
-//            }
-//
-//            private void showPopup(MouseEvent e) {
-//                if (e.isPopupTrigger()) { // Detect right-click trigger
-//                    int index = lstIngredients.locationToIndex(e.getPoint());
-//                    if (index != -1) {
-//                        lstIngredients.setSelectedIndex(index); // Highlight selection
-//                        popupMenu.show(lstIngredients, e.getX(), e.getY());
-//                    }
-//                }
-//            }
-//        });
-//
-//        deleteItem.addActionListener(o -> {
-//            int selectedIndex = lstIngredients.getSelectedIndex();
-//            if (selectedIndex != -1) {
-//                lstMdlIngredients.remove(selectedIndex);
-//                updateIngredientsList();
-//            }
-//        });
-//    }
 
     private void exitMenuItem(ActionEvent e) {
         controller.handleExitRequested();
