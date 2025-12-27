@@ -23,8 +23,7 @@ public class MongoDelegator {
 
     private static final String DATABASE_NAME = "recipe";
 
-    //TODO: There is a DEV version, setup run config
-    private static final String COLLECTION_NAME = "recipes-dev";
+    public static String COLLECTION_NAME;
 
     //TODO: Put in try-catch block
     private static final CodecRegistry pojoCodecRegistry = fromRegistries(
@@ -51,21 +50,6 @@ public class MongoDelegator {
             } catch (MongoException e) {
                 System.err.println("Unable to insert due to an error: " + e);
             }
-        }
-    }
-
-    public static Recipe getByName(String p_name){
-        try (MongoClient mongoClient = MongoClients.create(SETTINGS)) {
-            MongoDatabase database = mongoClient.getDatabase(DATABASE_NAME);
-            MongoCollection<Recipe> collection = database.getCollection(COLLECTION_NAME, Recipe.class);
-
-            Recipe recipe = collection.find(Filters.eq("name", p_name)).first(); //TODO: Duplicates?
-            if (recipe != null) {
-                System.out.println(recipe);
-            } else {
-                System.out.println("No matching documents found.");
-            }
-            return recipe;
         }
     }
 
