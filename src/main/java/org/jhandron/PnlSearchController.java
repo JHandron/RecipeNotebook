@@ -1,6 +1,5 @@
 package org.jhandron;
 
-import javax.swing.table.TableModel;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -26,7 +25,7 @@ public class PnlSearchController {
         view.bindSearchResultsTableModel(searchResultsModel);
     }
 
-    public void handleSearch(SearchDialogController.SearchMode searchMode, String rawSearchText) {
+    public void handleSearch(SearchMode searchMode, String rawSearchText) {
         if (rawSearchText == null || rawSearchText.isBlank()) {
             searchResultsModel.clearModel();
             return;

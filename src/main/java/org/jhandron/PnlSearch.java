@@ -5,8 +5,12 @@
 package org.jhandron;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import javax.swing.*;
 import javax.swing.table.TableModel;
+
+import org.jhandron.RecipeTableModel;
+import org.jhandron.TableColumnUtils;
 
 /**
  * @author Jason
@@ -14,20 +18,61 @@ import javax.swing.table.TableModel;
 public class PnlSearch extends JPanel implements SearchView {
 
     private final PnlSearchController controller;
+    private final RecipeSelectionListener selectionListener;
 
     public PnlSearch() {
+        this(null, null);
+    }
+
+    public PnlSearch(RecipeSelectionListener selectionListener) {
+        this(selectionListener, null);
+    }
+
+    public PnlSearch(RecipeSelectionListener selectionListener, Runnable closeCallback) {
         initComponents();
-        controller = new PnlSearchController(this,);
+        this.selectionListener = selectionListener != null ? selectionListener : recipes -> { };
+        controller = new PnlSearchController(this, this.selectionListener);
+        wireListeners();
+        controller.initializeViewBindings();
+        hideColumns();
     }
 
     @Override
     public void bindSearchResultsTableModel(TableModel searchResultsModel) {
-
+        table2.setModel(searchResultsModel);
     }
 
     @Override
     public void closeDialog() {
+        // no-op for panel usage; dialog hosting can override/extend later
+    }
 
+    private void wireListeners() {
+        radioButton1.setSelected(true);
+        button1.addActionListener(this::doSearch);
+        button2.addActionListener(this::selectRecipe);
+    }
+
+    private void doSearch(ActionEvent e) {
+        controller.handleSearch(getSelectedSearchMode(), textField1.getText());
+    }
+
+    private PnlSearchController.SearchMode getSelectedSearchMode() {
+        if (radioButton2.isSelected()) {
+            return PnlSearchController.SearchMode.INGREDIENTS;
+        }
+        if (radioButton3.isSelected()) {
+            return PnlSearchController.SearchMode.TAGS;
+        }
+        return PnlSearchController.SearchMode.NAME;
+    }
+
+    private void selectRecipe(ActionEvent e) {
+        controller.handleRecipeSelection(table2.getSelectedRows());
+    }
+
+    private void hideColumns() {
+        TableColumnUtils.hideColumns(table2, RecipeTableModel.COLUMN_NAMES[0]); // Id
     }
 
     private void initComponents() {
