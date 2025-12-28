@@ -15,34 +15,112 @@ import javax.swing.table.*;
 public class PnlRecipeData extends JPanel {
     public PnlRecipeData() {
         initComponents();
+        normalizeButtonLabels();
+    }
+
+    public void setRecipeDataListener(RecipeDataListener recipeDataListener) {
+        this.recipeDataListener = recipeDataListener;
+    }
+
+    public void bindIngredientListModel(ListModel<String> ingredientModel) {
+        lstIngredients.setModel(ingredientModel);
+    }
+
+    public void bindTagListModel(ListModel<String> tagModel) {
+        lstTags.setModel(tagModel);
+    }
+
+    public void bindRelatedRecipesTableModel(TableModel relatedRecipesModel) {
+        tblRelatedRecipes.setModel(relatedRecipesModel);
+    }
+
+    public JTable getRelatedRecipesTable() {
+        return tblRelatedRecipes;
+    }
+
+    public String getRecipeName() {
+        return txtAddRecipeName.getText();
+    }
+
+    public void setRecipeName(String recipeName) {
+        txtAddRecipeName.setText(recipeName);
+    }
+
+    public void setRecipeNameEditable(boolean editable) {
+        txtAddRecipeName.setEditable(editable);
+    }
+
+    public String getInstructions() {
+        return txtarAddInstructions.getText();
+    }
+
+    public void setInstructions(String instructions) {
+        txtarAddInstructions.setText(instructions);
+    }
+
+    public void clearForm() {
+        txtAddRecipeName.setText("");
+        txtAddIngredients.setText("");
+        txtAddTags.setText("");
+        txtarAddInstructions.setText("");
+        lstIngredients.clearSelection();
+        lstTags.clearSelection();
+        tblRelatedRecipes.clearSelection();
     }
 
     private void txtAddIngredientsEntered(ActionEvent e) {
-        // TODO add your code here
+        notifyAddIngredients();
     }
 
     private void deleteIngredients(ActionEvent e) {
-        // TODO add your code here
+        if (recipeDataListener != null) {
+            recipeDataListener.onDeleteIngredients(lstIngredients.getSelectedValuesList());
+        }
     }
 
     private void addIngredients(ActionEvent e) {
-        // TODO add your code here
+        notifyAddIngredients();
     }
 
     private void txtAddTagsEntered(ActionEvent e) {
-        // TODO add your code here
+        notifyAddTags();
     }
 
     private void deleteTags(ActionEvent e) {
-        // TODO add your code here
+        if (recipeDataListener != null) {
+            recipeDataListener.onDeleteTags(lstTags.getSelectedValuesList());
+        }
     }
 
     private void addTags(ActionEvent e) {
-        // TODO add your code here
+        notifyAddTags();
     }
 
     private void spawnSearchDialog(ActionEvent e) {
-        // TODO add your code here
+        if (recipeDataListener != null) {
+            recipeDataListener.onSearchRelatedRecipes();
+        }
+    }
+
+    private void notifyAddIngredients() {
+        if (recipeDataListener != null) {
+            recipeDataListener.onAddIngredients(txtAddIngredients.getText());
+        }
+        txtAddIngredients.setText("");
+    }
+
+    private void notifyAddTags() {
+        if (recipeDataListener != null) {
+            recipeDataListener.onAddTags(txtAddTags.getText());
+        }
+        txtAddTags.setText("");
+    }
+
+    private void normalizeButtonLabels() {
+        btnAddIngredients.setText("+");
+        btnDeleteIngredients.setText("\u2013");
+        btnAddTags.setText("+");
+        btnDeleteTags.setText("\u2013");
     }
 
     private void initComponents() {
@@ -379,4 +457,18 @@ public class PnlRecipeData extends JPanel {
     private JPanel panel3;
     private JButton button1;
     // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
+
+    private RecipeDataListener recipeDataListener;
+
+    public interface RecipeDataListener {
+        void onAddIngredients(String input);
+
+        void onDeleteIngredients(java.util.List<String> ingredients);
+
+        void onAddTags(String input);
+
+        void onDeleteTags(java.util.List<String> tags);
+
+        void onSearchRelatedRecipes();
+    }
 }
