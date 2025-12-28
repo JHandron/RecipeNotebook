@@ -5,14 +5,43 @@
 package org.jhandron;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import javax.swing.*;
 
 /**
  * @author Jason
  */
 public class PnlAddNew extends JPanel {
+
+    private final PnlAddNewController controller;
+
     public PnlAddNew() {
         initComponents();
+        controller = new PnlAddNewController(this);
+    }
+
+    private void onAddNewRecipe(ActionEvent e) {
+        controller.handleAddNewRecipe(getRecipeNameText(), getInstructionsText());
+    }
+
+    public PnlRecipeData getRecipeDataPanel() {
+        return pnlRecipeData1;
+    }
+
+    public String getRecipeNameText() {
+        return pnlRecipeData1.getRecipeNameText();
+    }
+
+    public void setRecipeNameText(String text) {
+        pnlRecipeData1.setRecipeNameText(text);
+    }
+
+    public String getInstructionsText() {
+        return pnlRecipeData1.getInstructionsText();
+    }
+
+    public void setInstructionsText(String text) {
+        pnlRecipeData1.setInstructionsText(text);
     }
 
     private void initComponents() {
@@ -32,6 +61,7 @@ public class PnlAddNew extends JPanel {
 
             //---- btnAddNew ----
             btnAddNew.setText("Add New Recipe");
+            btnAddNew.addActionListener(e -> onAddNewRecipe(e));
             panel1.add(btnAddNew);
         }
         add(panel1, BorderLayout.SOUTH);

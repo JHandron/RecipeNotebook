@@ -15,6 +15,7 @@ new FormModel {
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "btnAddNew"
 					"text": "Add New Recipe"
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "onAddNewRecipe", true ) )
 				} )
 			}, new FormLayoutConstraints( class java.lang.String ) {
 				"value": "South"

@@ -37,12 +37,14 @@ public class PnlRecipeDataController implements RecipeSelectionListener {
         removeTokensFromModel(tags, lstMdlTags);
     }
 
-    //TODO: Move this PnlAddNewController
-    public void handleAddNewRecipe(String p_recipeName, String p_instructions) {
+    public Recipe toRecipe(String recipeName, String instructions) {
         final Recipe recipe = new Recipe();
-        recipe.setName(p_recipeName.trim());
-        recipe.setInstructions(p_instructions.trim());
-
+        if (recipeName != null) {
+            recipe.setName(recipeName.trim());
+        }
+        if (instructions != null) {
+            recipe.setInstructions(instructions.trim());
+        }
         for (final Object ingredient : lstMdlIngredients.toArray()) {
             recipe.getIngredients().add((String) ingredient);
         }
@@ -52,7 +54,13 @@ public class PnlRecipeDataController implements RecipeSelectionListener {
         for (final Recipe relatedRecipe : tblMdlRelatedRecipes.getRecipes()) {
             recipe.getRelatedRecipeIds().add(relatedRecipe.getId());
         }
-        MongoDelegator.doInsert(recipe);
+        return recipe;
+    }
+
+    public void clearRecipeData() {
+        lstMdlIngredients.clear();
+        lstMdlTags.clear();
+        tblMdlRelatedRecipes.clearModel();
     }
 
     public void handleSearchRequested() {

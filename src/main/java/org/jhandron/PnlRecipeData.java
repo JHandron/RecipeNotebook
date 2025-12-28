@@ -78,6 +78,26 @@ public class PnlRecipeData extends JPanel implements RecipeDataView {
 //        dialog.setVisible(true);
     }
 
+    public PnlRecipeDataController getController() {
+        return controller;
+    }
+
+    public String getRecipeNameText() {
+        return txtAddRecipeName.getText();
+    }
+
+    public void setRecipeNameText(String text) {
+        txtAddRecipeName.setText(text);
+    }
+
+    public String getInstructionsText() {
+        return txtarAddInstructions.getText();
+    }
+
+    public void setInstructionsText(String text) {
+        txtarAddInstructions.setText(text);
+    }
+
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
         // Generated using JFormDesigner Educational license - Jason Handron (j-handron)
