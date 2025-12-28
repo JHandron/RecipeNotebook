@@ -6,13 +6,28 @@ package org.jhandron;
 
 import java.awt.*;
 import javax.swing.*;
+import javax.swing.table.TableModel;
 
 /**
  * @author Jason
  */
-public class PnlSearch extends JPanel {
+public class PnlSearch extends JPanel implements SearchView {
+
+    private final PnlSearchController controller;
+
     public PnlSearch() {
         initComponents();
+        controller = new PnlSearchController(this,);
+    }
+
+    @Override
+    public void bindSearchResultsTableModel(TableModel searchResultsModel) {
+
+    }
+
+    @Override
+    public void closeDialog() {
+
     }
 
     private void initComponents() {

@@ -24,6 +24,7 @@ public class PnlRecipeData extends JPanel implements RecipeDataView {
 
     public void init() {
         controller.initializeViewBindings();
+        hideColumns();
     }
 
     private void txtAddIngredientsEntered(ActionEvent e) {
@@ -76,6 +77,15 @@ public class PnlRecipeData extends JPanel implements RecipeDataView {
     public void openSearchDialog(RecipeSelectionListener p_selectionListener) {
 //        SearchDialogGUI dialog = new SearchDialogGUI(this, p_selectionListener);
 //        dialog.setVisible(true);
+    }
+
+    private void hideColumns() {
+        TableColumnUtils.hideColumns(tblRelatedRecipes,
+                RecipeTableModel.COLUMN_NAMES[0], // Id
+                RecipeTableModel.COLUMN_NAMES[2], // Ingredients
+                RecipeTableModel.COLUMN_NAMES[3], // Tags
+                RecipeTableModel.COLUMN_NAMES[4]  // Related Recipes
+        );
     }
 
     public PnlRecipeDataController getController() {

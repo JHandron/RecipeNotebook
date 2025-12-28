@@ -3,7 +3,6 @@ package org.jhandron;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import javax.swing.table.*;
 
 /**
  * @author Jason
@@ -13,52 +12,8 @@ public class RecipeNotebookGUI extends JFrame {
 
     public RecipeNotebookGUI() {
         initComponents();
-        init();
     }
 
-    private void init() {
-//        hideColumns();
-    }
-
-//    private void hideColumns() {
-//        TableColumnUtils.hideColumns(tblRelatedRecipes,
-//            RecipeTableModel.COLUMN_NAMES[0], // Id
-//            RecipeTableModel.COLUMN_NAMES[2], // Ingredients
-//            RecipeTableModel.COLUMN_NAMES[3], // Tags
-//            RecipeTableModel.COLUMN_NAMES[4]  // Related Recipes
-//        );
-//    }
-//
-//    private void addNewRecipe(ActionEvent e) {
-//        controller.handleAddNewRecipe(txtAddRecipeName.getText(), txtarAddInstructions.getText());
-//    }
-//
-//    private void addIngredients(ActionEvent e) {
-//        controller.handleIngredientsAdded(txtAddIngredients.getText());
-//        txtAddIngredients.setText("");
-//    }
-//
-//    private void txtAddIngredientsEntered(ActionEvent e) {
-//        addIngredients(e);
-//    }
-//
-//    private void addTags(ActionEvent e) {
-//        controller.handleTagsAdded(txtAddTags.getText());
-//        txtAddTags.setText("");
-//    }
-//
-//    private void txtAddTagsEntered(ActionEvent e) {
-//        addTags(e);
-//    }
-//
-//    private void deleteIngredients(ActionEvent e) {
-//        controller.handleIngredientsDeleted(lstIngredients.getSelectedValuesList());
-//    }
-//
-//    private void deleteTags(ActionEvent e) {
-//        controller.handleTagsDeleted(lstTags.getSelectedValuesList());
-//    }
-//
     private void exitMenuItem(ActionEvent e) {
         System.exit(0);
     }
@@ -71,8 +26,8 @@ public class RecipeNotebookGUI extends JFrame {
         menuItem3 = new JMenuItem();
         pnlMain = new JPanel();
         pnlMainCard = new JPanel();
-        pnlAddNew1 = new PnlAddNew();
         pnlSearch1 = new PnlSearch();
+        pnlAddNew1 = new PnlAddNew();
         pnlEdit1 = new PnlEdit();
 
         //======== this ========
@@ -107,8 +62,8 @@ public class RecipeNotebookGUI extends JFrame {
             //======== pnlMainCard ========
             {
                 pnlMainCard.setLayout(new CardLayout());
-                pnlMainCard.add(pnlAddNew1, "card1");
                 pnlMainCard.add(pnlSearch1, "card3");
+                pnlMainCard.add(pnlAddNew1, "card1");
                 pnlMainCard.add(pnlEdit1, "card2");
             }
             pnlMain.add(pnlMainCard, BorderLayout.CENTER);
@@ -126,8 +81,8 @@ public class RecipeNotebookGUI extends JFrame {
     private JMenuItem menuItem3;
     private JPanel pnlMain;
     private JPanel pnlMainCard;
-    private PnlAddNew pnlAddNew1;
     private PnlSearch pnlSearch1;
+    private PnlAddNew pnlAddNew1;
     private PnlEdit pnlEdit1;
     // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 }

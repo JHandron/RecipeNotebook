@@ -13,7 +13,7 @@ import javax.swing.table.*;
 /**
  * @author Jason
  */
-public class SearchDialogGUI extends JDialog implements SearchDialogView {
+public class SearchDialogGUI extends JDialog implements SearchView {
 
     private final SearchDialogController controller;
 

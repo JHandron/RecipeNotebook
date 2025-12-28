@@ -1,10 +1,11 @@
 package org.jhandron;
 
+import javax.swing.table.TableModel;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class SearchDialogController {
+public class PnlSearchController {
 
     public enum SearchMode {
         NAME,
@@ -16,7 +17,7 @@ public class SearchDialogController {
     private final RecipeSelectionListener selectionListener;
     private final RecipeTableModel searchResultsModel = new RecipeTableModel();
 
-    public SearchDialogController(SearchView view, RecipeSelectionListener selectionListener) {
+    public PnlSearchController(SearchView view, RecipeSelectionListener selectionListener) {
         this.view = view;
         this.selectionListener = selectionListener;
     }
@@ -25,7 +26,7 @@ public class SearchDialogController {
         view.bindSearchResultsTableModel(searchResultsModel);
     }
 
-    public void handleSearch(SearchMode searchMode, String rawSearchText) {
+    public void handleSearch(SearchDialogController.SearchMode searchMode, String rawSearchText) {
         if (rawSearchText == null || rawSearchText.isBlank()) {
             searchResultsModel.clearModel();
             return;
