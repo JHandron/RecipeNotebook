@@ -21,6 +21,9 @@ public class PnlSearch extends JPanel {
         panel1 = new JPanel();
         panel2 = new JPanel();
         label1 = new JLabel();
+        radioButton1 = new JRadioButton();
+        radioButton2 = new JRadioButton();
+        radioButton3 = new JRadioButton();
         panel3 = new JPanel();
         textField1 = new JTextField();
         button1 = new JButton();
@@ -46,20 +49,41 @@ public class PnlSearch extends JPanel {
                 label1.setText("Search By");
                 label1.setFont(label1.getFont().deriveFont(label1.getFont().getStyle() | Font.BOLD));
 
+                //---- radioButton1 ----
+                radioButton1.setText("Name");
+
+                //---- radioButton2 ----
+                radioButton2.setText("Ingredients");
+
+                //---- radioButton3 ----
+                radioButton3.setText("Tags");
+
                 GroupLayout panel2Layout = new GroupLayout(panel2);
                 panel2.setLayout(panel2Layout);
                 panel2Layout.setHorizontalGroup(
                     panel2Layout.createParallelGroup()
                         .addGroup(panel2Layout.createSequentialGroup()
                             .addContainerGap()
-                            .addComponent(label1)
-                            .addContainerGap(514, Short.MAX_VALUE))
+                            .addGroup(panel2Layout.createParallelGroup()
+                                .addComponent(label1)
+                                .addGroup(panel2Layout.createSequentialGroup()
+                                    .addComponent(radioButton1)
+                                    .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(radioButton2)
+                                    .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(radioButton3)))
+                            .addContainerGap(361, Short.MAX_VALUE))
                 );
                 panel2Layout.setVerticalGroup(
                     panel2Layout.createParallelGroup()
                         .addGroup(panel2Layout.createSequentialGroup()
                             .addContainerGap()
                             .addComponent(label1)
+                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(panel2Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                .addComponent(radioButton1)
+                                .addComponent(radioButton2)
+                                .addComponent(radioButton3))
                             .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 );
             }
@@ -77,19 +101,19 @@ public class PnlSearch extends JPanel {
                     panel3Layout.createParallelGroup()
                         .addGroup(panel3Layout.createSequentialGroup()
                             .addContainerGap()
-                            .addComponent(textField1, GroupLayout.DEFAULT_SIZE, 479, Short.MAX_VALUE)
-                            .addGap(12, 12, 12)
+                            .addComponent(textField1, GroupLayout.DEFAULT_SIZE, 485, Short.MAX_VALUE)
+                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(button1)
                             .addContainerGap())
                 );
                 panel3Layout.setVerticalGroup(
                     panel3Layout.createParallelGroup()
                         .addGroup(panel3Layout.createSequentialGroup()
-                            .addGap(38, 38, 38)
-                            .addGroup(panel3Layout.createParallelGroup()
-                                .addComponent(button1)
-                                .addComponent(textField1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                            .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addContainerGap()
+                            .addGroup(panel3Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                .addComponent(textField1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(button1))
+                            .addContainerGap(19, Short.MAX_VALUE))
                 );
             }
             panel1.add(panel3);
@@ -130,7 +154,7 @@ public class PnlSearch extends JPanel {
                                 .addContainerGap()
                                 .addComponent(label2)
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(scrollPane2, GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)
+                                .addComponent(scrollPane2, GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE)
                                 .addContainerGap())
                     );
                 }
@@ -149,6 +173,12 @@ public class PnlSearch extends JPanel {
             panel1.add(panel4);
         }
         add(panel1, BorderLayout.CENTER);
+
+        //---- buttonGroup1 ----
+        var buttonGroup1 = new ButtonGroup();
+        buttonGroup1.add(radioButton1);
+        buttonGroup1.add(radioButton2);
+        buttonGroup1.add(radioButton3);
         // JFormDesigner - End of component initialization  //GEN-END:initComponents  @formatter:on
     }
 
@@ -157,6 +187,9 @@ public class PnlSearch extends JPanel {
     private JPanel panel1;
     private JPanel panel2;
     private JLabel label1;
+    private JRadioButton radioButton1;
+    private JRadioButton radioButton2;
+    private JRadioButton radioButton3;
     private JPanel panel3;
     private JTextField textField1;
     private JButton button1;

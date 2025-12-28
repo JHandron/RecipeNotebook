@@ -9,18 +9,14 @@ import javax.swing.table.*;
  * @author Jason
  */
 
-public class RecipeNotebookGUI extends JFrame implements RecipeNotebookView {
-
-    private final RecipeNotebookController controller;
+public class RecipeNotebookGUI extends JFrame {
 
     public RecipeNotebookGUI() {
-        controller = new RecipeNotebookController(this);
         initComponents();
         init();
     }
 
     private void init() {
-        controller.initializeViewBindings();
 //        hideColumns();
     }
 
@@ -64,36 +60,6 @@ public class RecipeNotebookGUI extends JFrame implements RecipeNotebookView {
 //    }
 //
     private void exitMenuItem(ActionEvent e) {
-        controller.handleExitRequested();
-    }
-//
-//    private void spawnSearchDialog(ActionEvent e) {
-//        controller.handleSearchRequested();
-//    }
-//
-    @Override
-    public void bindIngredientListModel(ListModel<String> p_ingredientModel) {
-//        lstIngredients.setModel(p_ingredientModel);
-    }
-
-    @Override
-    public void bindTagListModel(ListModel<String> p_tagModel) {
-//        lstTags.setModel(p_tagModel);
-    }
-
-    @Override
-    public void bindRelatedRecipesTableModel(TableModel p_relatedRecipesModel) {
-//        tblRelatedRecipes.setModel(p_relatedRecipesModel);
-    }
-
-    @Override
-    public void openSearchDialog(RecipeSelectionListener p_selectionListener) {
-        SearchDialogGUI dialog = new SearchDialogGUI(this, p_selectionListener);
-        dialog.setVisible(true);
-    }
-
-    @Override
-    public void exitApplication() {
         System.exit(0);
     }
 
@@ -105,8 +71,8 @@ public class RecipeNotebookGUI extends JFrame implements RecipeNotebookView {
         menuItem3 = new JMenuItem();
         pnlMain = new JPanel();
         pnlMainCard = new JPanel();
-        pnlSearch1 = new PnlSearch();
         pnlAddNew1 = new PnlAddNew();
+        pnlSearch1 = new PnlSearch();
         pnlEdit1 = new PnlEdit();
 
         //======== this ========
@@ -141,8 +107,8 @@ public class RecipeNotebookGUI extends JFrame implements RecipeNotebookView {
             //======== pnlMainCard ========
             {
                 pnlMainCard.setLayout(new CardLayout());
-                pnlMainCard.add(pnlSearch1, "card3");
                 pnlMainCard.add(pnlAddNew1, "card1");
+                pnlMainCard.add(pnlSearch1, "card3");
                 pnlMainCard.add(pnlEdit1, "card2");
             }
             pnlMain.add(pnlMainCard, BorderLayout.CENTER);
@@ -160,8 +126,8 @@ public class RecipeNotebookGUI extends JFrame implements RecipeNotebookView {
     private JMenuItem menuItem3;
     private JPanel pnlMain;
     private JPanel pnlMainCard;
-    private PnlSearch pnlSearch1;
     private PnlAddNew pnlAddNew1;
+    private PnlSearch pnlSearch1;
     private PnlEdit pnlEdit1;
     // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 }

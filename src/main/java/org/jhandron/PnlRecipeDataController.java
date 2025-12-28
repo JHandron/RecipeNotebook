@@ -4,14 +4,14 @@ import javax.swing.DefaultListModel;
 import java.util.Arrays;
 import java.util.List;
 
-public class RecipeNotebookController implements RecipeSelectionListener {
+public class PnlRecipeDataController implements RecipeSelectionListener {
 
-    private final RecipeNotebookView view;
+    private final RecipeDataView view;
     private final DefaultListModel<String> lstMdlIngredients = new DefaultListModel<>();
     private final DefaultListModel<String> lstMdlTags = new DefaultListModel<>();
     private final RecipeTableModel tblMdlRelatedRecipes = new RecipeTableModel();
 
-    public RecipeNotebookController(RecipeNotebookView view) {
+    public PnlRecipeDataController(RecipeDataView view) {
         this.view = view;
     }
 
@@ -37,6 +37,7 @@ public class RecipeNotebookController implements RecipeSelectionListener {
         removeTokensFromModel(tags, lstMdlTags);
     }
 
+    //TODO: Move this PnlAddNewController
     public void handleAddNewRecipe(String p_recipeName, String p_instructions) {
         final Recipe recipe = new Recipe();
         recipe.setName(p_recipeName.trim());
@@ -56,10 +57,6 @@ public class RecipeNotebookController implements RecipeSelectionListener {
 
     public void handleSearchRequested() {
         view.openSearchDialog(this);
-    }
-
-    public void handleExitRequested() {
-        view.exitApplication();
     }
 
     @Override

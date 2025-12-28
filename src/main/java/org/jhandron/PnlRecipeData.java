@@ -12,37 +12,70 @@ import javax.swing.table.*;
 /**
  * @author Jason
  */
-public class PnlRecipeData extends JPanel {
+public class PnlRecipeData extends JPanel implements RecipeDataView {
+
+    private final PnlRecipeDataController controller;
+
     public PnlRecipeData() {
+        controller = new PnlRecipeDataController(this);
         initComponents();
+        init();
+    }
+
+    public void init() {
+        controller.initializeViewBindings();
     }
 
     private void txtAddIngredientsEntered(ActionEvent e) {
-        // TODO add your code here
+        addIngredients(e);
     }
 
     private void deleteIngredients(ActionEvent e) {
-        // TODO add your code here
+        controller.handleIngredientsDeleted(lstIngredients.getSelectedValuesList());
     }
 
     private void addIngredients(ActionEvent e) {
-        // TODO add your code here
+        controller.handleIngredientsAdded(txtAddIngredients.getText());
+        txtAddIngredients.setText("");
     }
 
     private void txtAddTagsEntered(ActionEvent e) {
-        // TODO add your code here
+        addTags(e);
     }
 
     private void deleteTags(ActionEvent e) {
-        // TODO add your code here
+        controller.handleTagsDeleted(lstTags.getSelectedValuesList());
     }
 
     private void addTags(ActionEvent e) {
-        // TODO add your code here
+        controller.handleTagsAdded(txtAddTags.getText());
+        txtAddTags.setText("");
     }
 
     private void spawnSearchDialog(ActionEvent e) {
-        // TODO add your code here
+        controller.handleSearchRequested();
+    }
+
+    @Override
+    public void bindIngredientListModel(ListModel<String> p_ingredientModel) {
+        lstIngredients.setModel(p_ingredientModel);
+    }
+
+    @Override
+    public void bindTagListModel(ListModel<String> p_tagModel) {
+        lstTags.setModel(p_tagModel);
+    }
+
+    @Override
+    public void bindRelatedRecipesTableModel(TableModel p_relatedRecipesModel) {
+        tblRelatedRecipes.setModel(p_relatedRecipesModel);
+    }
+
+    @Override
+    //TODO: Make this work
+    public void openSearchDialog(RecipeSelectionListener p_selectionListener) {
+//        SearchDialogGUI dialog = new SearchDialogGUI(this, p_selectionListener);
+//        dialog.setVisible(true);
     }
 
     private void initComponents() {
