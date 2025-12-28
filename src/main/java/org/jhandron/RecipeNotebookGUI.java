@@ -88,7 +88,7 @@ public class RecipeNotebookGUI extends JFrame implements RecipeNotebookView {
 
     @Override
     public void openSearchDialog(RecipeSelectionListener p_selectionListener) {
-        SearchDialog dialog = new SearchDialog(this, p_selectionListener);
+        SearchDialogGUI dialog = new SearchDialogGUI(this, p_selectionListener);
         dialog.setVisible(true);
     }
 
@@ -105,25 +105,26 @@ public class RecipeNotebookGUI extends JFrame implements RecipeNotebookView {
         menuItem3 = new JMenuItem();
         pnlMain = new JPanel();
         pnlAddNew = new JPanel();
-        panel5 = new JPanel();
+        pnlRecipeData = new JPanel();
+        pnlRecipeName = new JPanel();
         txtAddRecipeName = new JTextField();
         lblRecipeName = new JLabel();
-        panel11 = new JPanel();
-        panel9 = new JPanel();
-        label1 = new JLabel();
+        pnlIngredientsTags = new JPanel();
+        pnlIngredients = new JPanel();
+        lblIngredients = new JLabel();
         txtAddIngredients = new JTextField();
         spIngredients = new JScrollPane();
         lstIngredients = new JList<>();
-        button2 = new JButton();
-        button3 = new JButton();
-        panel10 = new JPanel();
+        btnAddIngredients = new JButton();
+        btnDeleteIngredients = new JButton();
+        pnlTags = new JPanel();
         spTags = new JScrollPane();
         lstTags = new JList<>();
-        label2 = new JLabel();
+        lblTags = new JLabel();
         txtAddTags = new JTextField();
-        button4 = new JButton();
-        button5 = new JButton();
-        pnlBottom = new JPanel();
+        btnAddTags = new JButton();
+        btnDeleteTags = new JButton();
+        pnlInstructionsRelatedRecipes = new JPanel();
         panel4 = new JPanel();
         label3 = new JLabel();
         spInstructions = new JScrollPane();
@@ -134,13 +135,14 @@ public class RecipeNotebookGUI extends JFrame implements RecipeNotebookView {
         tblRelatedRecipes = new JTable();
         panel3 = new JPanel();
         button1 = new JButton();
-        panel6 = new JPanel();
+        pnlAddRecipeButton = new JPanel();
         btnAddRecipe = new JButton();
 
         //======== this ========
         setTitle("Jason's Recipe Notebook");
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setIconImage(new ImageIcon("C:\\Users\\Jason\\Documents\\Projects\\RecipeNotebook\\src\\onkoyybdqdc81.png").getImage());
+        setPreferredSize(new Dimension(595, 535));
         var contentPane = getContentPane();
         contentPane.setLayout(new BorderLayout());
 
@@ -167,282 +169,288 @@ public class RecipeNotebookGUI extends JFrame implements RecipeNotebookView {
 
             //======== pnlAddNew ========
             {
-                pnlAddNew.setLayout(new BoxLayout(pnlAddNew, BoxLayout.Y_AXIS));
+                pnlAddNew.setLayout(new BorderLayout());
 
-                //======== panel5 ========
+                //======== pnlRecipeData ========
                 {
+                    pnlRecipeData.setLayout(new BoxLayout(pnlRecipeData, BoxLayout.Y_AXIS));
 
-                    //---- lblRecipeName ----
-                    lblRecipeName.setText("Recipe Name");
-                    lblRecipeName.setFont(lblRecipeName.getFont().deriveFont(lblRecipeName.getFont().getStyle() | Font.BOLD));
+                    //======== pnlRecipeName ========
+                    {
 
-                    GroupLayout panel5Layout = new GroupLayout(panel5);
-                    panel5.setLayout(panel5Layout);
-                    panel5Layout.setHorizontalGroup(
-                        panel5Layout.createParallelGroup()
-                            .addGroup(panel5Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(panel5Layout.createParallelGroup()
-                                    .addComponent(txtAddRecipeName, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 581, Short.MAX_VALUE)
-                                    .addComponent(lblRecipeName, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addContainerGap())
-                    );
-                    panel5Layout.setVerticalGroup(
-                        panel5Layout.createParallelGroup()
-                            .addGroup(panel5Layout.createSequentialGroup()
-                                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(lblRecipeName)
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtAddRecipeName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap())
-                    );
+                        //---- lblRecipeName ----
+                        lblRecipeName.setText("Recipe Name");
+                        lblRecipeName.setFont(lblRecipeName.getFont().deriveFont(lblRecipeName.getFont().getStyle() | Font.BOLD));
+
+                        GroupLayout pnlRecipeNameLayout = new GroupLayout(pnlRecipeName);
+                        pnlRecipeName.setLayout(pnlRecipeNameLayout);
+                        pnlRecipeNameLayout.setHorizontalGroup(
+                            pnlRecipeNameLayout.createParallelGroup()
+                                .addGroup(pnlRecipeNameLayout.createSequentialGroup()
+                                    .addContainerGap()
+                                    .addGroup(pnlRecipeNameLayout.createParallelGroup()
+                                        .addComponent(txtAddRecipeName, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 581, Short.MAX_VALUE)
+                                        .addComponent(lblRecipeName, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addContainerGap())
+                        );
+                        pnlRecipeNameLayout.setVerticalGroup(
+                            pnlRecipeNameLayout.createParallelGroup()
+                                .addGroup(pnlRecipeNameLayout.createSequentialGroup()
+                                    .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lblRecipeName)
+                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(txtAddRecipeName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                    .addContainerGap())
+                        );
+                    }
+                    pnlRecipeData.add(pnlRecipeName);
+
+                    //======== pnlIngredientsTags ========
+                    {
+                        pnlIngredientsTags.setLayout(new BoxLayout(pnlIngredientsTags, BoxLayout.X_AXIS));
+
+                        //======== pnlIngredients ========
+                        {
+
+                            //---- lblIngredients ----
+                            lblIngredients.setText("Ingredient(s)");
+                            lblIngredients.setFont(lblIngredients.getFont().deriveFont(lblIngredients.getFont().getStyle() | Font.BOLD));
+
+                            //---- txtAddIngredients ----
+                            txtAddIngredients.setToolTipText("Enter single ingredient or as comma separated values");
+                            txtAddIngredients.addActionListener(e -> txtAddIngredientsEntered(e));
+
+                            //======== spIngredients ========
+                            {
+                                spIngredients.setViewportView(lstIngredients);
+                            }
+
+                            //---- btnAddIngredients ----
+                            btnAddIngredients.setText("\u2013");
+                            btnAddIngredients.setFont(btnAddIngredients.getFont().deriveFont(btnAddIngredients.getFont().getStyle() | Font.BOLD));
+                            btnAddIngredients.addActionListener(e -> deleteIngredients(e));
+
+                            //---- btnDeleteIngredients ----
+                            btnDeleteIngredients.setText("+");
+                            btnDeleteIngredients.setFont(btnDeleteIngredients.getFont().deriveFont(btnDeleteIngredients.getFont().getStyle() | Font.BOLD));
+                            btnDeleteIngredients.addActionListener(e -> addIngredients(e));
+
+                            GroupLayout pnlIngredientsLayout = new GroupLayout(pnlIngredients);
+                            pnlIngredients.setLayout(pnlIngredientsLayout);
+                            pnlIngredientsLayout.setHorizontalGroup(
+                                pnlIngredientsLayout.createParallelGroup()
+                                    .addGroup(GroupLayout.Alignment.TRAILING, pnlIngredientsLayout.createSequentialGroup()
+                                        .addContainerGap()
+                                        .addGroup(pnlIngredientsLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                                            .addGroup(pnlIngredientsLayout.createSequentialGroup()
+                                                .addComponent(txtAddIngredients)
+                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(btnDeleteIngredients)
+                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(btnAddIngredients))
+                                            .addComponent(lblIngredients, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(spIngredients))
+                                        .addContainerGap())
+                            );
+                            pnlIngredientsLayout.setVerticalGroup(
+                                pnlIngredientsLayout.createParallelGroup()
+                                    .addGroup(pnlIngredientsLayout.createSequentialGroup()
+                                        .addContainerGap()
+                                        .addComponent(lblIngredients)
+                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(pnlIngredientsLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                                            .addComponent(txtAddIngredients, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(pnlIngredientsLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                                .addComponent(btnAddIngredients)
+                                                .addComponent(btnDeleteIngredients)))
+                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(spIngredients, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                        .addContainerGap())
+                            );
+                        }
+                        pnlIngredientsTags.add(pnlIngredients);
+
+                        //======== pnlTags ========
+                        {
+
+                            //======== spTags ========
+                            {
+                                spTags.setViewportView(lstTags);
+                            }
+
+                            //---- lblTags ----
+                            lblTags.setText("Tag(s)");
+                            lblTags.setFont(lblTags.getFont().deriveFont(lblTags.getFont().getStyle() | Font.BOLD));
+
+                            //---- txtAddTags ----
+                            txtAddTags.setToolTipText("Enter single tag or as comma separated values");
+                            txtAddTags.addActionListener(e -> txtAddTagsEntered(e));
+
+                            //---- btnAddTags ----
+                            btnAddTags.setText("\u2013");
+                            btnAddTags.setFont(btnAddTags.getFont().deriveFont(btnAddTags.getFont().getStyle() | Font.BOLD));
+                            btnAddTags.addActionListener(e -> deleteTags(e));
+
+                            //---- btnDeleteTags ----
+                            btnDeleteTags.setText("+");
+                            btnDeleteTags.setFont(btnDeleteTags.getFont().deriveFont(btnDeleteTags.getFont().getStyle() | Font.BOLD));
+                            btnDeleteTags.addActionListener(e -> addTags(e));
+
+                            GroupLayout pnlTagsLayout = new GroupLayout(pnlTags);
+                            pnlTags.setLayout(pnlTagsLayout);
+                            pnlTagsLayout.setHorizontalGroup(
+                                pnlTagsLayout.createParallelGroup()
+                                    .addGroup(pnlTagsLayout.createSequentialGroup()
+                                        .addContainerGap()
+                                        .addGroup(pnlTagsLayout.createParallelGroup()
+                                            .addGroup(pnlTagsLayout.createSequentialGroup()
+                                                .addComponent(txtAddTags)
+                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(btnDeleteTags)
+                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(btnAddTags))
+                                            .addComponent(lblTags, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(spTags, GroupLayout.Alignment.TRAILING))
+                                        .addContainerGap())
+                            );
+                            pnlTagsLayout.setVerticalGroup(
+                                pnlTagsLayout.createParallelGroup()
+                                    .addGroup(pnlTagsLayout.createSequentialGroup()
+                                        .addContainerGap()
+                                        .addComponent(lblTags)
+                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(pnlTagsLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                                            .addGroup(pnlTagsLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                                .addComponent(txtAddTags, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(btnDeleteTags))
+                                            .addComponent(btnAddTags))
+                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(spTags, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                        .addContainerGap())
+                            );
+                        }
+                        pnlIngredientsTags.add(pnlTags);
+                    }
+                    pnlRecipeData.add(pnlIngredientsTags);
+
+                    //======== pnlInstructionsRelatedRecipes ========
+                    {
+                        pnlInstructionsRelatedRecipes.setLayout(new BoxLayout(pnlInstructionsRelatedRecipes, BoxLayout.X_AXIS));
+
+                        //======== panel4 ========
+                        {
+
+                            //---- label3 ----
+                            label3.setText("Instructions");
+                            label3.setFont(label3.getFont().deriveFont(label3.getFont().getStyle() | Font.BOLD));
+
+                            //======== spInstructions ========
+                            {
+
+                                //---- txtarAddInstructions ----
+                                txtarAddInstructions.setLineWrap(true);
+                                txtarAddInstructions.setWrapStyleWord(true);
+                                txtarAddInstructions.setMinimumSize(null);
+                                txtarAddInstructions.setPreferredSize(null);
+                                spInstructions.setViewportView(txtarAddInstructions);
+                            }
+
+                            GroupLayout panel4Layout = new GroupLayout(panel4);
+                            panel4.setLayout(panel4Layout);
+                            panel4Layout.setHorizontalGroup(
+                                panel4Layout.createParallelGroup()
+                                    .addGroup(panel4Layout.createSequentialGroup()
+                                        .addContainerGap()
+                                        .addGroup(panel4Layout.createParallelGroup()
+                                            .addComponent(label3, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(spInstructions))
+                                        .addContainerGap())
+                            );
+                            panel4Layout.setVerticalGroup(
+                                panel4Layout.createParallelGroup()
+                                    .addGroup(panel4Layout.createSequentialGroup()
+                                        .addContainerGap()
+                                        .addComponent(label3)
+                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(spInstructions)
+                                        .addContainerGap())
+                            );
+                        }
+                        pnlInstructionsRelatedRecipes.add(panel4);
+
+                        //======== panel7 ========
+                        {
+
+                            //---- label4 ----
+                            label4.setText("Related Recipes");
+                            label4.setFont(label4.getFont().deriveFont(label4.getFont().getStyle() | Font.BOLD));
+
+                            //======== scrollPane1 ========
+                            {
+                                scrollPane1.setPreferredSize(null);
+
+                                //---- tblRelatedRecipes ----
+                                tblRelatedRecipes.setModel(new DefaultTableModel(
+                                    new Object[][] {
+                                    },
+                                    new String[] {
+                                        null
+                                    }
+                                ));
+                                scrollPane1.setViewportView(tblRelatedRecipes);
+                            }
+
+                            //======== panel3 ========
+                            {
+                                panel3.setPreferredSize(null);
+                                panel3.setLayout(new FlowLayout());
+
+                                //---- button1 ----
+                                button1.setText("Search...");
+                                button1.addActionListener(e -> spawnSearchDialog(e));
+                                panel3.add(button1);
+                            }
+
+                            GroupLayout panel7Layout = new GroupLayout(panel7);
+                            panel7.setLayout(panel7Layout);
+                            panel7Layout.setHorizontalGroup(
+                                panel7Layout.createParallelGroup()
+                                    .addGroup(panel7Layout.createSequentialGroup()
+                                        .addContainerGap()
+                                        .addGroup(panel7Layout.createParallelGroup()
+                                            .addComponent(label4, GroupLayout.DEFAULT_SIZE, 327, Short.MAX_VALUE)
+                                            .addComponent(scrollPane1, GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE)
+                                            .addComponent(panel3, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 327, Short.MAX_VALUE))
+                                        .addContainerGap())
+                            );
+                            panel7Layout.setVerticalGroup(
+                                panel7Layout.createParallelGroup()
+                                    .addGroup(panel7Layout.createSequentialGroup()
+                                        .addContainerGap()
+                                        .addComponent(label4)
+                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 137, GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(panel3, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addContainerGap())
+                            );
+                        }
+                        pnlInstructionsRelatedRecipes.add(panel7);
+                    }
+                    pnlRecipeData.add(pnlInstructionsRelatedRecipes);
                 }
-                pnlAddNew.add(panel5);
+                pnlAddNew.add(pnlRecipeData, BorderLayout.CENTER);
 
-                //======== panel11 ========
+                //======== pnlAddRecipeButton ========
                 {
-                    panel11.setLayout(new BoxLayout(panel11, BoxLayout.X_AXIS));
-
-                    //======== panel9 ========
-                    {
-
-                        //---- label1 ----
-                        label1.setText("Ingredient(s)");
-                        label1.setFont(label1.getFont().deriveFont(label1.getFont().getStyle() | Font.BOLD));
-
-                        //---- txtAddIngredients ----
-                        txtAddIngredients.setToolTipText("Press Enter to add an ingredient");
-                        txtAddIngredients.addActionListener(e -> txtAddIngredientsEntered(e));
-
-                        //======== spIngredients ========
-                        {
-                            spIngredients.setViewportView(lstIngredients);
-                        }
-
-                        //---- button2 ----
-                        button2.setText("\u2013");
-                        button2.setFont(button2.getFont().deriveFont(button2.getFont().getStyle() | Font.BOLD));
-                        button2.addActionListener(e -> deleteIngredients(e));
-
-                        //---- button3 ----
-                        button3.setText("+");
-                        button3.setFont(button3.getFont().deriveFont(button3.getFont().getStyle() | Font.BOLD));
-                        button3.addActionListener(e -> addIngredients(e));
-
-                        GroupLayout panel9Layout = new GroupLayout(panel9);
-                        panel9.setLayout(panel9Layout);
-                        panel9Layout.setHorizontalGroup(
-                            panel9Layout.createParallelGroup()
-                                .addGroup(GroupLayout.Alignment.TRAILING, panel9Layout.createSequentialGroup()
-                                    .addContainerGap()
-                                    .addGroup(panel9Layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                                        .addGroup(panel9Layout.createSequentialGroup()
-                                            .addComponent(txtAddIngredients)
-                                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(button3)
-                                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(button2))
-                                        .addComponent(label1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(spIngredients))
-                                    .addContainerGap())
-                        );
-                        panel9Layout.setVerticalGroup(
-                            panel9Layout.createParallelGroup()
-                                .addGroup(panel9Layout.createSequentialGroup()
-                                    .addContainerGap()
-                                    .addComponent(label1)
-                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                    .addGroup(panel9Layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                                        .addComponent(txtAddIngredients, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                        .addGroup(panel9Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                            .addComponent(button2)
-                                            .addComponent(button3)))
-                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(spIngredients, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                    .addContainerGap())
-                        );
-                    }
-                    panel11.add(panel9);
-
-                    //======== panel10 ========
-                    {
-
-                        //======== spTags ========
-                        {
-                            spTags.setViewportView(lstTags);
-                        }
-
-                        //---- label2 ----
-                        label2.setText("Tag(s)");
-                        label2.setFont(label2.getFont().deriveFont(label2.getFont().getStyle() | Font.BOLD));
-
-                        //---- txtAddTags ----
-                        txtAddTags.setToolTipText("Press Enter to add a tag");
-                        txtAddTags.addActionListener(e -> txtAddTagsEntered(e));
-
-                        //---- button4 ----
-                        button4.setText("\u2013");
-                        button4.setFont(button4.getFont().deriveFont(button4.getFont().getStyle() | Font.BOLD));
-                        button4.addActionListener(e -> deleteTags(e));
-
-                        //---- button5 ----
-                        button5.setText("+");
-                        button5.setFont(button5.getFont().deriveFont(button5.getFont().getStyle() | Font.BOLD));
-                        button5.addActionListener(e -> addTags(e));
-
-                        GroupLayout panel10Layout = new GroupLayout(panel10);
-                        panel10.setLayout(panel10Layout);
-                        panel10Layout.setHorizontalGroup(
-                            panel10Layout.createParallelGroup()
-                                .addGroup(panel10Layout.createSequentialGroup()
-                                    .addContainerGap()
-                                    .addGroup(panel10Layout.createParallelGroup()
-                                        .addGroup(panel10Layout.createSequentialGroup()
-                                            .addComponent(txtAddTags)
-                                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(button5)
-                                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(button4))
-                                        .addComponent(label2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(spTags, GroupLayout.Alignment.TRAILING))
-                                    .addContainerGap())
-                        );
-                        panel10Layout.setVerticalGroup(
-                            panel10Layout.createParallelGroup()
-                                .addGroup(panel10Layout.createSequentialGroup()
-                                    .addContainerGap()
-                                    .addComponent(label2)
-                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                    .addGroup(panel10Layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                                        .addGroup(panel10Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                            .addComponent(txtAddTags, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(button5))
-                                        .addComponent(button4))
-                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(spTags, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                    .addContainerGap())
-                        );
-                    }
-                    panel11.add(panel10);
-                }
-                pnlAddNew.add(panel11);
-
-                //======== pnlBottom ========
-                {
-                    pnlBottom.setLayout(new BoxLayout(pnlBottom, BoxLayout.X_AXIS));
-
-                    //======== panel4 ========
-                    {
-
-                        //---- label3 ----
-                        label3.setText("Instructions");
-                        label3.setFont(label3.getFont().deriveFont(label3.getFont().getStyle() | Font.BOLD));
-
-                        //======== spInstructions ========
-                        {
-
-                            //---- txtarAddInstructions ----
-                            txtarAddInstructions.setLineWrap(true);
-                            txtarAddInstructions.setWrapStyleWord(true);
-                            txtarAddInstructions.setMinimumSize(null);
-                            txtarAddInstructions.setPreferredSize(null);
-                            spInstructions.setViewportView(txtarAddInstructions);
-                        }
-
-                        GroupLayout panel4Layout = new GroupLayout(panel4);
-                        panel4.setLayout(panel4Layout);
-                        panel4Layout.setHorizontalGroup(
-                            panel4Layout.createParallelGroup()
-                                .addGroup(panel4Layout.createSequentialGroup()
-                                    .addContainerGap()
-                                    .addGroup(panel4Layout.createParallelGroup()
-                                        .addComponent(label3, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(spInstructions))
-                                    .addContainerGap())
-                        );
-                        panel4Layout.setVerticalGroup(
-                            panel4Layout.createParallelGroup()
-                                .addGroup(panel4Layout.createSequentialGroup()
-                                    .addContainerGap()
-                                    .addComponent(label3)
-                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(spInstructions)
-                                    .addContainerGap())
-                        );
-                    }
-                    pnlBottom.add(panel4);
-
-                    //======== panel7 ========
-                    {
-
-                        //---- label4 ----
-                        label4.setText("Related Recipes");
-                        label4.setFont(label4.getFont().deriveFont(label4.getFont().getStyle() | Font.BOLD));
-
-                        //======== scrollPane1 ========
-                        {
-                            scrollPane1.setPreferredSize(null);
-
-                            //---- tblRelatedRecipes ----
-                            tblRelatedRecipes.setModel(new DefaultTableModel(
-                                new Object[][] {
-                                },
-                                new String[] {
-                                    null
-                                }
-                            ));
-                            scrollPane1.setViewportView(tblRelatedRecipes);
-                        }
-
-                        //======== panel3 ========
-                        {
-                            panel3.setPreferredSize(null);
-                            panel3.setLayout(new FlowLayout());
-
-                            //---- button1 ----
-                            button1.setText("Search...");
-                            button1.addActionListener(e -> spawnSearchDialog(e));
-                            panel3.add(button1);
-                        }
-
-                        GroupLayout panel7Layout = new GroupLayout(panel7);
-                        panel7.setLayout(panel7Layout);
-                        panel7Layout.setHorizontalGroup(
-                            panel7Layout.createParallelGroup()
-                                .addGroup(panel7Layout.createSequentialGroup()
-                                    .addContainerGap()
-                                    .addGroup(panel7Layout.createParallelGroup()
-                                        .addComponent(label4, GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
-                                        .addComponent(scrollPane1, GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE)
-                                        .addComponent(panel3, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE))
-                                    .addContainerGap())
-                        );
-                        panel7Layout.setVerticalGroup(
-                            panel7Layout.createParallelGroup()
-                                .addGroup(panel7Layout.createSequentialGroup()
-                                    .addContainerGap()
-                                    .addComponent(label4)
-                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 137, GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(panel3, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addContainerGap())
-                        );
-                    }
-                    pnlBottom.add(panel7);
-                }
-                pnlAddNew.add(pnlBottom);
-
-                //======== panel6 ========
-                {
-                    panel6.setLayout(new FlowLayout());
+                    pnlAddRecipeButton.setLayout(new FlowLayout());
 
                     //---- btnAddRecipe ----
                     btnAddRecipe.setText("Add Recipe");
                     btnAddRecipe.addActionListener(e -> addNewRecipe(e));
-                    panel6.add(btnAddRecipe);
+                    pnlAddRecipeButton.add(btnAddRecipe);
                 }
-                pnlAddNew.add(panel6);
+                pnlAddNew.add(pnlAddRecipeButton, BorderLayout.SOUTH);
             }
             pnlMain.add(pnlAddNew, BorderLayout.CENTER);
         }
@@ -459,25 +467,26 @@ public class RecipeNotebookGUI extends JFrame implements RecipeNotebookView {
     private JMenuItem menuItem3;
     private JPanel pnlMain;
     private JPanel pnlAddNew;
-    private JPanel panel5;
+    private JPanel pnlRecipeData;
+    private JPanel pnlRecipeName;
     private JTextField txtAddRecipeName;
     private JLabel lblRecipeName;
-    private JPanel panel11;
-    private JPanel panel9;
-    private JLabel label1;
+    private JPanel pnlIngredientsTags;
+    private JPanel pnlIngredients;
+    private JLabel lblIngredients;
     private JTextField txtAddIngredients;
     private JScrollPane spIngredients;
     private JList<String> lstIngredients;
-    private JButton button2;
-    private JButton button3;
-    private JPanel panel10;
+    private JButton btnAddIngredients;
+    private JButton btnDeleteIngredients;
+    private JPanel pnlTags;
     private JScrollPane spTags;
     private JList<String> lstTags;
-    private JLabel label2;
+    private JLabel lblTags;
     private JTextField txtAddTags;
-    private JButton button4;
-    private JButton button5;
-    private JPanel pnlBottom;
+    private JButton btnAddTags;
+    private JButton btnDeleteTags;
+    private JPanel pnlInstructionsRelatedRecipes;
     private JPanel panel4;
     private JLabel label3;
     private JScrollPane spInstructions;
@@ -488,7 +497,7 @@ public class RecipeNotebookGUI extends JFrame implements RecipeNotebookView {
     private JTable tblRelatedRecipes;
     private JPanel panel3;
     private JButton button1;
-    private JPanel panel6;
+    private JPanel pnlAddRecipeButton;
     private JButton btnAddRecipe;
     // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 }

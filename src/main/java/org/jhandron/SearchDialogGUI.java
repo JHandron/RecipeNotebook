@@ -13,11 +13,11 @@ import javax.swing.table.*;
 /**
  * @author Jason
  */
-public class SearchDialog extends JDialog implements SearchDialogView {
+public class SearchDialogGUI extends JDialog implements SearchDialogView {
 
     private final SearchDialogController controller;
 
-    public SearchDialog(Window owner, RecipeSelectionListener recipeSelectionListener) {
+    public SearchDialogGUI(Window owner, RecipeSelectionListener recipeSelectionListener) {
         super(owner);
         controller = new SearchDialogController(this, recipeSelectionListener);
         initComponents();

@@ -8,179 +8,187 @@ new FormModel {
 			"$locationPolicy": 1
 			"title": "Jason's Recipe Notebook"
 			"defaultCloseOperation": 2
-			"$sizePolicy": 1
 			"iconImage": new com.jformdesigner.model.SwingIcon( 1, "C:\\Users\\Jason\\Documents\\Projects\\RecipeNotebook\\src\\onkoyybdqdc81.png" )
+			"preferredSize": new java.awt.Dimension( 595, 535 )
+			"$sizePolicy": 1
 			auxiliary() {
 				"JavaCodeGenerator.variableGetter": false
 			}
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.BorderLayout ) ) {
 				name: "pnlMain"
 				"minimumSize": new java.awt.Dimension( 0, 0 )
-				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class javax.swing.BoxLayout ) {
-					"axis": 1
-				} ) {
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.BorderLayout ) ) {
 					name: "pnlAddNew"
-					auxiliary() {
-						"JavaCodeGenerator.variableGetter": false
-					}
-					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-						"$horizontalGroup": "par l {seq {space :::p, par l {comp txtAddRecipeName::t::581:x, comp lblRecipeName::t:::x}, space :::p}}"
-						"$verticalGroup": "par l {seq l {space :::x, comp lblRecipeName:::p::p, space :::p, comp txtAddRecipeName:::p::p, space :::p}}"
+					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class javax.swing.BoxLayout ) {
+						"axis": 1
 					} ) {
-						name: "panel5"
-						add( new FormComponent( "javax.swing.JTextField" ) {
-							name: "txtAddRecipeName"
-						} )
-						add( new FormComponent( "javax.swing.JLabel" ) {
-							name: "lblRecipeName"
-							"text": "Recipe Name"
-							"font": &SwingDerivedFont0 new com.jformdesigner.model.SwingDerivedFont( null, 1, 0, false )
-						} )
-					} )
-					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class javax.swing.BoxLayout ) ) {
-						name: "panel11"
+						name: "pnlRecipeData"
+						auxiliary() {
+							"JavaCodeGenerator.variableGetter": false
+						}
 						add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-							"$horizontalGroup": "par l {seq t {space :::p, par t {seq {comp txtAddIngredients:::::x, space :::p, comp button3:::p::p, space :::p, comp button2:::p::p}, comp label1::t:::x, comp spIngredients::t:::x}, space :::p}}"
-							"$verticalGroup": "par l {seq {space :::p, comp label1:::::p, space :::p, par t {comp txtAddIngredients:::p::p, par b {comp button2::b:p::p, comp button3::b:p::p}}, space :::p, comp spIngredients:::::p, space :::p}}"
+							"$horizontalGroup": "par l {seq {space :::p, par l {comp txtAddRecipeName::t::581:x, comp lblRecipeName::t:::x}, space :::p}}"
+							"$verticalGroup": "par l {seq l {space :::x, comp lblRecipeName:::p::p, space :::p, comp txtAddRecipeName:::p::p, space :::p}}"
 						} ) {
-							name: "panel9"
-							add( new FormComponent( "javax.swing.JLabel" ) {
-								name: "label1"
-								"text": "Ingredient(s)"
-								"font": #SwingDerivedFont0
-							} )
+							name: "pnlRecipeName"
 							add( new FormComponent( "javax.swing.JTextField" ) {
-								name: "txtAddIngredients"
-								"toolTipText": "Press Enter to add an ingredient"
-								addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "txtAddIngredientsEntered", true ) )
-							} )
-							add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
-								name: "spIngredients"
-								add( new FormComponent( "javax.swing.JList" ) {
-									name: "lstIngredients"
-									auxiliary() {
-										"JavaCodeGenerator.typeParameters": "String"
-									}
-								} )
-							} )
-							add( new FormComponent( "javax.swing.JButton" ) {
-								name: "button2"
-								"text": "–"
-								"font": new com.jformdesigner.model.SwingDerivedFont( null, 1, 0, false )
-								addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "deleteIngredients", true ) )
-							} )
-							add( new FormComponent( "javax.swing.JButton" ) {
-								name: "button3"
-								"text": "+"
-								"font": new com.jformdesigner.model.SwingDerivedFont( null, 1, 0, false )
-								addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "addIngredients", true ) )
-							} )
-						} )
-						add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-							"$horizontalGroup": "par l {seq {space :::p, par l {seq l {comp txtAddTags:::::x, space :::p, comp button5:::p::p, space :::p, comp button4:::p::p}, comp label2::l:::x, comp spTags::t:::x}, space :::p}}"
-							"$verticalGroup": "par l {seq l {space :::p, comp label2:::::p, space :::p, par t {par b {comp txtAddTags::b:p::p, comp button5::b:p::p}, comp button4:::p::p}, space :::p, comp spTags:::::p, space :::p}}"
-						} ) {
-							name: "panel10"
-							add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
-								name: "spTags"
-								add( new FormComponent( "javax.swing.JList" ) {
-									name: "lstTags"
-									auxiliary() {
-										"JavaCodeGenerator.typeParameters": "String"
-									}
-								} )
+								name: "txtAddRecipeName"
 							} )
 							add( new FormComponent( "javax.swing.JLabel" ) {
-								name: "label2"
-								"text": "Tag(s)"
-								"font": #SwingDerivedFont0
-							} )
-							add( new FormComponent( "javax.swing.JTextField" ) {
-								name: "txtAddTags"
-								"toolTipText": "Press Enter to add a tag"
-								addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "txtAddTagsEntered", true ) )
-							} )
-							add( new FormComponent( "javax.swing.JButton" ) {
-								name: "button4"
-								"text": "–"
-								"font": &SwingDerivedFont1 new com.jformdesigner.model.SwingDerivedFont( null, 1, 0, false )
-								addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "deleteTags", true ) )
-							} )
-							add( new FormComponent( "javax.swing.JButton" ) {
-								name: "button5"
-								"text": "+"
-								"font": #SwingDerivedFont1
-								addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "addTags", true ) )
+								name: "lblRecipeName"
+								"text": "Recipe Name"
+								"font": &SwingDerivedFont0 new com.jformdesigner.model.SwingDerivedFont( null, 1, 0, false )
 							} )
 						} )
-					} )
-					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class javax.swing.BoxLayout ) ) {
-						name: "pnlBottom"
-						add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-							"$horizontalGroup": "par l {seq {space :::p, par l {comp label3:::::x, comp spInstructions:::::x}, space :::p}}"
-							"$verticalGroup": "par l {seq l {space :::p, comp label3:::p::p, space :::p, comp spInstructions:::::x, space :::p}}"
-						} ) {
-							name: "panel4"
-							add( new FormComponent( "javax.swing.JLabel" ) {
-								name: "label3"
-								"text": "Instructions"
-								"font": #SwingDerivedFont0
+						add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class javax.swing.BoxLayout ) ) {
+							name: "pnlIngredientsTags"
+							add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+								"$horizontalGroup": "par l {seq t {space :::p, par t {seq {comp txtAddIngredients:::::x, space :::p, comp btnDeleteIngredients:::p::p, space :::p, comp btnAddIngredients:::p::p}, comp lblIngredients::t:::x, comp spIngredients::t:::x}, space :::p}}"
+								"$verticalGroup": "par l {seq {space :::p, comp lblIngredients:::::p, space :::p, par t {comp txtAddIngredients:::p::p, par b {comp btnAddIngredients::b:p::p, comp btnDeleteIngredients::b:p::p}}, space :::p, comp spIngredients:::::p, space :::p}}"
+							} ) {
+								name: "pnlIngredients"
+								add( new FormComponent( "javax.swing.JLabel" ) {
+									name: "lblIngredients"
+									"text": "Ingredient(s)"
+									"font": #SwingDerivedFont0
+								} )
+								add( new FormComponent( "javax.swing.JTextField" ) {
+									name: "txtAddIngredients"
+									"toolTipText": "Enter single ingredient or as comma separated values"
+									addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "txtAddIngredientsEntered", true ) )
+								} )
+								add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+									name: "spIngredients"
+									add( new FormComponent( "javax.swing.JList" ) {
+										name: "lstIngredients"
+										auxiliary() {
+											"JavaCodeGenerator.typeParameters": "String"
+										}
+									} )
+								} )
+								add( new FormComponent( "javax.swing.JButton" ) {
+									name: "btnAddIngredients"
+									"text": "–"
+									"font": new com.jformdesigner.model.SwingDerivedFont( null, 1, 0, false )
+									addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "deleteIngredients", true ) )
+								} )
+								add( new FormComponent( "javax.swing.JButton" ) {
+									name: "btnDeleteIngredients"
+									"text": "+"
+									"font": new com.jformdesigner.model.SwingDerivedFont( null, 1, 0, false )
+									addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "addIngredients", true ) )
+								} )
 							} )
-							add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
-								name: "spInstructions"
-								add( new FormComponent( "javax.swing.JTextArea" ) {
-									name: "txtarAddInstructions"
-									"lineWrap": true
-									"wrapStyleWord": true
-									"minimumSize": sfield com.jformdesigner.model.FormObject NULL_VALUE
-									"preferredSize": sfield com.jformdesigner.model.FormObject NULL_VALUE
+							add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+								"$horizontalGroup": "par l {seq {space :::p, par l {seq l {comp txtAddTags:::::x, space :::p, comp btnDeleteTags:::p::p, space :::p, comp btnAddTags:::p::p}, comp lblTags::l:::x, comp spTags::t:::x}, space :::p}}"
+								"$verticalGroup": "par l {seq l {space :::p, comp lblTags:::::p, space :::p, par t {par b {comp txtAddTags::b:p::p, comp btnDeleteTags::b:p::p}, comp btnAddTags:::p::p}, space :::p, comp spTags:::::p, space :::p}}"
+							} ) {
+								name: "pnlTags"
+								add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+									name: "spTags"
+									add( new FormComponent( "javax.swing.JList" ) {
+										name: "lstTags"
+										auxiliary() {
+											"JavaCodeGenerator.typeParameters": "String"
+										}
+									} )
+								} )
+								add( new FormComponent( "javax.swing.JLabel" ) {
+									name: "lblTags"
+									"text": "Tag(s)"
+									"font": #SwingDerivedFont0
+								} )
+								add( new FormComponent( "javax.swing.JTextField" ) {
+									name: "txtAddTags"
+									"toolTipText": "Enter single tag or as comma separated values"
+									addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "txtAddTagsEntered", true ) )
+								} )
+								add( new FormComponent( "javax.swing.JButton" ) {
+									name: "btnAddTags"
+									"text": "–"
+									"font": &SwingDerivedFont1 new com.jformdesigner.model.SwingDerivedFont( null, 1, 0, false )
+									addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "deleteTags", true ) )
+								} )
+								add( new FormComponent( "javax.swing.JButton" ) {
+									name: "btnDeleteTags"
+									"text": "+"
+									"font": #SwingDerivedFont1
+									addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "addTags", true ) )
 								} )
 							} )
 						} )
-						add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-							"$horizontalGroup": "par l {seq {space :::p, par l {comp label4::l::165:x, comp scrollPane1::l::0:x, comp panel3::t::165:x}, space :::p}}"
-							"$verticalGroup": "par l {seq l {space :::p, comp label4:::p::p, space :::p, comp scrollPane1:::p:137:p, space :::p, comp panel3:::::x, space :::p}}"
-						} ) {
-							name: "panel7"
-							add( new FormComponent( "javax.swing.JLabel" ) {
-								name: "label4"
-								"text": "Related Recipes"
-								"font": #SwingDerivedFont0
-							} )
-							add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
-								name: "scrollPane1"
-								"preferredSize": sfield com.jformdesigner.model.FormObject NULL_VALUE
-								add( new FormComponent( "javax.swing.JTable" ) {
-									name: "tblRelatedRecipes"
-									"model": new com.jformdesigner.model.SwingTableModel( new java.util.Vector, new java.util.Vector {
-										add( null )
-									}, new java.util.Vector {
-										add( null )
-									}, new java.util.Vector {
-										add( null )
-									}, new java.util.Vector {
-										add( null )
+						add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class javax.swing.BoxLayout ) ) {
+							name: "pnlInstructionsRelatedRecipes"
+							add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+								"$horizontalGroup": "par l {seq {space :::p, par l {comp label3:::::x, comp spInstructions:::::x}, space :::p}}"
+								"$verticalGroup": "par l {seq l {space :::p, comp label3:::p::p, space :::p, comp spInstructions:::::x, space :::p}}"
+							} ) {
+								name: "panel4"
+								add( new FormComponent( "javax.swing.JLabel" ) {
+									name: "label3"
+									"text": "Instructions"
+									"font": #SwingDerivedFont0
+								} )
+								add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+									name: "spInstructions"
+									add( new FormComponent( "javax.swing.JTextArea" ) {
+										name: "txtarAddInstructions"
+										"lineWrap": true
+										"wrapStyleWord": true
+										"minimumSize": sfield com.jformdesigner.model.FormObject NULL_VALUE
+										"preferredSize": sfield com.jformdesigner.model.FormObject NULL_VALUE
 									} )
 								} )
 							} )
-							add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.FlowLayout ) ) {
-								name: "panel3"
-								"preferredSize": sfield com.jformdesigner.model.FormObject NULL_VALUE
-								add( new FormComponent( "javax.swing.JButton" ) {
-									name: "button1"
-									"text": "Search..."
-									addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "spawnSearchDialog", true ) )
+							add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+								"$horizontalGroup": "par l {seq {space :::p, par l {comp label4::l::327:x, comp scrollPane1::l::0:x, comp panel3::t::327:x}, space :::p}}"
+								"$verticalGroup": "par l {seq l {space :::p, comp label4:::p::p, space :::p, comp scrollPane1:::p:137:p, space :::p, comp panel3:::::x, space :::p}}"
+							} ) {
+								name: "panel7"
+								add( new FormComponent( "javax.swing.JLabel" ) {
+									name: "label4"
+									"text": "Related Recipes"
+									"font": #SwingDerivedFont0
+								} )
+								add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+									name: "scrollPane1"
+									"preferredSize": sfield com.jformdesigner.model.FormObject NULL_VALUE
+									add( new FormComponent( "javax.swing.JTable" ) {
+										name: "tblRelatedRecipes"
+										"model": new com.jformdesigner.model.SwingTableModel( new java.util.Vector, new java.util.Vector {
+											add( null )
+										}, new java.util.Vector {
+											add( null )
+										}, new java.util.Vector {
+											add( null )
+										}, new java.util.Vector {
+											add( null )
+										} )
+									} )
+								} )
+								add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.FlowLayout ) ) {
+									name: "panel3"
+									"preferredSize": sfield com.jformdesigner.model.FormObject NULL_VALUE
+									add( new FormComponent( "javax.swing.JButton" ) {
+										name: "button1"
+										"text": "Search..."
+										addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "spawnSearchDialog", true ) )
+									} )
 								} )
 							} )
 						} )
+					}, new FormLayoutConstraints( class java.lang.String ) {
+						"value": "Center"
 					} )
 					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.FlowLayout ) ) {
-						name: "panel6"
+						name: "pnlAddRecipeButton"
 						add( new FormComponent( "javax.swing.JButton" ) {
 							name: "btnAddRecipe"
 							"text": "Add Recipe"
 							addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "addNewRecipe", true ) )
 						} )
+					}, new FormLayoutConstraints( class java.lang.String ) {
+						"value": "South"
 					} )
 				}, new FormLayoutConstraints( class java.lang.String ) {
 					"value": "Center"

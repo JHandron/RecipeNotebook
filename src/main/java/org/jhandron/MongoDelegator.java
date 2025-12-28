@@ -67,7 +67,6 @@ public class MongoDelegator {
                 System.out.println("No matching documents found.");
             }
             return results;
-
         }
     }
 
