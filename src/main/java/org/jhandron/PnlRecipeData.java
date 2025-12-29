@@ -7,6 +7,7 @@ package org.jhandron;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import javax.swing.border.*;
 import javax.swing.table.*;
 
 /**
@@ -146,6 +147,7 @@ public class PnlRecipeData extends JPanel implements RecipeDataView {
 
         //======== pnlRecipeName ========
         {
+            pnlRecipeName.setBorder(new EmptyBorder(5, 5, 5, 5));
 
             //---- lblRecipeName ----
             lblRecipeName.setText("Recipe Name");
@@ -180,6 +182,7 @@ public class PnlRecipeData extends JPanel implements RecipeDataView {
 
             //======== pnlIngredients ========
             {
+                pnlIngredients.setBorder(new EmptyBorder(5, 5, 5, 5));
 
                 //---- lblIngredients ----
                 lblIngredients.setText("Ingredient(s)");
@@ -241,6 +244,7 @@ public class PnlRecipeData extends JPanel implements RecipeDataView {
 
             //======== pnlTags ========
             {
+                pnlTags.setBorder(new EmptyBorder(5, 5, 5, 5));
 
                 //======== spTags ========
                 {
@@ -308,6 +312,7 @@ public class PnlRecipeData extends JPanel implements RecipeDataView {
 
             //======== panel4 ========
             {
+                panel4.setBorder(new EmptyBorder(5, 5, 5, 5));
 
                 //---- label3 ----
                 label3.setText("Instructions");
@@ -341,7 +346,7 @@ public class PnlRecipeData extends JPanel implements RecipeDataView {
                             .addContainerGap()
                             .addComponent(label3)
                             .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(spInstructions)
+                            .addComponent(spInstructions, GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
                             .addContainerGap())
                 );
             }
@@ -349,6 +354,8 @@ public class PnlRecipeData extends JPanel implements RecipeDataView {
 
             //======== panel7 ========
             {
+                panel7.setBorder(new EmptyBorder(5, 5, 5, 5));
+                panel7.setPreferredSize(null);
 
                 //---- label4 ----
                 label4.setText("Related Recipes");
@@ -356,7 +363,7 @@ public class PnlRecipeData extends JPanel implements RecipeDataView {
 
                 //======== scrollPane1 ========
                 {
-                    scrollPane1.setPreferredSize(null);
+                    scrollPane1.setPreferredSize(new Dimension(0, 0));
 
                     //---- tblRelatedRecipes ----
                     tblRelatedRecipes.setModel(new DefaultTableModel(
@@ -366,6 +373,7 @@ public class PnlRecipeData extends JPanel implements RecipeDataView {
                             null
                         }
                     ));
+                    tblRelatedRecipes.setPreferredSize(null);
                     scrollPane1.setViewportView(tblRelatedRecipes);
                 }
 
@@ -387,9 +395,9 @@ public class PnlRecipeData extends JPanel implements RecipeDataView {
                         .addGroup(panel7Layout.createSequentialGroup()
                             .addContainerGap()
                             .addGroup(panel7Layout.createParallelGroup()
-                                .addComponent(label4, GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE)
-                                .addComponent(scrollPane1, GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE)
-                                .addComponent(panel3, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE))
+                                .addComponent(label4, GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)
+                                .addComponent(panel3, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(scrollPane1, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE))
                             .addContainerGap())
                 );
                 panel7Layout.setVerticalGroup(
@@ -398,7 +406,7 @@ public class PnlRecipeData extends JPanel implements RecipeDataView {
                             .addContainerGap()
                             .addComponent(label4)
                             .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 137, GroupLayout.PREFERRED_SIZE)
+                            .addComponent(scrollPane1, GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
                             .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(panel3, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addContainerGap())

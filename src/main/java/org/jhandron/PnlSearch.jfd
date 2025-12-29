@@ -10,59 +10,60 @@ new FormModel {
 			} ) {
 				name: "panel1"
 				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-					"$horizontalGroup": "par l {seq {space :::p, par l {comp label1::l:p::p, seq l {comp radioButton1:::p::p, space u:::p, comp radioButton2:::p::p, space u:::p, comp radioButton3:::p::p}}, space ::361:x}}"
-					"$verticalGroup": "par l {seq l {space :::p, comp label1:::p::p, space :::p, par b {comp radioButton1::b:p::p, comp radioButton2::b:p::p, comp radioButton3::b:p::p}, space :::x}}"
+					"$horizontalGroup": "par l {seq {space :::p, par l {comp lblSearchBy::l:p::p, seq l {comp rbName:::p::p, space u:::p, comp rbIngredients:::p::p, space u:::p, comp rbTags:::p::p}}, space ::361:x}}"
+					"$verticalGroup": "par l {seq l {space :::p, comp lblSearchBy:::p::p, space :::p, par b {comp rbName::b:p::p, comp rbIngredients::b:p::p, comp rbTags::b:p::p}, space :::x}}"
 				} ) {
 					name: "panel2"
 					add( new FormComponent( "javax.swing.JLabel" ) {
-						name: "label1"
+						name: "lblSearchBy"
 						"text": "Search By"
 						"font": new com.jformdesigner.model.SwingDerivedFont( null, 1, 0, false )
 					} )
 					add( new FormComponent( "javax.swing.JRadioButton" ) {
-						name: "radioButton1"
+						name: "rbName"
 						"text": "Name"
 						"$buttonGroup": new FormReference( "buttonGroup1" )
 					} )
 					add( new FormComponent( "javax.swing.JRadioButton" ) {
-						name: "radioButton2"
+						name: "rbIngredients"
 						"text": "Ingredients"
 						"$buttonGroup": new FormReference( "buttonGroup1" )
 					} )
 					add( new FormComponent( "javax.swing.JRadioButton" ) {
-						name: "radioButton3"
+						name: "rbTags"
 						"text": "Tags"
 						"$buttonGroup": new FormReference( "buttonGroup1" )
 					} )
 				} )
 				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-					"$horizontalGroup": "par l {seq {space :::p, comp textField1::::485:x, space :::p, comp button1:::p::p, space :::p}}"
-					"$verticalGroup": "par l {seq l {space :::p, par b {comp textField1::b:p::p, comp button1::b:p::p}, space ::19:x}}"
+					"$horizontalGroup": "par l {seq {space :::p, comp txtSearch:::::x, space u:::p, comp btnSearch:::::p, space :::p}}"
+					"$verticalGroup": "par l {seq l {space :::p, par l {comp txtSearch:::::p, comp btnSearch:::p::p}, space :::p}}"
 				} ) {
 					name: "panel3"
 					add( new FormComponent( "javax.swing.JTextField" ) {
-						name: "textField1"
+						name: "txtSearch"
 					} )
 					add( new FormComponent( "javax.swing.JButton" ) {
-						name: "button1"
+						name: "btnSearch"
 						"text": "Search"
+						"horizontalAlignment": 4
 					} )
 				} )
 				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.BorderLayout ) ) {
 					name: "panel4"
 					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-						"$horizontalGroup": "par l {seq l {space :::p, par l {seq {comp scrollPane2::::563:x, space :::p}, seq {comp label2:::p:87:p, space :0:482:x}}}}"
-						"$verticalGroup": "par l {seq t {space :::p, comp label2:::p::p, space :::p, comp scrollPane2::::296:x, space :::p}}"
+						"$horizontalGroup": "par l {seq l {space :::p, par l {seq {comp scrollPane2::::563:x, space :::p}, seq {comp lblSearchResults:::p:87:p, space :0:482:x}}}}"
+						"$verticalGroup": "par l {seq t {space :::p, comp lblSearchResults:::p::p, space :::p, comp scrollPane2::::325:x, space :::p}}"
 					} ) {
 						name: "panel6"
 						add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
 							name: "scrollPane2"
 							add( new FormComponent( "javax.swing.JTable" ) {
-								name: "table2"
+								name: "tblSearchResults"
 							} )
 						} )
 						add( new FormComponent( "javax.swing.JLabel" ) {
-							name: "label2"
+							name: "lblSearchResults"
 							"text": "Search Results"
 							"font": new com.jformdesigner.model.SwingDerivedFont( null, 1, 0, false )
 						} )
@@ -72,7 +73,7 @@ new FormModel {
 					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.FlowLayout ) ) {
 						name: "panel5"
 						add( new FormComponent( "javax.swing.JButton" ) {
-							name: "button2"
+							name: "btnViewRecipe"
 							"text": "View Recipe"
 						} )
 					}, new FormLayoutConstraints( class java.lang.String ) {
@@ -89,7 +90,7 @@ new FormModel {
 		add( new FormNonVisual( "javax.swing.ButtonGroup" ) {
 			name: "buttonGroup1"
 		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 45, 675 )
+			"location": new java.awt.Point( 45, 630 )
 		} )
 	}
 }

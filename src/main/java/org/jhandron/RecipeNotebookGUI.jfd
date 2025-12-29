@@ -19,15 +19,16 @@ new FormModel {
 				"minimumSize": new java.awt.Dimension( 0, 0 )
 				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.CardLayout ) ) {
 					name: "pnlMainCard"
-					add( new FormComponent( "org.jhandron.PnlSearch" ) {
-						name: "pnlSearch1"
-					}, new FormLayoutConstraints( class java.lang.String ) {
-						"value": "card3"
-					} )
+					"border": new javax.swing.border.EmptyBorder( 5, 5, 5, 5 )
 					add( new FormComponent( "org.jhandron.PnlAddNew" ) {
 						name: "pnlAddNew1"
 					}, new FormLayoutConstraints( class java.lang.String ) {
 						"value": "card1"
+					} )
+					add( new FormComponent( "org.jhandron.PnlSearch" ) {
+						name: "pnlSearch1"
+					}, new FormLayoutConstraints( class java.lang.String ) {
+						"value": "card3"
 					} )
 					add( new FormComponent( "org.jhandron.PnlEdit" ) {
 						name: "pnlEdit1"
@@ -53,7 +54,7 @@ new FormModel {
 				} )
 			}
 		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 150, 90 )
+			"location": new java.awt.Point( 140, 50 )
 			"size": new java.awt.Dimension( 595, 535 )
 		} )
 	}

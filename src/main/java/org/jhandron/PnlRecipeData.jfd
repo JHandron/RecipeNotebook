@@ -12,6 +12,7 @@ new FormModel {
 				"$verticalGroup": "par l {seq l {space :::x, comp lblRecipeName:::p::p, space :::p, comp txtAddRecipeName:::p::p, space :::p}}"
 			} ) {
 				name: "pnlRecipeName"
+				"border": &EmptyBorder0 new javax.swing.border.EmptyBorder( 5, 5, 5, 5 )
 				add( new FormComponent( "javax.swing.JTextField" ) {
 					name: "txtAddRecipeName"
 				} )
@@ -28,6 +29,7 @@ new FormModel {
 					"$verticalGroup": "par l {seq {space :::p, comp lblIngredients:::::p, space :::p, par t {comp txtAddIngredients:::p::p, par b {comp btnAddIngredients::b:p::p, comp btnDeleteIngredients::b:p::p}}, space :::p, comp spIngredients:::::p, space :::p}}"
 				} ) {
 					name: "pnlIngredients"
+					"border": #EmptyBorder0
 					add( new FormComponent( "javax.swing.JLabel" ) {
 						name: "lblIngredients"
 						"text": "Ingredient(s)"
@@ -65,6 +67,7 @@ new FormModel {
 					"$verticalGroup": "par l {seq l {space :::p, comp lblTags:::::p, space :::p, par t {par b {comp txtAddTags::b:p::p, comp btnDeleteTags::b:p::p}, comp btnAddTags:::p::p}, space :::p, comp spTags:::::p, space :::p}}"
 				} ) {
 					name: "pnlTags"
+					"border": #EmptyBorder0
 					add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
 						name: "spTags"
 						add( new FormComponent( "javax.swing.JList" ) {
@@ -102,9 +105,10 @@ new FormModel {
 				name: "pnlInstructionsRelatedRecipes"
 				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
 					"$horizontalGroup": "par l {seq {space :::p, par l {comp label3:::::x, comp spInstructions:::::x}, space :::p}}"
-					"$verticalGroup": "par l {seq l {space :::p, comp label3:::p::p, space :::p, comp spInstructions:::::x, space :::p}}"
+					"$verticalGroup": "par l {seq l {space :::p, comp label3:::p::p, space :::p, comp spInstructions::::188:x, space :::p}}"
 				} ) {
 					name: "panel4"
+					"border": #EmptyBorder0
 					add( new FormComponent( "javax.swing.JLabel" ) {
 						name: "label3"
 						"text": "Instructions"
@@ -122,10 +126,12 @@ new FormModel {
 					} )
 				} )
 				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-					"$horizontalGroup": "par l {seq {space :::p, par l {comp label4::l::203:x, comp scrollPane1::l::0:x, comp panel3::t::203:x}, space :::p}}"
-					"$verticalGroup": "par l {seq l {space :::p, comp label4:::p::p, space :::p, comp scrollPane1:::p:137:p, space :::p, comp panel3:::::x, space :::p}}"
+					"$horizontalGroup": "par l {seq {space :::p, par l {comp label4::l::264:x, comp panel3::t:::x, comp scrollPane1::t::264:x}, space :::p}}"
+					"$verticalGroup": "par l {seq l {space :::p, comp label4:::p::p, space :::p, comp scrollPane1::::121:x, space :::p, comp panel3:::::x, space :::p}}"
 				} ) {
 					name: "panel7"
+					"border": #EmptyBorder0
+					"preferredSize": sfield com.jformdesigner.model.FormObject NULL_VALUE
 					add( new FormComponent( "javax.swing.JLabel" ) {
 						name: "label4"
 						"text": "Related Recipes"
@@ -133,7 +139,7 @@ new FormModel {
 					} )
 					add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
 						name: "scrollPane1"
-						"preferredSize": sfield com.jformdesigner.model.FormObject NULL_VALUE
+						"preferredSize": new java.awt.Dimension( 0, 0 )
 						add( new FormComponent( "javax.swing.JTable" ) {
 							name: "tblRelatedRecipes"
 							"model": new com.jformdesigner.model.SwingTableModel( new java.util.Vector, new java.util.Vector {
@@ -145,6 +151,7 @@ new FormModel {
 							}, new java.util.Vector {
 								add( null )
 							} )
+							"preferredSize": sfield com.jformdesigner.model.FormObject NULL_VALUE
 						} )
 					} )
 					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.FlowLayout ) ) {
@@ -160,9 +167,7 @@ new FormModel {
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 280, 265 )
-			"size": new java.awt.Dimension( 505, 410 )
+			"size": new java.awt.Dimension( 550, 465 )
 		} )
 	}
 }
-
-

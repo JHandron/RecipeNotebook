@@ -3,6 +3,7 @@ package org.jhandron;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import javax.swing.border.*;
 
 /**
  * @author Jason
@@ -26,8 +27,8 @@ public class RecipeNotebookGUI extends JFrame {
         menuItem3 = new JMenuItem();
         pnlMain = new JPanel();
         pnlMainCard = new JPanel();
-        pnlSearch1 = new PnlSearch();
         pnlAddNew1 = new PnlAddNew();
+        pnlSearch1 = new PnlSearch();
         pnlEdit1 = new PnlEdit();
 
         //======== this ========
@@ -61,9 +62,10 @@ public class RecipeNotebookGUI extends JFrame {
 
             //======== pnlMainCard ========
             {
+                pnlMainCard.setBorder(new EmptyBorder(5, 5, 5, 5));
                 pnlMainCard.setLayout(new CardLayout());
-                pnlMainCard.add(pnlSearch1, "card3");
                 pnlMainCard.add(pnlAddNew1, "card1");
+                pnlMainCard.add(pnlSearch1, "card3");
                 pnlMainCard.add(pnlEdit1, "card2");
             }
             pnlMain.add(pnlMainCard, BorderLayout.CENTER);
@@ -81,8 +83,8 @@ public class RecipeNotebookGUI extends JFrame {
     private JMenuItem menuItem3;
     private JPanel pnlMain;
     private JPanel pnlMainCard;
-    private PnlSearch pnlSearch1;
     private PnlAddNew pnlAddNew1;
+    private PnlSearch pnlSearch1;
     private PnlEdit pnlEdit1;
     // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 }
