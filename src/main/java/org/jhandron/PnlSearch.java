@@ -16,6 +16,7 @@ public class PnlSearch extends JPanel implements SearchView {
 
     private final PnlSearchController controller;
     private final RecipeSelectionListener selectionListener;
+    private final Runnable closeCallback;
 
     public PnlSearch() {
         this(null, null);
@@ -28,6 +29,7 @@ public class PnlSearch extends JPanel implements SearchView {
     public PnlSearch(RecipeSelectionListener selectionListener, Runnable closeCallback) {
         initComponents();
         this.selectionListener = selectionListener != null ? selectionListener : recipes -> { };
+        this.closeCallback = closeCallback != null ? closeCallback : () -> { };
         controller = new PnlSearchController(this, this.selectionListener);
         wireListeners();
         controller.initializeViewBindings();
@@ -41,7 +43,7 @@ public class PnlSearch extends JPanel implements SearchView {
 
     @Override
     public void closeDialog() {
-        // no-op for panel usage; dialog hosting can override/extend later
+        closeCallback.run();
     }
 
     private void wireListeners() {
