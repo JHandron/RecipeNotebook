@@ -74,10 +74,10 @@ public class PnlRecipeData extends JPanel implements RecipeDataView {
     }
 
     @Override
-    //TODO: Make this work
     public void openSearchDialog(RecipeSelectionListener p_selectionListener) {
-//        SearchDialogGUI dialog = new SearchDialogGUI(this, p_selectionListener);
-//        dialog.setVisible(true);
+        Window owner = SwingUtilities.getWindowAncestor(this);
+        DlgSearch searchDialog = new DlgSearch(owner);
+        searchDialog.setVisible(true);
     }
 
     private void hideColumns() {

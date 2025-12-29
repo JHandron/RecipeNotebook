@@ -21,10 +21,6 @@ public class PnlSearch extends JPanel implements SearchView {
         this(null, null);
     }
 
-    public PnlSearch(RecipeSelectionListener selectionListener) {
-        this(selectionListener, null);
-    }
-
     public PnlSearch(RecipeSelectionListener selectionListener, Runnable closeCallback) {
         initComponents();
         this.selectionListener = selectionListener != null ? selectionListener : recipes -> { };
@@ -78,6 +74,7 @@ public class PnlSearch extends JPanel implements SearchView {
         panel1 = new JPanel();
         panel2 = new JPanel();
         lblSearchBy = new JLabel();
+        panel7 = new JPanel();
         rbName = new JRadioButton();
         rbIngredients = new JRadioButton();
         rbTags = new JRadioButton();
@@ -106,14 +103,42 @@ public class PnlSearch extends JPanel implements SearchView {
                 lblSearchBy.setText("Search By");
                 lblSearchBy.setFont(lblSearchBy.getFont().deriveFont(lblSearchBy.getFont().getStyle() | Font.BOLD));
 
-                //---- rbName ----
-                rbName.setText("Name");
+                //======== panel7 ========
+                {
 
-                //---- rbIngredients ----
-                rbIngredients.setText("Ingredients");
+                    //---- rbName ----
+                    rbName.setText("Name");
 
-                //---- rbTags ----
-                rbTags.setText("Tags");
+                    //---- rbIngredients ----
+                    rbIngredients.setText("Ingredients");
+
+                    //---- rbTags ----
+                    rbTags.setText("Tags");
+
+                    GroupLayout panel7Layout = new GroupLayout(panel7);
+                    panel7.setLayout(panel7Layout);
+                    panel7Layout.setHorizontalGroup(
+                        panel7Layout.createParallelGroup()
+                            .addGroup(panel7Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(rbName)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(rbIngredients)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(rbTags)
+                                .addContainerGap())
+                    );
+                    panel7Layout.setVerticalGroup(
+                        panel7Layout.createParallelGroup()
+                            .addGroup(panel7Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(panel7Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                    .addComponent(rbName)
+                                    .addComponent(rbIngredients)
+                                    .addComponent(rbTags))
+                                .addContainerGap())
+                    );
+                }
 
                 GroupLayout panel2Layout = new GroupLayout(panel2);
                 panel2.setLayout(panel2Layout);
@@ -122,26 +147,17 @@ public class PnlSearch extends JPanel implements SearchView {
                         .addGroup(panel2Layout.createSequentialGroup()
                             .addContainerGap()
                             .addGroup(panel2Layout.createParallelGroup()
-                                .addComponent(lblSearchBy)
-                                .addGroup(panel2Layout.createSequentialGroup()
-                                    .addComponent(rbName)
-                                    .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(rbIngredients)
-                                    .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(rbTags)))
-                            .addContainerGap(361, Short.MAX_VALUE))
+                                .addComponent(panel7, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lblSearchBy))
+                            .addContainerGap(349, Short.MAX_VALUE))
                 );
                 panel2Layout.setVerticalGroup(
                     panel2Layout.createParallelGroup()
                         .addGroup(panel2Layout.createSequentialGroup()
                             .addContainerGap()
                             .addComponent(lblSearchBy)
-                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(panel2Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                .addComponent(rbName)
-                                .addComponent(rbIngredients)
-                                .addComponent(rbTags))
-                            .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(panel7, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                 );
             }
             panel1.add(panel2);
@@ -245,6 +261,7 @@ public class PnlSearch extends JPanel implements SearchView {
     private JPanel panel1;
     private JPanel panel2;
     private JLabel lblSearchBy;
+    private JPanel panel7;
     private JRadioButton rbName;
     private JRadioButton rbIngredients;
     private JRadioButton rbTags;

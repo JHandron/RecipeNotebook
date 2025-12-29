@@ -10,8 +10,8 @@ new FormModel {
 			} ) {
 				name: "panel1"
 				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-					"$horizontalGroup": "par l {seq {space :::p, par l {comp lblSearchBy::l:p::p, seq l {comp rbName:::p::p, space u:::p, comp rbIngredients:::p::p, space u:::p, comp rbTags:::p::p}}, space ::361:x}}"
-					"$verticalGroup": "par l {seq l {space :::p, comp lblSearchBy:::p::p, space :::p, par b {comp rbName::b:p::p, comp rbIngredients::b:p::p, comp rbTags::b:p::p}, space :::x}}"
+					"$horizontalGroup": "par l {seq l {space :::p, par l {comp panel7:::p::p, comp lblSearchBy:::p::p}, space ::349:x}}"
+					"$verticalGroup": "par l {seq l {space :::p, comp lblSearchBy:::p::p, space :::x, comp panel7:::p::p}}"
 				} ) {
 					name: "panel2"
 					add( new FormComponent( "javax.swing.JLabel" ) {
@@ -19,20 +19,26 @@ new FormModel {
 						"text": "Search By"
 						"font": new com.jformdesigner.model.SwingDerivedFont( null, 1, 0, false )
 					} )
-					add( new FormComponent( "javax.swing.JRadioButton" ) {
-						name: "rbName"
-						"text": "Name"
-						"$buttonGroup": new FormReference( "buttonGroup1" )
-					} )
-					add( new FormComponent( "javax.swing.JRadioButton" ) {
-						name: "rbIngredients"
-						"text": "Ingredients"
-						"$buttonGroup": new FormReference( "buttonGroup1" )
-					} )
-					add( new FormComponent( "javax.swing.JRadioButton" ) {
-						name: "rbTags"
-						"text": "Tags"
-						"$buttonGroup": new FormReference( "buttonGroup1" )
+					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+						"$horizontalGroup": "par l {seq {space :::p, comp rbName:::p::p, space u:::p, comp rbIngredients:::p::p, space u:::p, comp rbTags:::p::p, space :::p}}"
+						"$verticalGroup": "par l {seq {space :::p, par b {comp rbName::b:p::p, comp rbIngredients::b:p::p, comp rbTags::b:p::p}, space :::p}}"
+					} ) {
+						name: "panel7"
+						add( new FormComponent( "javax.swing.JRadioButton" ) {
+							name: "rbName"
+							"text": "Name"
+							"$buttonGroup": new FormReference( "buttonGroup1" )
+						} )
+						add( new FormComponent( "javax.swing.JRadioButton" ) {
+							name: "rbIngredients"
+							"text": "Ingredients"
+							"$buttonGroup": new FormReference( "buttonGroup1" )
+						} )
+						add( new FormComponent( "javax.swing.JRadioButton" ) {
+							name: "rbTags"
+							"text": "Tags"
+							"$buttonGroup": new FormReference( "buttonGroup1" )
+						} )
 					} )
 				} )
 				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
