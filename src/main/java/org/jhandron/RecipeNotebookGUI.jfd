@@ -17,23 +17,27 @@ new FormModel {
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.BorderLayout ) ) {
 				name: "pnlMain"
 				"minimumSize": new java.awt.Dimension( 0, 0 )
-				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.CardLayout ) ) {
-					name: "pnlMainCard"
-					"border": new javax.swing.border.EmptyBorder( 5, 5, 5, 5 )
+				add( new FormContainer( "javax.swing.JTabbedPane", new FormLayoutManager( class javax.swing.JTabbedPane ) ) {
+					name: "tabbedPane1"
+					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.CardLayout ) ) {
+						name: "panel1"
+						add( new FormComponent( "org.jhandron.PnlSearch" ) {
+							name: "pnlSearch1"
+						}, new FormLayoutConstraints( class java.lang.String ) {
+							"value": "cardSearch"
+						} )
+						add( new FormComponent( "org.jhandron.PnlEdit" ) {
+							name: "pnlEdit1"
+						}, new FormLayoutConstraints( class java.lang.String ) {
+							"value": "cardEdit"
+						} )
+					}, new FormLayoutConstraints( null ) {
+						"title": "Search/Edit"
+					} )
 					add( new FormComponent( "org.jhandron.PnlAddNew" ) {
 						name: "pnlAddNew1"
-					}, new FormLayoutConstraints( class java.lang.String ) {
-						"value": "card1"
-					} )
-					add( new FormComponent( "org.jhandron.PnlSearch" ) {
-						name: "pnlSearch1"
-					}, new FormLayoutConstraints( class java.lang.String ) {
-						"value": "card3"
-					} )
-					add( new FormComponent( "org.jhandron.PnlEdit" ) {
-						name: "pnlEdit1"
-					}, new FormLayoutConstraints( class java.lang.String ) {
-						"value": "card2"
+					}, new FormLayoutConstraints( null ) {
+						"title": "Add New"
 					} )
 				}, new FormLayoutConstraints( class java.lang.String ) {
 					"value": "Center"
@@ -55,7 +59,7 @@ new FormModel {
 			}
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 140, 50 )
-			"size": new java.awt.Dimension( 595, 535 )
+			"size": new java.awt.Dimension( 640, 575 )
 		} )
 	}
 }

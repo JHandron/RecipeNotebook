@@ -112,9 +112,9 @@ public class PnlRecipeData extends JPanel implements RecipeDataView {
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
         // Generated using JFormDesigner Educational license - Jason Handron (j-handron)
-        pnlRecipeName = new JPanel();
+        panel1 = new JPanel();
+        label1 = new JLabel();
         txtAddRecipeName = new JTextField();
-        lblRecipeName = new JLabel();
         pnlIngredientsTags = new JPanel();
         pnlIngredients = new JPanel();
         lblIngredients = new JLabel();
@@ -145,36 +145,38 @@ public class PnlRecipeData extends JPanel implements RecipeDataView {
         //======== this ========
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
-        //======== pnlRecipeName ========
+        //======== panel1 ========
         {
-            pnlRecipeName.setBorder(new EmptyBorder(5, 5, 5, 5));
+            panel1.setBorder(new EmptyBorder(5, 5, 5, 5));
 
-            //---- lblRecipeName ----
-            lblRecipeName.setText("Recipe Name");
-            lblRecipeName.setFont(lblRecipeName.getFont().deriveFont(lblRecipeName.getFont().getStyle() | Font.BOLD));
+            //---- label1 ----
+            label1.setText("Recipe Name");
+            label1.setFont(label1.getFont().deriveFont(label1.getFont().getStyle() | Font.BOLD));
 
-            GroupLayout pnlRecipeNameLayout = new GroupLayout(pnlRecipeName);
-            pnlRecipeName.setLayout(pnlRecipeNameLayout);
-            pnlRecipeNameLayout.setHorizontalGroup(
-                pnlRecipeNameLayout.createParallelGroup()
-                    .addGroup(pnlRecipeNameLayout.createSequentialGroup()
+            GroupLayout panel1Layout = new GroupLayout(panel1);
+            panel1.setLayout(panel1Layout);
+            panel1Layout.setHorizontalGroup(
+                panel1Layout.createParallelGroup()
+                    .addGroup(panel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(pnlRecipeNameLayout.createParallelGroup()
-                            .addComponent(txtAddRecipeName, GroupLayout.DEFAULT_SIZE, 578, Short.MAX_VALUE)
-                            .addComponent(lblRecipeName, GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE))
+                        .addGroup(panel1Layout.createParallelGroup()
+                            .addComponent(txtAddRecipeName, GroupLayout.DEFAULT_SIZE, 598, Short.MAX_VALUE)
+                            .addGroup(panel1Layout.createSequentialGroup()
+                                .addComponent(label1)
+                                .addGap(0, 524, Short.MAX_VALUE)))
                         .addContainerGap())
             );
-            pnlRecipeNameLayout.setVerticalGroup(
-                pnlRecipeNameLayout.createParallelGroup()
-                    .addGroup(pnlRecipeNameLayout.createSequentialGroup()
+            panel1Layout.setVerticalGroup(
+                panel1Layout.createParallelGroup()
+                    .addGroup(panel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(lblRecipeName, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(label1)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtAddRecipeName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())
             );
         }
-        add(pnlRecipeName);
+        add(panel1);
 
         //======== pnlIngredientsTags ========
         {
@@ -347,7 +349,7 @@ public class PnlRecipeData extends JPanel implements RecipeDataView {
                             .addContainerGap()
                             .addComponent(label3)
                             .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(spInstructions, GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+                            .addComponent(spInstructions, GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE)
                             .addContainerGap())
                 );
             }
@@ -396,9 +398,9 @@ public class PnlRecipeData extends JPanel implements RecipeDataView {
                         .addGroup(panel7Layout.createSequentialGroup()
                             .addContainerGap()
                             .addGroup(panel7Layout.createParallelGroup()
-                                .addComponent(label4, GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE)
+                                .addComponent(label4, GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE)
                                 .addComponent(panel3, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(scrollPane1, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE))
+                                .addComponent(scrollPane1, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE))
                             .addContainerGap())
                 );
                 panel7Layout.setVerticalGroup(
@@ -421,9 +423,9 @@ public class PnlRecipeData extends JPanel implements RecipeDataView {
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables  @formatter:off
     // Generated using JFormDesigner Educational license - Jason Handron (j-handron)
-    private JPanel pnlRecipeName;
+    private JPanel panel1;
+    private JLabel label1;
     private JTextField txtAddRecipeName;
-    private JLabel lblRecipeName;
     private JPanel pnlIngredientsTags;
     private JPanel pnlIngredients;
     private JLabel lblIngredients;

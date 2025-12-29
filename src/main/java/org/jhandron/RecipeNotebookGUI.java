@@ -26,10 +26,11 @@ public class RecipeNotebookGUI extends JFrame {
         menu1 = new JMenu();
         menuItem3 = new JMenuItem();
         pnlMain = new JPanel();
-        pnlMainCard = new JPanel();
-        pnlAddNew1 = new PnlAddNew();
+        tabbedPane1 = new JTabbedPane();
+        panel1 = new JPanel();
         pnlSearch1 = new PnlSearch();
         pnlEdit1 = new PnlEdit();
+        pnlAddNew1 = new PnlAddNew();
 
         //======== this ========
         setTitle("Jason's Recipe Notebook");
@@ -60,18 +61,22 @@ public class RecipeNotebookGUI extends JFrame {
             pnlMain.setMinimumSize(new Dimension(0, 0));
             pnlMain.setLayout(new BorderLayout());
 
-            //======== pnlMainCard ========
+            //======== tabbedPane1 ========
             {
-                pnlMainCard.setBorder(new EmptyBorder(5, 5, 5, 5));
-                pnlMainCard.setLayout(new CardLayout());
-                pnlMainCard.add(pnlAddNew1, "card1");
-                pnlMainCard.add(pnlSearch1, "card3");
-                pnlMainCard.add(pnlEdit1, "card2");
+
+                //======== panel1 ========
+                {
+                    panel1.setLayout(new CardLayout());
+                    panel1.add(pnlSearch1, "cardSearch");
+                    panel1.add(pnlEdit1, "cardEdit");
+                }
+                tabbedPane1.addTab("Search/Edit", panel1);
+                tabbedPane1.addTab("Add New", pnlAddNew1);
             }
-            pnlMain.add(pnlMainCard, BorderLayout.CENTER);
+            pnlMain.add(tabbedPane1, BorderLayout.CENTER);
         }
         contentPane.add(pnlMain, BorderLayout.CENTER);
-        setSize(595, 535);
+        setSize(640, 575);
         setLocationRelativeTo(null);
         // JFormDesigner - End of component initialization  //GEN-END:initComponents  @formatter:on
     }
@@ -82,9 +87,10 @@ public class RecipeNotebookGUI extends JFrame {
     private JMenu menu1;
     private JMenuItem menuItem3;
     private JPanel pnlMain;
-    private JPanel pnlMainCard;
-    private PnlAddNew pnlAddNew1;
+    private JTabbedPane tabbedPane1;
+    private JPanel panel1;
     private PnlSearch pnlSearch1;
     private PnlEdit pnlEdit1;
+    private PnlAddNew pnlAddNew1;
     // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 }

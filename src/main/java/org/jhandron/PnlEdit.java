@@ -11,6 +11,7 @@ import javax.swing.*;
  * @author Jason
  */
 public class PnlEdit extends JPanel {
+
     public PnlEdit() {
         initComponents();
     }

@@ -7,10 +7,18 @@ new FormModel {
 			name: "this"
 			"defaultCloseOperation": 2
 			"title": "Search Recipes"
-			add( new FormComponent( "org.jhandron.PnlSearch" ) {
-				name: "pnlSearch1"
-				"preferredSize": new java.awt.Dimension( 380, 325 )
-				"border": new javax.swing.border.EmptyBorder( 5, 5, 5, 5 )
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.FlowLayout ) ) {
+				name: "panel1"
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "button1"
+					"text": "Select Recipe(s)"
+				} )
+			}, new FormLayoutConstraints( class java.lang.String ) {
+				"value": "South"
+			} )
+			add( new FormComponent( "org.jhandron.PnlSearchData" ) {
+				name: "pnlSearchData1"
+				"preferredSize": new java.awt.Dimension( 380, 340 )
 			}, new FormLayoutConstraints( class java.lang.String ) {
 				"value": "Center"
 			} )
@@ -20,4 +28,3 @@ new FormModel {
 		} )
 	}
 }
-

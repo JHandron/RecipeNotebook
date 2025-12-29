@@ -1,0 +1,98 @@
+JFDML JFormDesigner: "8.2.4.0.393" Java: "17.0.6" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.BorderLayout ) ) {
+			name: "this"
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class javax.swing.BoxLayout ) {
+				"axis": 1
+			} ) {
+				name: "panel1"
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+					"$horizontalGroup": "par l {seq l {space :::p, par l:::p {comp panel7:::::x, comp lblSearchBy:::::x}, space ::349:x}}"
+					"$verticalGroup": "par l {seq l {space :::p, comp lblSearchBy:::p::p, space :::x, comp panel7:::p::p}}"
+				} ) {
+					name: "panel2"
+					"border": &EmptyBorder0 new javax.swing.border.EmptyBorder( 5, 5, 5, 5 )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "lblSearchBy"
+						"text": "Search By"
+						"font": new com.jformdesigner.model.SwingDerivedFont( null, 1, 0, false )
+					} )
+					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+						"$horizontalGroup": "par l {seq {space :::p, comp rbName:::p::p, space u:::p, comp rbIngredients:::p::p, space u:::p, comp rbTags:::p::p, space :::p}}"
+						"$verticalGroup": "par l {seq {space :::p, par b {comp rbName::b:p::p, comp rbIngredients::b:p::p, comp rbTags::b:p::p}, space :::p}}"
+					} ) {
+						name: "panel7"
+						add( new FormComponent( "javax.swing.JRadioButton" ) {
+							name: "rbName"
+							"text": "Name"
+							"$buttonGroup": new FormReference( "buttonGroup1" )
+							"selected": true
+						} )
+						add( new FormComponent( "javax.swing.JRadioButton" ) {
+							name: "rbIngredients"
+							"text": "Ingredients"
+							"$buttonGroup": new FormReference( "buttonGroup1" )
+						} )
+						add( new FormComponent( "javax.swing.JRadioButton" ) {
+							name: "rbTags"
+							"text": "Tags"
+							"$buttonGroup": new FormReference( "buttonGroup1" )
+						} )
+					} )
+				} )
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+					"$horizontalGroup": "par l {seq {space :::p, comp txtSearch:::::x, space u:::p, comp btnSearch:::::p, space :::p}}"
+					"$verticalGroup": "par l {seq l {space :::p, par l {comp txtSearch:::::p, comp btnSearch:::p::p}, space :::p}}"
+				} ) {
+					name: "panel3"
+					"border": #EmptyBorder0
+					add( new FormComponent( "javax.swing.JTextField" ) {
+						name: "txtSearch"
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "btnSearch"
+						"text": "Search"
+						"horizontalAlignment": 4
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "doSearch", true ) )
+					} )
+				} )
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.BorderLayout ) ) {
+					name: "panel4"
+					"border": #EmptyBorder0
+					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+						"$horizontalGroup": "par l {seq l {space :::p, par l {seq {comp scrollPane2::::563:x, space :::p}, seq {comp lblSearchResults:::p:87:p, space :0:482:x}}}}"
+						"$verticalGroup": "par l {seq t {space :::p, comp lblSearchResults:::p::p, space :::p, comp scrollPane2::::351:x, space :::p}}"
+					} ) {
+						name: "panel6"
+						add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+							name: "scrollPane2"
+							add( new FormComponent( "javax.swing.JTable" ) {
+								name: "tblSearchResults"
+							} )
+						} )
+						add( new FormComponent( "javax.swing.JLabel" ) {
+							name: "lblSearchResults"
+							"text": "Search Results"
+							"font": new com.jformdesigner.model.SwingDerivedFont( null, 1, 0, false )
+						} )
+					}, new FormLayoutConstraints( class java.lang.String ) {
+						"value": "Center"
+					} )
+				} )
+			}, new FormLayoutConstraints( class java.lang.String ) {
+				"value": "Center"
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 260, 165 )
+			"size": new java.awt.Dimension( 575, 480 )
+		} )
+		add( new FormNonVisual( "javax.swing.ButtonGroup" ) {
+			name: "buttonGroup1"
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 45, 630 )
+		} )
+	}
+}

@@ -1,66 +1,21 @@
 package org.jhandron;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-
 public class PnlSearchController {
 
-    public enum SearchMode {
-        NAME,
-        INGREDIENTS,
-        TAGS
+    private final PnlSearch view;
+    private final PnlSearchDataController searchDataController;
+
+    public PnlSearchController(PnlSearch p_view) {
+        view = p_view;
+        searchDataController = p_view.getSearchDataPanel().getController();
     }
 
-    private final SearchView view;
-    private RecipeSelectionListener selectionListener;
-    private final RecipeTableModel searchResultsModel = new RecipeTableModel();
-
-    public PnlSearchController(SearchView view, RecipeSelectionListener selectionListener) {
-        this.view = view;
-        this.selectionListener = selectionListener;
-    }
-
-    public void initializeViewBindings() {
-        view.bindSearchResultsTableModel(searchResultsModel);
-    }
-
-    public void handleSearch(SearchMode searchMode, String rawSearchText) {
-        if (rawSearchText == null || rawSearchText.isBlank()) {
-            searchResultsModel.clearModel();
+    public void handleViewRecipe(int[] selectedIndex) {
+        if(selectedIndex.length > 1) {
+            System.out.println("Select only one row.");
             return;
-        }
-
-        final String searchText = rawSearchText.trim();
-        Collection<Recipe> recipeSearchResults = switch (searchMode) {
-            case NAME -> MongoDelegator.getCollectionByName(searchText);
-            case INGREDIENTS -> MongoDelegator.getByInstructions(searchText);
-            case TAGS -> MongoDelegator.getByTags(searchText);
-        };
-        if (recipeSearchResults.isEmpty()) {
-            searchResultsModel.clearModel();
         } else {
-            updateSearchTable(recipeSearchResults);
-        }
-    }
-
-    public void setSelectionListener(RecipeSelectionListener selectionListener) {
-        this.selectionListener = selectionListener;
-    }
-
-    public void handleRecipeSelection(int[] selectedRowIndexes) {
-        List<Recipe> selectedRecipes = new ArrayList<>();
-        for (int index : selectedRowIndexes) {
-            selectedRecipes.add(searchResultsModel.getRecipeAt(index));
-        }
-        selectionListener.onRecipesSelected(selectedRecipes);
-        view.closeDialog();
-    }
-
-    private void updateSearchTable(Collection<Recipe> results) {
-        searchResultsModel.clearModel();
-        for (Recipe recipe : results) {
-            searchResultsModel.addRecipe(recipe);
+            //Bring to card layout
         }
     }
 }
