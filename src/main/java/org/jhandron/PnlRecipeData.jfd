@@ -8,8 +8,8 @@ new FormModel {
 		} ) {
 			name: "this"
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-				"$horizontalGroup": "par l {seq {space :::p, par l {comp txtAddRecipeName::t::0:x, comp lblRecipeName::t::0:x}, space :::p}}"
-				"$verticalGroup": "par l {seq l {space :::x, comp lblRecipeName:::p::p, space :::p, comp txtAddRecipeName:::p::p, space :::p}}"
+				"$horizontalGroup": "par l {seq {space :::p, par l {comp txtAddRecipeName::::578:x, comp lblRecipeName::::0:x}, space :::p}}"
+				"$verticalGroup": "par l {seq l {space :::p, comp lblRecipeName:::::x, space :::p, comp txtAddRecipeName:::p::p, space :::p}}"
 			} ) {
 				name: "pnlRecipeName"
 				"border": &EmptyBorder0 new javax.swing.border.EmptyBorder( 5, 5, 5, 5 )
@@ -105,10 +105,11 @@ new FormModel {
 				name: "pnlInstructionsRelatedRecipes"
 				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
 					"$horizontalGroup": "par l {seq {space :::p, par l {comp label3:::::x, comp spInstructions:::::x}, space :::p}}"
-					"$verticalGroup": "par l {seq l {space :::p, comp label3:::p::p, space :::p, comp spInstructions::::188:x, space :::p}}"
+					"$verticalGroup": "par l {seq l {space :::p, comp label3:::p::p, space :::p, comp spInstructions::::180:x, space :::p}}"
 				} ) {
 					name: "panel4"
 					"border": #EmptyBorder0
+					"preferredSize": new java.awt.Dimension( 142, 218 )
 					add( new FormComponent( "javax.swing.JLabel" ) {
 						name: "label3"
 						"text": "Instructions"
@@ -126,12 +127,12 @@ new FormModel {
 					} )
 				} )
 				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-					"$horizontalGroup": "par l {seq {space :::p, par l {comp label4::l::264:x, comp panel3::t:::x, comp scrollPane1::t::264:x}, space :::p}}"
-					"$verticalGroup": "par l {seq l {space :::p, comp label4:::p::p, space :::p, comp scrollPane1::::121:x, space :::p, comp panel3:::::x, space :::p}}"
+					"$horizontalGroup": "par l {seq {space :::p, par l {comp label4::l::278:x, comp panel3::t:::x, comp scrollPane1::t::278:x}, space :::p}}"
+					"$verticalGroup": "par l {seq l {space :::p, comp label4:::p::p, space :::p, comp scrollPane1:::::x, space :::p, comp panel3:::::p, space :::p}}"
 				} ) {
 					name: "panel7"
 					"border": #EmptyBorder0
-					"preferredSize": sfield com.jformdesigner.model.FormObject NULL_VALUE
+					"preferredSize": new java.awt.Dimension( 142, 218 )
 					add( new FormComponent( "javax.swing.JLabel" ) {
 						name: "label4"
 						"text": "Related Recipes"
@@ -154,7 +155,10 @@ new FormModel {
 							"preferredSize": sfield com.jformdesigner.model.FormObject NULL_VALUE
 						} )
 					} )
-					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.FlowLayout ) ) {
+					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.FlowLayout ) {
+						"hgap": 0
+						"vgap": 0
+					} ) {
 						name: "panel3"
 						"preferredSize": sfield com.jformdesigner.model.FormObject NULL_VALUE
 						add( new FormComponent( "javax.swing.JButton" ) {
@@ -166,8 +170,8 @@ new FormModel {
 				} )
 			} )
 		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 280, 265 )
-			"size": new java.awt.Dimension( 550, 465 )
+			"location": new java.awt.Point( 150, 35 )
+			"size": new java.awt.Dimension( 600, 515 )
 		} )
 	}
 }

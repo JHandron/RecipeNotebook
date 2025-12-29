@@ -28,6 +28,7 @@ new FormModel {
 							name: "rbName"
 							"text": "Name"
 							"$buttonGroup": new FormReference( "buttonGroup1" )
+							"selected": true
 						} )
 						add( new FormComponent( "javax.swing.JRadioButton" ) {
 							name: "rbIngredients"
@@ -53,13 +54,14 @@ new FormModel {
 						name: "btnSearch"
 						"text": "Search"
 						"horizontalAlignment": 4
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "doSearch", true ) )
 					} )
 				} )
 				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.BorderLayout ) ) {
 					name: "panel4"
 					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
 						"$horizontalGroup": "par l {seq l {space :::p, par l {seq {comp scrollPane2::::563:x, space :::p}, seq {comp lblSearchResults:::p:87:p, space :0:482:x}}}}"
-						"$verticalGroup": "par l {seq t {space :::p, comp lblSearchResults:::p::p, space :::p, comp scrollPane2::::325:x, space :::p}}"
+						"$verticalGroup": "par l {seq t {space :::p, comp lblSearchResults:::p::p, space :::p, comp scrollPane2::::320:x, space :::p}}"
 					} ) {
 						name: "panel6"
 						add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {

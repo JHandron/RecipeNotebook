@@ -15,7 +15,8 @@ import javax.swing.table.TableModel;
 public class PnlSearch extends JPanel implements SearchView {
 
     private final PnlSearchController controller;
-    private final RecipeSelectionListener selectionListener;
+    private RecipeSelectionListener selectionListener;
+    private Runnable closeCallback;
 
     public PnlSearch() {
         this(null, null);
@@ -24,6 +25,7 @@ public class PnlSearch extends JPanel implements SearchView {
     public PnlSearch(RecipeSelectionListener selectionListener, Runnable closeCallback) {
         initComponents();
         this.selectionListener = selectionListener != null ? selectionListener : recipes -> { };
+        this.closeCallback = closeCallback != null ? closeCallback : () -> { };
         controller = new PnlSearchController(this, this.selectionListener);
         wireListeners();
         controller.initializeViewBindings();
@@ -35,14 +37,19 @@ public class PnlSearch extends JPanel implements SearchView {
         tblSearchResults.setModel(searchResultsModel);
     }
 
-    @Override
-    public void closeDialog() {
-        // no-op for panel usage; dialog hosting can override/extend later
+    public void setDialogContext(RecipeSelectionListener selectionListener, Runnable closeCallback) {
+        this.selectionListener = selectionListener != null ? selectionListener : recipes -> { };
+        controller.setSelectionListener(this.selectionListener);
+        this.closeCallback = closeCallback != null ? closeCallback : () -> { };
     }
 
+    @Override
+    public void closeDialog() {
+        closeCallback.run();
+    }
+
+    //TODO: Remove this once actionListeners are hooked up separately
     private void wireListeners() {
-        rbName.setSelected(true);
-        btnSearch.addActionListener(this::doSearch);
         btnViewRecipe.addActionListener(this::selectRecipe);
     }
 
@@ -108,6 +115,7 @@ public class PnlSearch extends JPanel implements SearchView {
 
                     //---- rbName ----
                     rbName.setText("Name");
+                    rbName.setSelected(true);
 
                     //---- rbIngredients ----
                     rbIngredients.setText("Ingredients");
@@ -168,6 +176,7 @@ public class PnlSearch extends JPanel implements SearchView {
                 //---- btnSearch ----
                 btnSearch.setText("Search");
                 btnSearch.setHorizontalAlignment(SwingConstants.RIGHT);
+                btnSearch.addActionListener(e -> doSearch(e));
 
                 GroupLayout panel3Layout = new GroupLayout(panel3);
                 panel3.setLayout(panel3Layout);
@@ -228,7 +237,7 @@ public class PnlSearch extends JPanel implements SearchView {
                                 .addContainerGap()
                                 .addComponent(lblSearchResults)
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(scrollPane2, GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE)
+                                .addComponent(scrollPane2, GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)
                                 .addContainerGap())
                     );
                 }

@@ -76,7 +76,7 @@ public class PnlRecipeData extends JPanel implements RecipeDataView {
     @Override
     public void openSearchDialog(RecipeSelectionListener p_selectionListener) {
         Window owner = SwingUtilities.getWindowAncestor(this);
-        DlgSearch searchDialog = new DlgSearch(owner);
+        DlgSearch searchDialog = new DlgSearch(owner, p_selectionListener);
         searchDialog.setVisible(true);
     }
 
@@ -160,15 +160,15 @@ public class PnlRecipeData extends JPanel implements RecipeDataView {
                     .addGroup(pnlRecipeNameLayout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(pnlRecipeNameLayout.createParallelGroup()
-                            .addComponent(txtAddRecipeName, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE)
-                            .addComponent(lblRecipeName, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE))
+                            .addComponent(txtAddRecipeName, GroupLayout.DEFAULT_SIZE, 578, Short.MAX_VALUE)
+                            .addComponent(lblRecipeName, GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE))
                         .addContainerGap())
             );
             pnlRecipeNameLayout.setVerticalGroup(
                 pnlRecipeNameLayout.createParallelGroup()
                     .addGroup(pnlRecipeNameLayout.createSequentialGroup()
-                        .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblRecipeName)
+                        .addContainerGap()
+                        .addComponent(lblRecipeName, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtAddRecipeName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())
@@ -313,6 +313,7 @@ public class PnlRecipeData extends JPanel implements RecipeDataView {
             //======== panel4 ========
             {
                 panel4.setBorder(new EmptyBorder(5, 5, 5, 5));
+                panel4.setPreferredSize(new Dimension(142, 218));
 
                 //---- label3 ----
                 label3.setText("Instructions");
@@ -346,7 +347,7 @@ public class PnlRecipeData extends JPanel implements RecipeDataView {
                             .addContainerGap()
                             .addComponent(label3)
                             .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(spInstructions, GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
+                            .addComponent(spInstructions, GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
                             .addContainerGap())
                 );
             }
@@ -355,7 +356,7 @@ public class PnlRecipeData extends JPanel implements RecipeDataView {
             //======== panel7 ========
             {
                 panel7.setBorder(new EmptyBorder(5, 5, 5, 5));
-                panel7.setPreferredSize(null);
+                panel7.setPreferredSize(new Dimension(142, 218));
 
                 //---- label4 ----
                 label4.setText("Related Recipes");
@@ -380,7 +381,7 @@ public class PnlRecipeData extends JPanel implements RecipeDataView {
                 //======== panel3 ========
                 {
                     panel3.setPreferredSize(null);
-                    panel3.setLayout(new FlowLayout());
+                    panel3.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
 
                     //---- button1 ----
                     button1.setText("Search...");
@@ -395,9 +396,9 @@ public class PnlRecipeData extends JPanel implements RecipeDataView {
                         .addGroup(panel7Layout.createSequentialGroup()
                             .addContainerGap()
                             .addGroup(panel7Layout.createParallelGroup()
-                                .addComponent(label4, GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)
+                                .addComponent(label4, GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE)
                                 .addComponent(panel3, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(scrollPane1, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE))
+                                .addComponent(scrollPane1, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE))
                             .addContainerGap())
                 );
                 panel7Layout.setVerticalGroup(
@@ -406,9 +407,9 @@ public class PnlRecipeData extends JPanel implements RecipeDataView {
                             .addContainerGap()
                             .addComponent(label4)
                             .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(scrollPane1, GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
+                            .addComponent(scrollPane1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(panel3, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(panel3, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                             .addContainerGap())
                 );
             }

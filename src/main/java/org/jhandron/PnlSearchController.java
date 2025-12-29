@@ -13,7 +13,7 @@ public class PnlSearchController {
     }
 
     private final SearchView view;
-    private final RecipeSelectionListener selectionListener;
+    private RecipeSelectionListener selectionListener;
     private final RecipeTableModel searchResultsModel = new RecipeTableModel();
 
     public PnlSearchController(SearchView view, RecipeSelectionListener selectionListener) {
@@ -42,6 +42,10 @@ public class PnlSearchController {
         } else {
             updateSearchTable(recipeSearchResults);
         }
+    }
+
+    public void setSelectionListener(RecipeSelectionListener selectionListener) {
+        this.selectionListener = selectionListener;
     }
 
     public void handleRecipeSelection(int[] selectedRowIndexes) {

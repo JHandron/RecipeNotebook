@@ -13,9 +13,15 @@ import javax.swing.border.*;
  * @author Jason
  */
 public class DlgSearch extends JDialog {
+
     public DlgSearch(Window owner) {
         super(owner);
+    }
+
+    public DlgSearch(Window owner, RecipeSelectionListener p_selectionListener) {
+        super(owner);
         initComponents();
+        pnlSearch1.setDialogContext(p_selectionListener, this::dispose);
     }
 
     private void initComponents() {
