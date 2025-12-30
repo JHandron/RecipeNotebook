@@ -16,6 +16,10 @@ public class PnlEdit extends JPanel {
         initComponents();
     }
 
+    public PnlRecipeData getRecipeDataPanel() {
+        return pnlRecipeData1;
+    }
+
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
         // Generated using JFormDesigner Educational license - Jason Handron (j-handron)

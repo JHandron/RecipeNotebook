@@ -89,8 +89,8 @@ public class RecipeNotebookGUI extends JFrame {
     private JPanel pnlMain;
     private JTabbedPane tabbedPane1;
     private JPanel panel1;
-    private PnlSearch pnlSearch1;
-    private PnlEdit pnlEdit1;
+    PnlSearch pnlSearch1;
+    PnlEdit pnlEdit1;
     private PnlAddNew pnlAddNew1;
     // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 }

@@ -80,6 +80,26 @@ public class PnlRecipeData extends JPanel implements RecipeDataView {
         searchDialog.setVisible(true);
     }
 
+    @Override
+    public String getRecipeNameText() {
+        return txtAddRecipeName.getText();
+    }
+
+    @Override
+    public void setRecipeNameText(String text) {
+        txtAddRecipeName.setText(text);
+    }
+
+    @Override
+    public String getInstructionsText() {
+        return txtarAddInstructions.getText();
+    }
+
+    @Override
+    public void setInstructionsText(String text) {
+        txtarAddInstructions.setText(text);
+    }
+
     private void hideColumns() {
         TableColumnUtils.hideColumns(tblRelatedRecipes,
                 RecipeTableModel.COLUMN_NAMES[0], // Id

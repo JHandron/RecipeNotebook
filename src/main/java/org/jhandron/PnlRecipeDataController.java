@@ -57,6 +57,35 @@ public class PnlRecipeDataController implements RecipeSelectionListener {
         return recipe;
     }
 
+    public void populateFromRecipe(Recipe recipe) {
+        if (recipe == null) {
+            return;
+        }
+
+        view.setRecipeNameText(recipe.getName());
+        view.setInstructionsText(recipe.getInstructions());
+
+        lstMdlIngredients.clear();
+        lstMdlTags.clear();
+        tblMdlRelatedRecipes.clearModel();
+
+        if (recipe.getIngredients() != null) {
+            recipe.getIngredients().forEach(lstMdlIngredients::addElement);
+        }
+        if (recipe.getTags() != null) {
+            recipe.getTags().forEach(lstMdlTags::addElement);
+        }
+
+        if (recipe.getRelatedRecipeIds() != null && !recipe.getRelatedRecipeIds().isEmpty()) {
+            for (String relatedRecipeId : recipe.getRelatedRecipeIds()) {
+                Recipe relatedRecipe = MongoDelegator.getRecipeById(relatedRecipeId);
+                if (relatedRecipe != null) {
+                    tblMdlRelatedRecipes.addRecipe(relatedRecipe);
+                }
+            }
+        }
+    }
+
     public void clearRecipeData() {
         lstMdlIngredients.clear();
         lstMdlTags.clear();
