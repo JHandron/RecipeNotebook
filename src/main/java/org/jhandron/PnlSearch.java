@@ -25,6 +25,10 @@ public class PnlSearch extends JPanel {
         return pnlSearchData1;
     }
 
+    public void showCard(String cardName) {
+        ((CardLayout) getParent().getLayout()).show(getParent(), cardName);
+    }
+
     private void onViewRecipe(ActionEvent e) {
         controller.handleViewRecipe(getSelectedRecipeIndex());
     }

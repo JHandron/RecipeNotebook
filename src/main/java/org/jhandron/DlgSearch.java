@@ -16,6 +16,8 @@ import javax.swing.border.*;
  */
 public class DlgSearch extends JDialog {
 
+    private final DlgSearchController controller = new DlgSearchController();
+
     public DlgSearch(Window owner) {
         super(owner);
     }
@@ -23,17 +25,10 @@ public class DlgSearch extends JDialog {
     public DlgSearch(Window owner, RecipeSelectionListener p_selectionListener) {
         super(owner);
         initComponents();
+        controller.bindSearchDataPanel(pnlSearchData1);
         pnlSearchData1.setDialogContext(p_selectionListener, this::dispose);
+        controller.registerSelectAction(button1);
     }
-
-//    private void onSelectRecipes(ActionEvent e) {
-//        List<Recipe> selectedRecipes = new ArrayList<>();
-//        for (int index : selectedRowIndexes) {
-//            selectedRecipes.add(searchResultsModel.getRecipeAt(index));
-//        }
-//        selectionListener.onRecipesSelected(selectedRecipes);
-//        closeDialog();
-//    }
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off

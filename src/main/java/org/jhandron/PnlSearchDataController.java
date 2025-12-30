@@ -48,14 +48,29 @@ public class PnlSearchDataController {
         this.selectionListener = selectionListener;
     }
 
-//    public void handleRecipeSelection(int[] selectedRowIndexes) {
-//        List<Recipe> selectedRecipes = new ArrayList<>();
-//        for (int index : selectedRowIndexes) {
-//            selectedRecipes.add(searchResultsModel.getRecipeAt(index));
-//        }
-//        selectionListener.onRecipesSelected(selectedRecipes);
-//        view.closeDialog();
-//    }
+    public void handleRecipeSelection(int[] selectedRowIndexes) {
+        if (selectedRowIndexes == null || selectedRowIndexes.length == 0) {
+            return;
+        }
+
+        final List<Recipe> selectedRecipes = new ArrayList<>();
+        for (int index : selectedRowIndexes) {
+            Recipe recipe = searchResultsModel.getRecipeAt(index);
+            if (recipe != null) {
+                selectedRecipes.add(recipe);
+            }
+        }
+        if (selectedRecipes.isEmpty()) {
+            return;
+        }
+
+        selectionListener.onRecipesSelected(selectedRecipes);
+        view.closeDialog();
+    }
+
+    public Recipe getRecipeAt(int rowIndex) {
+        return searchResultsModel.getRecipeAt(rowIndex);
+    }
 
     private void updateSearchTable(Collection<Recipe> results) {
         searchResultsModel.clearModel();

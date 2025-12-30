@@ -103,4 +103,28 @@ public class MongoDelegator {
             return results;
         }
     }
+
+    public static Recipe getRecipeById(String id) {
+        if (id == null || id.isBlank()) {
+            return null;
+        }
+
+        try (MongoClient mongoClient = MongoClients.create(SETTINGS)) {
+            MongoDatabase database = mongoClient.getDatabase(DATABASE_NAME);
+            MongoCollection<Recipe> collection = database.getCollection(COLLECTION_NAME, Recipe.class);
+
+            return collection.find(Filters.eq("_id", id)).first();
+        }
+    }
+
+    public static Recipe getRecipeAtIndex(int rowIndex, RecipeTableModel model) {
+        if (model == null || rowIndex < 0) {
+            return null;
+        }
+        Recipe recipe = model.getRecipeAt(rowIndex);
+        if (recipe == null || recipe.getId() == null) {
+            return null;
+        }
+        return getRecipeById(recipe.getId());
+    }
 }

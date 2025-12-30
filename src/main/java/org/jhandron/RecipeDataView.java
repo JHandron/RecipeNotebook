@@ -12,4 +12,12 @@ public interface RecipeDataView {
     void bindRelatedRecipesTableModel(TableModel relatedRecipesModel);
 
     void openSearchDialog(RecipeSelectionListener selectionListener);
+
+    String getRecipeNameText();
+
+    void setRecipeNameText(String text);
+
+    String getInstructionsText();
+
+    void setInstructionsText(String text);
 }
