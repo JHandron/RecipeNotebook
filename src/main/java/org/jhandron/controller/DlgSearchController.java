@@ -1,4 +1,6 @@
-package org.jhandron;
+package org.jhandron.controller;
+
+import org.jhandron.view.PnlSearchData;
 
 import javax.swing.JButton;
 

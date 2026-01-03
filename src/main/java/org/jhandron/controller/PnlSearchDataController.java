@@ -1,4 +1,6 @@
-package org.jhandron;
+package org.jhandron.controller;
+
+import org.jhandron.*;
 
 import java.util.ArrayList;
 import java.util.Collection;

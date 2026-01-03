@@ -2,7 +2,9 @@
  * Created by JFormDesigner on Sun Dec 28 13:49:34 EST 2025
  */
 
-package org.jhandron;
+package org.jhandron.view;
+
+import org.jhandron.controller.PnlAddNewController;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;

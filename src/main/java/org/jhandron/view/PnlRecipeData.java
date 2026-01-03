@@ -2,7 +2,10 @@
  * Created by JFormDesigner on Sun Dec 28 13:50:33 EST 2025
  */
 
-package org.jhandron;
+package org.jhandron.view;
+
+import org.jhandron.*;
+import org.jhandron.controller.PnlRecipeDataController;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -111,22 +114,6 @@ public class PnlRecipeData extends JPanel implements RecipeDataView {
 
     public PnlRecipeDataController getController() {
         return controller;
-    }
-
-    public String getRecipeNameText() {
-        return txtAddRecipeName.getText();
-    }
-
-    public void setRecipeNameText(String text) {
-        txtAddRecipeName.setText(text);
-    }
-
-    public String getInstructionsText() {
-        return txtarAddInstructions.getText();
-    }
-
-    public void setInstructionsText(String text) {
-        txtarAddInstructions.setText(text);
     }
 
     private void initComponents() {

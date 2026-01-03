@@ -1,4 +1,6 @@
-package org.jhandron;
+package org.jhandron.controller;
+
+import org.jhandron.*;
 
 import javax.swing.DefaultListModel;
 import java.util.Arrays;

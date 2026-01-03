@@ -2,14 +2,14 @@
  * Created by JFormDesigner on Sun Dec 28 21:42:11 EST 2025
  */
 
-package org.jhandron;
+package org.jhandron.view;
+
+import org.jhandron.RecipeSelectionListener;
+import org.jhandron.controller.DlgSearchController;
+import org.jhandron.view.PnlSearchData;
 
 import java.awt.*;
-import java.awt.event.*;
-import java.util.ArrayList;
-import java.util.List;
 import javax.swing.*;
-import javax.swing.border.*;
 
 /**
  * @author Jason

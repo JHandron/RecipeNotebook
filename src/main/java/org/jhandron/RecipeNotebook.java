@@ -1,6 +1,7 @@
 package org.jhandron;
 
 import com.formdev.flatlaf.FlatDarkLaf;
+import org.jhandron.view.RecipeNotebookGUI;
 
 import javax.swing.*;
 

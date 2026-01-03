@@ -1,4 +1,8 @@
-package org.jhandron;
+package org.jhandron.controller;
+
+import org.jhandron.MongoDelegator;
+import org.jhandron.view.PnlAddNew;
+import org.jhandron.Recipe;
 
 public class PnlAddNewController {
 

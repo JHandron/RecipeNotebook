@@ -2,7 +2,13 @@
  * Created by JFormDesigner on Sun Dec 28 13:50:08 EST 2025
  */
 
-package org.jhandron;
+package org.jhandron.view;
+
+import org.jhandron.RecipeSelectionListener;
+import org.jhandron.RecipeTableModel;
+import org.jhandron.SearchView;
+import org.jhandron.TableColumnUtils;
+import org.jhandron.controller.PnlSearchDataController;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;

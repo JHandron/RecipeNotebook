@@ -2,12 +2,13 @@
  * Created by JFormDesigner on Mon Dec 29 17:36:22 EST 2025
  */
 
-package org.jhandron;
+package org.jhandron.view;
+
+import org.jhandron.controller.PnlSearchController;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import javax.swing.*;
-import javax.swing.table.TableModel;
 
 /**
  * @author Jason

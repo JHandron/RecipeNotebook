@@ -2,7 +2,7 @@
  * Created by JFormDesigner on Sun Dec 28 13:49:59 EST 2025
  */
 
-package org.jhandron;
+package org.jhandron.view;
 
 import java.awt.*;
 import javax.swing.*;
